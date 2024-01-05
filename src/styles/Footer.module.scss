@@ -1,0 +1,15 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 2rem 10rem;
+
+  border-top: 2px solid #3d3d3d;
+}
+
+.info {
+  margin: 0;
+  font-size: 24px;
+  color: #333;
+}

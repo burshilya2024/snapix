@@ -1,0 +1,32 @@
+.link {
+  cursor: pointer;
+
+  padding: 10px 20px;
+
+  font-size: 20px;
+  color: #fff;
+
+  background-color: #397df6;
+  border: none;
+  border-radius: 4px;
+
+  transition: all 0.3s ease;
+}
+
+.link:hover {
+  transform: translateY(-3px);
+  background-color: #305fc1;
+}
+
+.active {
+  color: aqua;
+}
+
+.link.profileLinl {
+  background: none;
+}
+
+.link.SignInLink {
+  background-color: transparent;
+}
+

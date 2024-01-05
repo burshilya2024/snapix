@@ -1,0 +1,42 @@
+@import './variables.module';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100vw;
+  color: $text-color;
+  background-color: $background-color;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 3%;
+
+  @media (width >= 1200px) {
+    max-width: 1200px;
+  }
+
+  @media (width <= 1199px) {
+    max-width: 900px;
+  }
+
+  @media (width <= 599px) {
+    max-width: 100%;
+  }
+}
+
+a {
+  color: #333;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #007bff;
+}

@@ -1,0 +1,32 @@
+{
+  "name": "internship_instagram",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "format": "prettier --write src",
+    "lint": "eslint --fix src/**/*.{tsx,ts,jsx,js} --no-error-on-unmatched-pattern && stylelint --fix src/{,*/}*.{scss,css} --allow-empty-input"
+  },
+  "dependencies": {
+    "axios": "^1.6.4",
+    "next": "14.0.4",
+    "react": "^18",
+    "react-dom": "^18"
+  },
+  "devDependencies": {
+    "@it-incubator/eslint-config": "^1.0.2",
+    "@it-incubator/prettier-config": "^0.1.2",
+    "@it-incubator/stylelint-config": "^1.0.3",
+    "@types/node": "^20.10.6",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.4",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "sass": "^1.69.7",
+    "stylelint": "^16.1.0",
+    "typescript": "^5"
+  }
+}
