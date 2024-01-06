@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 
+import { Photo } from '@/interface/photo'
 import axios from 'axios'
-import { Photo } from '@/src/interface/photo'
-import styles from '@/src/styles/Public.module.scss'
 import Image from 'next/image'
+
+import styles from '@/styles/Public.module.scss'
 
 const API_KEY = '-R1NIoPats74w7LQjkm6-zdv3ilBtzlCsL8fJOViYpo'
 
@@ -25,36 +26,29 @@ export default function Public() {
 
     fetchPhotos()
   }, [])
-
-  const text = '123456'
-  const letters = text.split('').map((letter, index) => <span key={index}>{letter}</span>)
+  const registeredUsers = [0, 0, 9, 2, 1, 3]
 
   return (
-    <>
-      <div className={styles.publickWrapper}>
-        <div className={styles.Registered}>
-          <p>Registered users:</p>
-          <ul className={styles.registered_people}>
-            <li>0</li>
-            <li>0</li>
-            <li>9</li>
-            <li>2</li>
-            <li>1</li>
-            <li>3</li>
-          </ul>
-        </div>
+    <div className={styles.publickWrapper}>
+      <div className={styles.Registered}>
+        <p>Registered users:</p>
+        <ul className={styles.registered_people}>
+          {registeredUsers.map((user, index) => (
+            <li key={index}>{user}</li>
+          ))}
+        </ul>
       </div>
       <div className={styles.publickPhoto}>
         {photos.map(photo => (
           <Image
             alt={photo.alt_description}
+            height={400}
             key={photo.id}
             src={photo.urls.small}
             width={400}
-            height={400}
           />
         ))}
       </div>
-    </>
+    </div>
   )
 }

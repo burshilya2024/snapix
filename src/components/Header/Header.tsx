@@ -1,5 +1,7 @@
 import Link from 'next/link'
-import styles from '@/src/styles/Header.module.scss'
+
+import styles from '@/styles/Header.module.scss'
+
 import { Navigation } from '../Navigate/Navigateon'
 
 const navItems = [

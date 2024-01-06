@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import styles from '@/src/styles/Navigation.module.scss'
+
+import styles from '@/styles/Navigation.module.scss'
 
 type NavLink = {
   className: any
