@@ -1,17 +1,17 @@
+import { FormEvent, ReactNode } from 'react'
+
 import styles from '@/styles/Form.module.scss'
-import {ReactNode} from "react";
 
 interface FormProps {
-    children: ReactNode
+  children: ReactNode
+  onSubmit: (event: FormEvent<HTMLFormElement>) => void
 }
-const Form = ({children}:FormProps) => {
-    return (
-        <div className={styles.formContainer}>
-       <div className={styles.form}>
-           {children}
-       </div > 
-        </div>
-    )
+const Form = ({ children }: FormProps) => {
+  return (
+    <div className={styles.formContainer}>
+      <div className={styles.form}>{children}</div>
+    </div>
+  )
 }
 
-export default Form;
+export default Form
