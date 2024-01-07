@@ -9,9 +9,9 @@ const Form = ({children}:FormProps) => {
         <div className={styles.formContainer}>
        <div className={styles.form}>
            {children}
-       </div>
+       </div > 
         </div>
     )
 }
 
-export default Form
+export default Form;
