@@ -1,16 +1,18 @@
 .formContainer {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
 .form{
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+
   width: 378px;
   height: 504px;
-  background-color: #171717;
-  border: solid 1px #333333;
   padding: 24px;
+
+  background-color: #171717;
+  border: solid 1px #333;
 }
