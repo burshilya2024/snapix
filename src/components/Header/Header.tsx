@@ -2,12 +2,12 @@ import Link from 'next/link'
 
 import styles from '@/styles/Header.module.scss'
 
-import { Navigation } from '../Navigate/Navigateon'
+import { Navigation } from '../Navigate/Navigation'
 
 const navItems = [
-  { className: 'profileLinl', href: '/Profile', label: 'Profile' },
-  { className: 'SignInLink', href: '/SignIn', label: 'Sign In' },
-  { className: 'SignUpLik', href: '/SignUp', label: 'Sign Up' },
+  { className: 'profileLink', href: '/Profile', label: 'Profile' },
+  { className: 'logInLink', href: '/LogIn', label: 'Log in' },
+  { className: 'signUpLik', href: '/SignUp', label: 'Sign up' },
 ]
 
 const Header = () => {
