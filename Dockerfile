@@ -3,7 +3,7 @@ WORKDIR /app
 COPY package.json yarn.lock ./
 RUN yarn install
 
-FROM node:18.15 as builder
+FROM node:18.17 as builder
 WORKDIR /app
 COPY . .
 COPY --from=dependencies /app/node_modules ./node_modules
