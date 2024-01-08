@@ -13,6 +13,8 @@ export default function Public() {
 
   useEffect(() => {
     const fetchPhotos = async () => {
+      //! ТЕСТОВОЕ API ДЛЯ ОТОБРОЖЕНИЕ MOCK FOTO, publick_bursh
+      //! ТЕСТОВОЕ API ДЛЯ ОТОБРОЖЕНИЕ MOCK FOTO, publick_bursh 2
       try {
         const response = await axios.get(
           `https://api.unsplash.com/photos?client_id=${API_KEY}&per_page=8&page=1`
