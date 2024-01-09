@@ -10,9 +10,6 @@ const navItems = [
   { className: 'signUpLik', href: '/SignUp', label: 'Sign up' },
 ]
 
-console.log('test_branch_to_deploy, deploy test:7:10')
-console.log('test_branch_to_deploy, deploy test:7:11')
-
 const Header = () => {
   return (
     <header className={styles.header}>
