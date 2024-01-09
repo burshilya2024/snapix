@@ -1,12 +1,17 @@
-.inputGroup {
-  margin-bottom: 1rem;
+.loginForm div{
+  padding: 20px;
+  width: 100%;
 }
+
+.loginForm p{
+  color: red;
+}
+
 
 .inputField {
   width: 100%;
-  margin: 0.5rem 0;
-  padding: 0.5rem;
 
+  padding: 0.5rem;
   color: #8d9094;
 
   background-color: #333;
