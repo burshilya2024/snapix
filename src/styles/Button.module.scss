@@ -1,9 +1,11 @@
 .button {
   cursor: pointer;
+
   width: 100%;
   padding: 10px 20px;
-  font-weight: 600;
+
   font-size: 16px;
+  font-weight: 600;
   color: #fff;
 
   background-color: #397df6;
@@ -15,8 +17,8 @@
 
 .button:hover {
   transform: translateY(-3px);
-  background-color: #5991f9;
   color: white;
+  background-color: #5991f9;
 }
 
 .primary {

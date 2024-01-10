@@ -1,82 +1,104 @@
 .slider {
-  display: flex;
-  margin: 0 auto;
   position: relative;
+  display: flex;
   height: 240px;
+  margin: 0 auto;
 
   .arrow_left,
   .arrow_right {
+    cursor: pointer;
+
+    position: absolute;
+    z-index: 100;
     top: 50%;
     transform: translateY(-50%);
-    z-index: 100;
-    position: absolute;
-    background: none;
-    color: white;
-    font-weight: 600;
-    font-size: 24px;
-    height: 40px;
+
     width: 40px;
+    height: 40px;
+
+    font-size: 24px;
+    font-weight: 600;
+    color: white;
+
+    background: none;
     border: none;
-    cursor: pointer;
     border-radius: 50%;
+
     transition: background-color 0.3s ease;
 
     &:hover {
-      background-color: rgba(161, 161, 161, 0.385);
+      background-color: rgb(161 161 161 / 38.5%);
     }
   }
 
-  .arrow_left {
-    left: 0;
-  }
+  .slider {
+    .arrow_left {
+      left: 0;
 
-  .arrow_right {
-    right: 0;
+      &:hover {
+        // Стили для :hover
+      }
+    }
+
+    .arrow_right {
+      right: 0;
+
+      &:hover {
+        // Стили для :hover
+      }
+    }
   }
 
   .slideContainer {
-    width: 100%;
     overflow: hidden;
     display: flex;
     justify-content: center;
+    width: 100%;
 
     .image_container {
       width: 250px;
       height: 240px;
 
       img {
-        height: 100%;
         width: 100%;
+        height: 100%;
         object-fit: cover;
       }
     }
   }
 
   .overlay {
+    pointer-events: none;
+
     position: absolute;
     top: 0;
     left: 0;
+
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.175);
-    pointer-events: none;
+
+    background: rgb(0 0 0 / 17.5%);
   }
 
   .indicators {
+    position: absolute;
+    z-index: 1;
+    bottom: 10px;
+
     display: flex;
     justify-content: center;
+
     margin-top: 10px;
-    bottom: 10px;
-    z-index: 1;
-    position: absolute;
 
     .indicator {
+      cursor: pointer;
+
       width: 10px;
       height: 10px;
+      margin: 0 5px;
+
       background-color: #ddd;
       border-radius: 50%;
-      margin: 0 5px;
-      cursor: pointer;
     }
 
     .active {
@@ -86,63 +108,70 @@
 }
 
 .img_img_url_wrapper {
-  margin-top: 20px;
   display: flex;
-  padding: 10px;
   gap: 25px;
   align-items: center;
+
   height: 50px;
+  margin-top: 20px;
+  padding: 10px;
 
   span {
     font-weight: 600;
   }
 
   .image_wrapper {
-    height: 45px;
-    width: 45px;
     overflow: hidden;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
 
     .rounded_image {
-      height: 100%;
       width: 100%;
+      height: 100%;
       border-radius: 50%;
     }
   }
 }
 
 .timeAgo {
+  margin: 20px 0;
   color: gray;
-  margin: 20px 0px;
 }
 
 .description {
-  display: grid;
-
   position: relative;
+  display: grid;
   max-height: 120px; // Замените на вашу максимальную высоту
   transition: max-height 2600ms ease;
-  @media screen and (max-width: 667px) {
-    padding-bottom: 20px;
-  }
+
   p {
-    margin-bottom: 0;
     min-height: 0;
+    margin-bottom: 0;
   }
 
   .description_link {
-    color: #0082f4;
-    padding: 0 5px;
     cursor: pointer;
+
     position: absolute;
     right: 0;
     bottom: 0;
-    @media screen and (max-width: 667px) {
+
+    padding: 0 5px;
+
+    color: #0082f4;
+
+    @media screen and (width <= 667px) {
       bottom: -5px;
       color: red;
     }
   }
+
   &.expanded {
     max-height: 2000px;
+  }
+
+  @media screen and (width <= 667px) {
+    padding-bottom: 20px;
   }
 }
