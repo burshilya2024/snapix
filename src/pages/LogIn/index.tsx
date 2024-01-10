@@ -1,54 +1,64 @@
 import React, { useState } from 'react'
-
+import { FieldValues, useForm } from 'react-hook-form'
 import Button from '@/components/Button/Button'
-import Form from '@/components/Form/Form'
+import Card from '@/components/Card/Card'
 
 import styles from '@/styles/LogIn.module.scss'
 
 const LogIn: React.FC = () => {
-  const [email, setEmail] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
-
-  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    setIsSubmitting(true)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+    getValues,
+  } = useForm()
+  const onSubmit = async (data: FieldValues) => {
     await new Promise(resolve => setTimeout(resolve, 1000))
-
-    setEmail('')
-    setPassword('')
-    setIsSubmitting(false)
+    reset()
   }
-
   return (
-    <Form onSubmit={handleLogin}>
-      <div className={styles.tittle}>Sign In</div>
-      <div className={styles.inputGroup}>
-        <input
-          className={styles.inputField}
-          onChange={e => setEmail(e.target.value)}
-          placeholder={'Email'}
-          required
-          type={'email'}
-          value={email}
-        />
-      </div>
-      <div className={styles.inputGroup}>
-        <input
-          className={styles.inputField}
-          onChange={e => setPassword(e.target.value)}
-          placeholder={'Password'}
-          required
-          type={'password'}
-          value={password}
-        />
-        {/*TODO: make "input" be an single component*/}
-      </div>
-      <div>Forgot Password</div>
-      <Button primary>Sign in</Button>
-      <div> Dont have an account?</div>
-      <Button outline>Sign up</Button>
-    </Form>
+    <Card>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.loginForm}>
+        <div className={styles.tittle}>Sign In</div>
+        <div>
+          <input
+            {...register('email', { required: 'Email is required' })}
+            className={styles.inputField}
+            placeholder="Email"
+            type="email"
+          />
+          {errors.email && <p>{`${errors.email.message}`}</p>}
+        </div>
+        <div>
+          <input
+            {...register('password', {
+              required: 'Password is required',
+              minLength: {
+                value: 10,
+                message: 'Password must be at least 10 characters',
+              },
+            })}
+            className={styles.inputField}
+            placeholder="Password"
+            type="password"
+          />
+          {errors.password && <p>{`${errors.password.message}`}</p>}
+        </div>
+        <div>Forgot Password</div>
+        <div>
+          <Button type="submit" primary>
+            Sign in
+          </Button>
+        </div>
+        <div> Dont have an account?</div>
+        <div>
+          <Button type="submit" outline>
+            Sign up
+          </Button>
+        </div>
+      </form>
+    </Card>
   )
 }
 

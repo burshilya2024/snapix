@@ -8,8 +8,18 @@ interface ButtonProps {
   outline?: boolean
   primary?: boolean
   secondary?: boolean
+  disabled?: boolean
+  type?: string
 }
-const Button = ({ children, onClick, outline, primary, secondary }: ButtonProps) => {
+const Button = ({
+  children,
+  onClick,
+  outline,
+  primary,
+  secondary,
+  disabled,
+  type,
+}: ButtonProps) => {
   let buttonClass = styles.button
 
   if (primary) {
@@ -21,7 +31,12 @@ const Button = ({ children, onClick, outline, primary, secondary }: ButtonProps)
   }
 
   return (
-    <button className={buttonClass} onClick={onClick}>
+    <button
+      className={buttonClass}
+      onClick={onClick}
+      disabled={disabled}
+      type={type ? 'submit' : 'button'}
+    >
       {children}
     </button>
   )

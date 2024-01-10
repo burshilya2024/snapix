@@ -1,17 +1,16 @@
-.formContainer {
+.cardContainer {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.form {
+.card {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 
   width: 378px;
   height: 504px;
-  padding: 24px;
 
   background-color: #171717;
   border: solid 1px #333;
