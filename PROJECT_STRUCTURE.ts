@@ -1,4 +1,3 @@
-// test
 // TODO:project-root/
 // │
 // !├── src/
