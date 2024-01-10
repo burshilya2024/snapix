@@ -1,23 +1,24 @@
-const path = require('path');
+const path = require('path')
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        hostname: 'images.unsplash.com',
+        protocol: 'https',
+      },
+    ],
+  },
   reactStrictMode: true,
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https', 
-        hostname: 'images.unsplash.com',
-      },
-    ],
-  },
-  webpack: (config) => {
-    config.resolve.alias['@components'] = path.join(__dirname, 'components');
-   return config;
-  },
-};
+  webpack: config => {
+    config.resolve.alias['@components'] = path.join(__dirname, 'components')
 
-module.exports = nextConfig;
+    return config
+  },
+}
+
+module.exports = nextConfig
