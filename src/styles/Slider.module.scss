@@ -29,24 +29,22 @@
     &:hover {
       background-color: rgb(161 161 161 / 38.5%);
     }
+  }
+  .arrow_left {
+    left: 0;
 
-    .arrow_left {
-      left: 0;
-
-      &:hover {
-        // Стили для :hover
-      }
-    }
-
-    .arrow_right {
-      right: 0;
-
-      &:hover {
-        // Стили для :hover
-      }
+    &:hover {
+      // Стили для :hover
     }
   }
 
+  .arrow_right {
+    right: 0;
+
+    &:hover {
+      // Стили для :hover
+    }
+  }
   .slideContainer {
     overflow: hidden;
     display: flex;
