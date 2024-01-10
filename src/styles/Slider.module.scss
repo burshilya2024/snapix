@@ -4,8 +4,8 @@
   height: 240px;
   margin: 0 auto;
 
-  .arrow_left,
-  .arrow_right {
+  .slider_arrow_left,
+  .slider_arrow_right {
     cursor: pointer;
 
     position: absolute;
@@ -30,21 +30,7 @@
       background-color: rgb(161 161 161 / 38.5%);
     }
   }
-  .arrow_left {
-    left: 0;
 
-    &:hover {
-      // Стили для :hover
-    }
-  }
-
-  .arrow_right {
-    right: 0;
-
-    &:hover {
-      // Стили для :hover
-    }
-  }
   .slideContainer {
     overflow: hidden;
     display: flex;
@@ -61,6 +47,14 @@
         object-fit: cover;
       }
     }
+  }
+
+  .slider_arrow_left {
+    left: 0;
+  }
+
+  .slider_arrow_right {
+    right: 0;
   }
 
   .overlay {
