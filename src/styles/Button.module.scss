@@ -2,7 +2,7 @@
   cursor: pointer;
   width: 100%;
   padding: 10px 20px;
-
+  font-weight: 600;
   font-size: 16px;
   color: #fff;
 
@@ -15,7 +15,8 @@
 
 .button:hover {
   transform: translateY(-3px);
-  background-color: #305fc1;
+  background-color: #5991f9;
+  color: white;
 }
 
 .primary {
