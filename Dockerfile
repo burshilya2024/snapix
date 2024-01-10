@@ -1,15 +1,15 @@
-FROM node:18.15 as dependencies
+FROM node:18.17 as dependencies
 WORKDIR /app
 COPY package.json yarn.lock ./
 RUN yarn install
 
-FROM node:18.15 as builder
+FROM node:18.17 as builder
 WORKDIR /app
 COPY . .
 COPY --from=dependencies /app/node_modules ./node_modules
 RUN yarn build:production
 
-FROM node:18.15 as runner
+FROM node:18.17 as runner
 WORKDIR /app
 ENV NODE_ENV production
 # If you are using a custom next.config.js file, uncomment this line.
