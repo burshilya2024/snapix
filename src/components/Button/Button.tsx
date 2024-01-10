@@ -4,12 +4,22 @@ import styles from '@/styles/Button.module.scss'
 
 interface ButtonProps {
   children: ReactNode
+  disabled?: boolean
   onClick?: MouseEventHandler<HTMLButtonElement>
   outline?: boolean
   primary?: boolean
   secondary?: boolean
+  type?: string
 }
-const Button = ({ children, onClick, outline, primary, secondary }: ButtonProps) => {
+const Button = ({
+  children,
+  disabled,
+  onClick,
+  outline,
+  primary,
+  secondary,
+  type,
+}: ButtonProps) => {
   let buttonClass = styles.button
 
   if (primary) {
@@ -21,7 +31,12 @@ const Button = ({ children, onClick, outline, primary, secondary }: ButtonProps)
   }
 
   return (
-    <button className={buttonClass} onClick={onClick}>
+    <button
+      className={buttonClass}
+      disabled={disabled}
+      onClick={onClick}
+      type={type ? 'submit' : 'button'}
+    >
       {children}
     </button>
   )
