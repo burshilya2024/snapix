@@ -4,8 +4,8 @@
   height: 240px;
   margin: 0 auto;
 
-  .arrow_left,
-  .arrow_right {
+  .slider_arrow_left,
+  .slider_arrow_right {
     cursor: pointer;
 
     position: absolute;
@@ -29,147 +29,136 @@
     &:hover {
       background-color: rgb(161 161 161 / 38.5%);
     }
-
-    .arrow_left {
-      left: 0;
-
-      &:hover {
-        // Стили для :hover
-      }
-    }
-
-    .arrow_right {
-      right: 0;
-
-      &:hover {
-        // Стили для :hover
-      }
-    }
-
-    .slideContainer {
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      width: 100%;
-
-      .image_container {
-        width: 250px;
-        height: 240px;
-
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-      }
-    }
-
-    .overlay {
-      pointer-events: none;
-
-      position: absolute;
-      top: 0;
-      left: 0;
-
-      width: 100%;
-      height: 100%;
-
-      background: rgb(0 0 0 / 17.5%);
-    }
-
-    .indicators {
-      position: absolute;
-      z-index: 1;
-      bottom: 10px;
-
-      display: flex;
-      justify-content: center;
-
-      margin-top: 10px;
-
-      .indicator {
-        cursor: pointer;
-
-        width: 10px;
-        height: 10px;
-        margin: 0 5px;
-
-        background-color: #ddd;
-        border-radius: 50%;
-      }
-
-      .active {
-        background-color: #0082f4;
-      }
-    }
   }
 
-  .img_img_url_wrapper {
+  .slideContainer {
+    overflow: hidden;
     display: flex;
-    gap: 25px;
-    align-items: center;
+    justify-content: center;
+    width: 100%;
 
-    height: 50px;
-    margin-top: 20px;
-    padding: 10px;
+    .image_container {
+      width: 250px;
+      height: 240px;
 
-    span {
-      font-weight: 600;
-    }
-
-    .image_wrapper {
-      overflow: hidden;
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-
-      .rounded_image {
+      img {
         width: 100%;
         height: 100%;
-        border-radius: 50%;
+        object-fit: cover;
       }
     }
   }
 
-  .timeAgo {
-    margin: 20px 0;
-    color: gray;
+  .overlay {
+    pointer-events: none;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgb(0 0 0 / 17.5%);
   }
 
-  .description {
-    position: relative;
-    display: grid;
-    max-height: 120px; // Замените на вашу максимальную высоту
-    transition: max-height 2600ms ease;
+  .indicators {
+    position: absolute;
+    z-index: 1;
+    bottom: 10px;
 
-    p {
-      min-height: 0;
-      margin-bottom: 0;
-    }
+    display: flex;
+    justify-content: center;
 
-    .description_link {
+    margin-top: 10px;
+
+    .indicator {
       cursor: pointer;
 
-      position: absolute;
-      right: 0;
-      bottom: 0;
+      width: 10px;
+      height: 10px;
+      margin: 0 5px;
 
-      padding: 0 5px;
-
-      color: #0082f4;
-
-      @media screen and (width <= 667px) {
-        bottom: -5px;
-        color: red;
-      }
+      background-color: #ddd;
+      border-radius: 50%;
     }
 
-    &.expanded {
-      max-height: 2000px;
+    .active {
+      background-color: #0082f4;
     }
+  }
+}
+
+.slider_arrow_left {
+  left: 0;
+}
+
+.slider_arrow_right {
+  right: 0;
+}
+
+.overlay {
+  pointer-events: none;
+  height: 50px;
+  margin-top: 20px;
+  padding: 10px;
+
+  span {
+    font-weight: 600;
+  }
+
+  .image_wrapper {
+    overflow: hidden;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+
+    .rounded_image {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+  }
+}
+
+.timeAgo {
+  margin: 20px 0;
+  color: gray;
+}
+
+.description {
+  position: relative;
+  display: grid;
+  max-height: 120px; // Замените на вашу максимальную высоту
+  transition: max-height 2600ms ease;
+
+  p {
+    min-height: 0;
+    margin-bottom: 0;
+  }
+
+  .description_link {
+    cursor: pointer;
+
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    padding: 0 5px;
+
+    color: #0082f4;
 
     @media screen and (width <= 667px) {
-      padding-bottom: 20px;
+      bottom: -5px;
+      color: red;
     }
+  }
+
+  &.expanded {
+    max-height: 2000px;
+  }
+
+  @media screen and (width <= 667px) {
+    padding-bottom: 20px;
   }
 }

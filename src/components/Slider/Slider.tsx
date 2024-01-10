@@ -52,7 +52,7 @@ const Slider: React.FC<SliderProps> = ({ photos }) => {
   return (
     <div className={styles.slider_wrapper}>
       <div className={styles.slider}>
-        <button className={styles.arrow_left} onClick={prevSlide}>
+        <button className={styles.slider_arrow_left} onClick={prevSlide}>
           <FontAwesomeIcon icon={faChevronLeft} />
         </button>
         <div className={styles.slideContainer}>
@@ -76,7 +76,7 @@ const Slider: React.FC<SliderProps> = ({ photos }) => {
             ))}
           </div>
         </div>
-        <button className={styles.arrow_right} onClick={nextSlide}>
+        <button className={styles.slider_arrow_right} onClick={nextSlide}>
           <FontAwesomeIcon icon={faChevronRight} />
         </button>
       </div>
