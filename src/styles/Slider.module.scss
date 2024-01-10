@@ -33,142 +33,143 @@
     .arrow_left {
       left: 0;
 
-    &:hover {
-      // Стили для :hover
+      &:hover {
+        // Стили для :hover
+      }
     }
-  }
 
-  .arrow_right {
-    right: 0;
+    .arrow_right {
+      right: 0;
 
-    &:hover {
-      // Стили для :hover
+      &:hover {
+        // Стили для :hover
+      }
     }
-  }
 
-  .slideContainer {
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    width: 100%;
+    .slideContainer {
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      width: 100%;
 
-    .image_container {
-      width: 250px;
-      height: 240px;
+      .image_container {
+        width: 250px;
+        height: 240px;
 
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+
+    .overlay {
+      pointer-events: none;
+
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      width: 100%;
+      height: 100%;
+
+      background: rgb(0 0 0 / 17.5%);
+    }
+
+    .indicators {
+      position: absolute;
+      z-index: 1;
+      bottom: 10px;
+
+      display: flex;
+      justify-content: center;
+
+      margin-top: 10px;
+
+      .indicator {
+        cursor: pointer;
+
+        width: 10px;
+        height: 10px;
+        margin: 0 5px;
+
+        background-color: #ddd;
+        border-radius: 50%;
+      }
+
+      .active {
+        background-color: #0082f4;
       }
     }
   }
 
-  .overlay {
-    pointer-events: none;
+  .img_img_url_wrapper {
+    display: flex;
+    gap: 25px;
+    align-items: center;
 
-    position: absolute;
-    top: 0;
-    left: 0;
+    height: 50px;
+    margin-top: 20px;
+    padding: 10px;
 
-    width: 100%;
-    height: 100%;
+    span {
+      font-weight: 600;
+    }
 
-    background: rgb(0 0 0 / 17.5%);
+    .image_wrapper {
+      overflow: hidden;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+
+      .rounded_image {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+      }
+    }
   }
 
-  .indicators {
-    position: absolute;
-    z-index: 1;
-    bottom: 10px;
+  .timeAgo {
+    margin: 20px 0;
+    color: gray;
+  }
 
-    display: flex;
-    justify-content: center;
+  .description {
+    position: relative;
+    display: grid;
+    max-height: 120px; // Замените на вашу максимальную высоту
+    transition: max-height 2600ms ease;
 
-    margin-top: 10px;
+    p {
+      min-height: 0;
+      margin-bottom: 0;
+    }
 
-    .indicator {
+    .description_link {
       cursor: pointer;
 
-      width: 10px;
-      height: 10px;
-      margin: 0 5px;
+      position: absolute;
+      right: 0;
+      bottom: 0;
 
-      background-color: #ddd;
-      border-radius: 50%;
+      padding: 0 5px;
+
+      color: #0082f4;
+
+      @media screen and (width <= 667px) {
+        bottom: -5px;
+        color: red;
+      }
     }
 
-    .active {
-      background-color: #0082f4;
+    &.expanded {
+      max-height: 2000px;
     }
-  }
-}
-
-.img_img_url_wrapper {
-  display: flex;
-  gap: 25px;
-  align-items: center;
-
-  height: 50px;
-  margin-top: 20px;
-  padding: 10px;
-
-  span {
-    font-weight: 600;
-  }
-
-  .image_wrapper {
-    overflow: hidden;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-
-    .rounded_image {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-    }
-  }
-}
-
-.timeAgo {
-  margin: 20px 0;
-  color: gray;
-}
-
-.description {
-  position: relative;
-  display: grid;
-  max-height: 120px; // Замените на вашу максимальную высоту
-  transition: max-height 2600ms ease;
-
-  p {
-    min-height: 0;
-    margin-bottom: 0;
-  }
-
-  .description_link {
-    cursor: pointer;
-
-    position: absolute;
-    right: 0;
-    bottom: 0;
-
-    padding: 0 5px;
-
-    color: #0082f4;
 
     @media screen and (width <= 667px) {
-      bottom: -5px;
-      color: red;
+      padding-bottom: 20px;
     }
-  }
-
-  &.expanded {
-    max-height: 2000px;
-  }
-
-  @media screen and (width <= 667px) {
-    padding-bottom: 20px;
   }
 }
