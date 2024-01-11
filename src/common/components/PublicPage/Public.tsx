@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { Photo } from '@/interface/photo'
+import { Photo } from '@/common/types/photo'
 import axios from 'axios'
 
 import styles from '@/styles/Public.module.scss'
