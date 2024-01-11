@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { Photo } from '@/interface/photo'
+import { Photo } from '@/common/types/photo'
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Image from 'next/image'

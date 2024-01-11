@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { FieldValues, useForm } from 'react-hook-form'
 
-import Button from '@/components/Button/Button'
-import Card from '@/components/Card/Card'
+import Button from '@/common/components/Button/Button'
+import Card from '@/common/components/Card/Card'
 
 import styles from '@/styles/LogIn.module.scss'
 
