@@ -1,0 +1,58 @@
+.LayoutContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  flex-direction: row;
+
+  width: 100%;
+  height: 100%;
+}
+
+.LayoutHeader {
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+  height: 10vh;
+}
+
+.Layout {
+  display: flex;
+  flex-direction: row;
+  padding-top: 10vh;
+}
+
+.LayoutNavbar {
+  position: fixed;
+  z-index: 100;
+  left: 0;
+
+  overflow: hidden;
+  display: grid;
+
+  width: 250px;
+  height: 100%;
+  padding: 3vh 0;
+
+  border-right: 1px solid #3d3d3d;
+
+  @media (width <= 599px) {
+    width: 70px;
+  }
+}
+
+.LayoutChildrenContainer {
+  overflow-y: auto;
+  width: 100%;
+  margin-left: 250px;
+  padding: 50px;
+
+  @media (width <= 599px) {
+    margin-left: 50px;
+  }
+}
+
+.LayoutPublick {
+  width: 100%;
+}

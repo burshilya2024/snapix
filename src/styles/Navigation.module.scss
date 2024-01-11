@@ -1,31 +1,57 @@
-.link {
+.WrapperLinkNavigation {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  justify-content: space-between;
+
+  height: 450px;
+  padding: 0 20px 0 0;
+  padding: 15px;
+
+  > *:last-child {
+    margin-top: 100px;
+
+    @media (width <= 599px) {
+      margin-top: 0;
+    }
+  }
+}
+
+.NavigationLink {
   cursor: pointer;
 
-  padding: 10px 20px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+
+  padding: 18px;
 
   font-size: 20px;
-  color: #fff;
+  font-weight: 600;
+  color: white;
+  text-decoration: none;
 
-  background-color: #397df6;
-  border: none;
-  border-radius: 4px;
+  border-radius: 5px;
 
-  transition: all 0.3s ease;
+  transition: all 50ms ease-in-out;
+
+  &:hover {
+    color: white;
+    background: #202020;
+  }
+
+  &.active {
+    color: white;
+    background: #202020;
+  }
 }
 
-.link:hover {
-  transform: translateY(-3px);
-  background-color: #305fc1;
-}
+.icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
 
-.active {
-  color: aqua;
-}
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
 
-.link.profileLink {
-  background: none;
-}
-
-.link.logInLink {
-  background-color: transparent;
+  transition: filter 0.3s ease;
 }

@@ -24,9 +24,7 @@ const TextBlock = ({ maxLength, text }: { maxLength: number; text: string }) => 
     <div className={`${styles.description} ${showMore ? styles.expanded : ''}`}>
       <p>{truncatedText}</p>
       {text.length > maxLength && (
-        <a className={styles.description_link} onClick={handleShowMoreClick}>
-          {showMore ? 'скрыть' : 'Show more'}
-        </a>
+        <a className={styles.description_link}>{showMore ? 'скрыть' : 'Show more'}</a>
       )}
     </div>
   )

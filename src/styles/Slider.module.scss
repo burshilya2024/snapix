@@ -17,7 +17,7 @@
     cursor: pointer;
 
     position: absolute;
-    z-index: 100;
+    z-index: 10;
     top: 50%;
     transform: translateY(-50%);
 
@@ -132,7 +132,7 @@
 .description {
   position: relative;
   display: grid;
-  max-height: 120px; // Замените на вашу максимальную высоту
+  max-height: 120px;
   transition: max-height 2600ms ease;
 
   p {
