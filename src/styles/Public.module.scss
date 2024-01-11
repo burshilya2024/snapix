@@ -1,14 +1,15 @@
 @import './variables.module';
 
 .publickWrapper {
+  overflow: auto;
+  display: grid;
+  justify-content: center;
+
   height: calc(100% - 50px);
   margin-top: 30px;
-  padding: 2rem;
+  padding-top: 12vh;
 
-  font-family: Arial, sans-serif;
   color: white;
-
-  // border: 1px solid #242424;
 }
 
 .Registered {
@@ -85,5 +86,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(234px, 1fr));
   gap: 15px;
+
   margin-top: 50px;
+  padding-bottom: 120px;
 }

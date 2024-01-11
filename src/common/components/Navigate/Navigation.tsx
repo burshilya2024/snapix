@@ -4,8 +4,8 @@ import { usePathname } from 'next/navigation'
 import styles from '@/styles/Navigation.module.scss'
 
 type NavLink = {
-  className: any
   href: string
+  icon: string
   label: string
 }
 type Props = {
@@ -16,22 +16,26 @@ const Navigation = ({ navLinks }: Props) => {
   const pathname = usePathname()
 
   return (
-    <>
+    <div className={styles.WrapperLinkNavigation}>
       {navLinks.map(link => {
         const isActive = pathname === link.href
-        const cl = link.className
 
         return (
           <Link
-            className={`${[styles.link]} ${styles[cl]} ${isActive ? styles.active : ''}`}
+            className={`${styles.NavigationLink} ${isActive ? styles.active : ''}`}
             href={link.href}
             key={link.label}
           >
+            <img
+              alt={link.label}
+              className={`${styles.icon} ${isActive ? styles.activeIcon : ''}`}
+              src={link.icon}
+            />
             {link.label}
           </Link>
         )
       })}
-    </>
+    </div>
   )
 }
 
