@@ -7,9 +7,8 @@ const auth = true
 const Header = () => {
   return (
     <header className={styles.header}>
-      <Link href={'/'}>
-        <h1 className={styles.logo}>Snapix</h1>
-      </Link>
+      <h1 className={styles.logo}>Inctagram</h1>
+
       {auth ? (
         <div className={styles.header_right}>
           <Link href={'/LogIn'}>

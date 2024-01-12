@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: space-between;
 
-  padding: 1rem 5rem;
+  padding: 1rem 3rem 1rem 0.8rem;
 
   background: black;
   border-bottom: 1px solid #3d3d3d;
@@ -15,10 +15,8 @@
 
 .logo {
   color: white;
-
-  &:hover {
-    color: aqua;
-  }
+  cursor: pointer;
+  font-size: 25px;
 }
 
 .header_right {
