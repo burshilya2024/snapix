@@ -2,6 +2,7 @@ function Create() {
   return (
     <div>
       <h1>create</h1>
+
       <p>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quia aut repellat, dolorum omnis,
         expedita, corporis sit ad autem doloremque reprehenderit tempora eaque cupiditate eveniet.
