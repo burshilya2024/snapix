@@ -2,8 +2,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   padding: 1rem 3rem 1rem 0.8rem;
+
   border-bottom: 1px solid #3d3d3d;
+
   @media screen and (width <= 580px) {
     padding: 0.8rem;
   }

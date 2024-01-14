@@ -2,6 +2,7 @@
   position: fixed;
   top: 0;
   left: 0;
+
   width: 100%;
   height: 100%;
 }
@@ -17,6 +18,7 @@
   display: flex;
   height: 100%;
   margin: 12vh 0;
+
   @media (width<=599px) {
     display: flex;
     flex-direction: column;
@@ -26,17 +28,23 @@
 
 .Layout_navbar {
   z-index: 110;
+
   overflow: hidden;
+
   width: 300px;
   padding-top: 40px;
+
   border-right: 1px solid #3d3d3d;
+
   @media (width <= 599px) {
     position: fixed;
     bottom: 0;
-    padding-top: 0;
+
     display: flex;
+
     width: 100%;
     height: 7vh;
+    padding-top: 0;
 
     border-top: 1px solid #3d3d3d;
   }

@@ -9,91 +9,109 @@
 html,
 body {
   overflow-x: hidden;
-
   max-width: 100vw;
-
   font-family: Arial, sans-serif;
 }
+
 a {
-  text-decoration: none;
   font-weight: 600;
+  text-decoration: none;
 }
+
 /* Добавьте стили для темы по умолчанию */
 body {
-  background-color: $background-color-light;
   color: $text-color-light;
+  background-color: $background-color-light;
+
   nav {
     background-color: $background-color-light;
   }
+
   header {
     background-color: $background-color-light;
   }
+
   .svg * {
     fill: $text-color-light;
   }
+
   a {
     color: $text-color-light;
   }
 }
+
 body[data-theme='dark'] {
-  background-color: $background-color-dark;
   color: $text-color-dark;
+  background-color: $background-color-dark;
+
   .svg * {
     fill: $text-color-dark;
   }
+
   nav {
     background-color: $background-color-dark;
   }
+
   header {
     background-color: $background-color-dark;
   }
+
   a {
     color: $text-color-dark;
   }
 }
 
-// !1)swithcer dark/light(theme)
+// !1)switcher dark/light(theme)
 .switch {
   position: relative;
   display: inline-block;
   width: 60px;
   height: 34px;
-  input {
-    opacity: 0;
-    width: 0;
 
+  input {
+    width: 0;
     height: 0;
+    opacity: 0;
   }
-  input:checked + .slider::before {
-    background: white;
-    transform: translateX(25px);
-  }
-  input:checked + .slider {
-    background-color: rgb(118, 118, 118);
-  }
+
   .slider {
-    position: absolute;
     cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgb(255, 255, 255);
+
+    position: absolute;
+    inset: 0;
+
+    background-color: rgb(255 255 255);
     border-radius: 60px;
+
     transition: 0.4s;
-    &:before {
-      position: absolute;
+
+    &::before {
       content: '';
-      height: 25px;
-      width: 25px;
-      left: 4px;
+
+      position: absolute;
       bottom: 4px;
+      left: 4px;
+
+      width: 25px;
+      height: 25px;
+
       background-color: black;
       border-radius: 25px;
+
       transition: 0.3s;
     }
   }
+
+  input:checked + .slider::before {
+    transform: translateX(25px);
+    background: white;
+  }
+
+  input:checked + .slider {
+    background-color: rgb(118 118 118);
+  }
 }
+
 // !2)other...
 
 /* Стили для скролла */

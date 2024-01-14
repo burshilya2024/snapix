@@ -1,13 +1,15 @@
+.activeIcon * {
+  fill: white !important;
+}
+
 .Navbar_list {
   display: flex;
   flex-direction: column;
   gap: 15px;
+
   margin-left: 20px;
-  padding: 0px 20px 0px 10px;
-  @media (width <= 599px) {
-    gap: 0;
-    padding: 0;
-  }
+  padding: 0 20px 0 10px;
+
   > *:last-child {
     margin-top: 30px;
 
@@ -15,21 +17,30 @@
       margin-top: 0;
     }
   }
+
   @media (width <= 599px) {
     flex-direction: row;
+    gap: 0;
+
     width: 100%;
+    margin-left: 0;
+    padding: 0;
   }
 }
+
 .Navbar_list_link {
-  padding: 10px;
   display: flex;
-  align-items: center;
-  border-radius: 12px;
-  width: 100%;
   gap: 7px;
+  align-items: center;
+
+  width: 100%;
+  padding: 10px;
+
+  border-radius: 12px;
+
   &:hover {
-    background: rgb(49, 49, 49);
     color: white;
+    background: rgb(49 49 49);
   }
 
   @media (width <= 599px) {
@@ -39,11 +50,9 @@
     border-radius: 0;
   }
 }
+
 .active {
-  background: rgb(49, 49, 49);
   font-weight: 800;
   color: white !important;
-}
-.activeIcon * {
-  fill: white !important;
+  background: rgb(49 49 49);
 }
