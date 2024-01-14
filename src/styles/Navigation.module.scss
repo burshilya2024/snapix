@@ -2,49 +2,34 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
-  justify-content: space-between;
-
+  margin-left: 20px;
+  padding: 0px 20px 0px 10px;
+  @media (width <= 599px) {
+    gap: 0;
+    padding: 0;
+  }
   > *:last-child {
-    margin-top: 100px;
+    margin-top: 30px;
 
     @media (width <= 599px) {
       margin-top: 0;
     }
   }
-
   @media (width <= 599px) {
     flex-direction: row;
-    width: 90%;
-    margin: 0 auto;
+    width: 100%;
   }
 }
-
 .Navbar_list_link {
-  cursor: pointer;
-
+  padding: 10px;
   display: flex;
   align-items: center;
-
+  border-radius: 12px;
   width: 100%;
-  padding: 15px;
-
-  font-size: 20px;
-  font-weight: 600;
-  color: white;
-  text-decoration: none;
-
-  border-radius: 5px;
-
-  transition: all 50ms ease-in-out;
-
+  gap: 7px;
   &:hover {
+    background: rgb(49, 49, 49);
     color: white;
-    background: #202020;
-  }
-
-  &.active {
-    color: white;
-    background: #202020;
   }
 
   @media (width <= 599px) {
@@ -54,13 +39,11 @@
     border-radius: 0;
   }
 }
-
-.Navbar_list_icon {
-  width: 24px;
-  height: 24px;
-  margin-right: 8px;
-
-  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
-
-  transition: filter 0.3s ease;
+.active {
+  background: rgb(49, 49, 49);
+  font-weight: 800;
+  color: white !important;
+}
+.activeIcon * {
+  fill: white !important;
 }

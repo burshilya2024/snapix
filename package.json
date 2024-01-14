@@ -32,6 +32,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
     "eslint-import-resolver-alias": "^1.1.2",
+    "next-svgr": "^0.0.2",
     "sass": "^1.69.7",
     "stylelint": "^16.1.0",
     "typescript": "^5"

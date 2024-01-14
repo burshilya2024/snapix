@@ -3,6 +3,7 @@ import Link from 'next/link'
 import styles from '@/styles/Header.module.scss'
 
 import Button from '../Button/Button'
+import ThemeToggle from '../ThemeToggle/ThemeToggle'
 const auth = true
 const Header = () => {
   return (
@@ -11,6 +12,7 @@ const Header = () => {
 
       {auth ? (
         <div className={styles.header_right}>
+          <ThemeToggle />
           <Link href={'/LogIn'}>
             <Button outline>Log in</Button>
           </Link>

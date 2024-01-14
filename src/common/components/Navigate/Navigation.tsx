@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react'
-
 import useWindowSize from '@/common/hooks/useWindowsSize'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -8,7 +6,7 @@ import styles from '@/styles/Navigation.module.scss'
 
 type NavLink = {
   href: string
-  icon: string
+  icon: any
   label: string
 }
 type Props = {
@@ -18,7 +16,6 @@ type Props = {
 const Navigation = ({ navLinks }: Props) => {
   const pathname = usePathname()
   const isMobile = useWindowSize()
-  // Пустой массив означает, что эффект сработает только при монтировании и демонтаже компонента
 
   return (
     <div className={styles.Navbar_list}>
@@ -36,11 +33,7 @@ const Navigation = ({ navLinks }: Props) => {
             href={link.href}
             key={link.label}
           >
-            <img
-              alt={link.label}
-              className={`${styles.Navbar_list_icon} ${isActive ? styles.activeIcon : ''}`}
-              src={link.icon}
-            />
+            <span className={`${'svg'} ${isActive && styles.activeIcon} `}>{link.icon}</span>
             {!isMobile && link.label}
           </Link>
         )

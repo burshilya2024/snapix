@@ -1,5 +1,3 @@
-@import './variables.module';
-
 .publickWrapper {
   overflow: auto;
   display: grid;
@@ -19,7 +17,7 @@
 
   padding: 1% 3%;
 
-  background-color: $background-gray;
+  background-color: gray;
   border: 1px solid #242424;
 
   p {
