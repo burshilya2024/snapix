@@ -1,13 +1,10 @@
-import { useEffect, useState } from 'react'
-
 import { Photo } from '@/common/types/photo'
-import axios from 'axios'
+import { useFetchDataPhotoQuery } from '@/store/UnsplashTextApi'
 
 import styles from '@/styles/Public.module.scss'
 
 import Slider from '../Slider/Slider'
 
-const API_KEY = '-R1NIoPats74w7LQjkm6-zdv3ilBtzlCsL8fJOViYpo'
 const shuffleArray = (array: Photo[]) => {
   const newArray = array.slice() // Копируем массив, чтобы не изменять оригинальный
 
@@ -31,23 +28,12 @@ const chunkArray = (array: Photo[], size: number) => {
 }
 
 export default function Public() {
-  const [photos, setPhotos] = useState<Photo[]>([])
+  const { data: photos = [], error, isLoading } = useFetchDataPhotoQuery()
 
-  useEffect(() => {
-    const fetchPhotos = async () => {
-      try {
-        const response = await axios.get(
-          `https://api.unsplash.com/photos?client_id=${API_KEY}&per_page=16&page=1`
-        )
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
 
-        setPhotos(response.data)
-      } catch (error) {
-        console.error('Ошибка получения данных:', error)
-      }
-    }
-
-    fetchPhotos()
-  }, [])
   const registeredUsers = [0, 0, 9, 2, 1, 3]
 
   const shuffledPhotos = shuffleArray(photos)
