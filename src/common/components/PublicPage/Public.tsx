@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+
 import { Photo } from '@/common/types/photo'
 import { useFetchDataPhotoQuery } from '@/store/UnsplashTextApi'
 
@@ -28,7 +30,12 @@ const chunkArray = (array: Photo[], size: number) => {
 }
 
 export default function Public() {
-  const { data: photos = [], error, isLoading } = useFetchDataPhotoQuery()
+  const { data: photos = [], error, isLoading, refetch } = useFetchDataPhotoQuery()
+
+  useEffect(() => {
+    // Выполняется при монтировании компонента
+    refetch() // Запустить запрос для получения данных
+  }, [refetch]) // Запускать запрос при изменении refetch (например, когда зависимости useEffect изменяются)
 
   if (isLoading) {
     return <div>Loading...</div>
