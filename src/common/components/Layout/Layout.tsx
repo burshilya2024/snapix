@@ -2,17 +2,17 @@ import { ReactNode, useEffect, useState } from 'react'
 
 import Header from '@/common/components/Header/Header'
 import { useLocalStorage } from '@/common/hooks/useLocalStorage'
+import CreateIcon from '@public/assets/icons/create.svg'
+import FavoritesIcon from '@public/assets/icons/favorite.svg'
+import HomeIcon from '@public/assets/icons/home-light.svg'
+import LogInIcon from '@public/assets/icons/log-out.svg'
+import MessangerIcon from '@public/assets/icons/message.svg'
+import MyProfileIcon from '@public/assets/icons/person.svg'
+import SearchIcon from '@public/assets/icons/search.svg'
+import StatisticsIcon from '@public/assets/icons/trending-up-outline.svg'
 
 import styles from '@/styles/Layout.module.scss'
 
-import CreateIcon from '../../../../public/assets/icons/create.svg'
-import FavoritesIcon from '../../../../public/assets/icons/favorite.svg'
-import HomeIcon from '../../../../public/assets/icons/home-light.svg'
-import LogInIcon from '../../../../public/assets/icons/log-out.svg'
-import MessangerIcon from '../../../../public/assets/icons/message.svg'
-import MyProfileIcon from '../../../../public/assets/icons/person.svg'
-import SearchIcon from '../../../../public/assets/icons/search.svg'
-import StatisticsIcon from '../../../../public/assets/icons/trending-up-outline.svg'
 import Button from '../Button/Button'
 import { Navigation } from '../Navigate/Navigation'
 import Public from '../PublicPage/Public'
@@ -25,7 +25,7 @@ const navigate = [
   { href: '/create', icon: <CreateIcon />, label: 'create' },
   { href: '/messanger', icon: <MessangerIcon />, label: 'Messanger' },
   { href: '/search', icon: <SearchIcon />, label: 'search' },
-  { href: '/myprofile', icon: <MyProfileIcon />, label: 'My Profile' },
+  { href: '/MyProfile', icon: <MyProfileIcon />, label: 'My Profile' },
   { href: '/Statistics', icon: <StatisticsIcon />, label: 'Statistics' },
   { href: '/Favorites', icon: <FavoritesIcon />, label: 'Favorites' },
   { href: '/LogIn', icon: <LogInIcon />, label: 'Log Out' },
