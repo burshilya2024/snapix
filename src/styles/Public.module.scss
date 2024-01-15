@@ -6,8 +6,6 @@
   height: calc(100% - 50px);
   margin-top: 30px;
   padding-top: 12vh;
-
-  color: white;
 }
 
 .Registered {
@@ -17,7 +15,6 @@
 
   padding: 1% 3%;
 
-  background-color: gray;
   border: 1px solid #242424;
 
   p {
@@ -49,7 +46,6 @@
   font-weight: 700;
   list-style: none;
 
-  background-color: black;
   border: 1px solid #242424;
 
   @media screen and (width <= 768px) {

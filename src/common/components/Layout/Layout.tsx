@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactNode, useState } from 'react'
 
 import Header from '@/common/components/Header/Header'
 
@@ -12,6 +12,7 @@ import MessangerIcon from '../../../../public/assets/icons/message.svg'
 import MyProfileIcon from '../../../../public/assets/icons/person.svg'
 import SearchIcon from '../../../../public/assets/icons/search.svg'
 import StatisticsIcon from '../../../../public/assets/icons/trending-up-outline.svg'
+import Button from '../Button/Button'
 import { Navigation } from '../Navigate/Navigation'
 import Public from '../PublicPage/Public'
 
@@ -19,7 +20,8 @@ interface LayoutProps {
   children: ReactNode
 }
 export default function Layout({ children }: LayoutProps) {
-  const auth = true
+  const [auth, setauth] = useState(false)
+
   const navigate = [
     { href: '/', icon: <HomeIcon />, label: 'home' },
     { href: '/create', icon: <CreateIcon />, label: 'create' },
@@ -34,6 +36,9 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <div className={styles.LayoutContainer}>
       <header className={styles.LayoutHeader}>
+        <Button onClick={() => setauth(!auth)} outline>
+          {auth ? 'ВЫЙТИ из аккаунта' : 'войти в аккаунт'}
+        </Button>
         <Header />
       </header>
       {auth ? (
