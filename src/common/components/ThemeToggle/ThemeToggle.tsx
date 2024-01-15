@@ -1,14 +1,21 @@
-// components/ThemeToggle.tsx
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
+
+import { useLocalStorage } from '@/common/hooks/useLocalStorage'
 
 const ThemeToggle: React.FC = () => {
-  const [theme, setTheme] = useState('light')
+  // Используем хук useLocalStorage для сохранения значения темы в localStorage
+  const [theme, setTheme] = useLocalStorage<string>('theme', 'dark')
+
+  useEffect(() => {
+    // Устанавливаем текущую тему при монтировании компонента
+    document.body.setAttribute('data-theme', theme)
+  }, [theme])
 
   const handleToggleTheme = () => {
+    // Инвертируем тему и обновляем localStorage
     const newTheme = theme === 'dark' ? 'light' : 'dark'
 
     setTheme(newTheme)
-    document.body.setAttribute('data-theme', newTheme)
   }
 
   return (

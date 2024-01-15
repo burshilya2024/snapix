@@ -17,7 +17,7 @@
 .LayoutWrapper_navBar_chiildren {
   display: flex;
   height: 100%;
-  margin: 12vh 0;
+  margin: 110px 0;
 
   @media (width<=599px) {
     display: flex;
@@ -29,7 +29,7 @@
 .Layout_navbar {
   z-index: 99;
 
-  overflow: hidden;
+  overflow-y: auto;
 
   width: 300px;
   padding-top: 40px;

@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
 import { Photo } from '@/common/types/photo'
-import { useFetchDataPhotoQuery } from '@/store/UnsplashTextApi'
+import { useFetchDataPhotoQuery } from '@/store/UnsplashTestApi'
 
 import styles from '@/styles/Public.module.scss'
 

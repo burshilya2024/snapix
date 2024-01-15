@@ -1,6 +1,7 @@
-import { ReactNode, useState } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 
 import Header from '@/common/components/Header/Header'
+import { useLocalStorage } from '@/common/hooks/useLocalStorage'
 
 import styles from '@/styles/Layout.module.scss'
 
@@ -19,24 +20,31 @@ import Public from '../PublicPage/Public'
 interface LayoutProps {
   children: ReactNode
 }
-export default function Layout({ children }: LayoutProps) {
-  const [auth, setauth] = useState(false)
+const navigate = [
+  { href: '/', icon: <HomeIcon />, label: 'home' },
+  { href: '/create', icon: <CreateIcon />, label: 'create' },
+  { href: '/messanger', icon: <MessangerIcon />, label: 'Messanger' },
+  { href: '/search', icon: <SearchIcon />, label: 'search' },
+  { href: '/myprofile', icon: <MyProfileIcon />, label: 'My Profile' },
+  { href: '/Statistics', icon: <StatisticsIcon />, label: 'Statistics' },
+  { href: '/Favorites', icon: <FavoritesIcon />, label: 'Favorites' },
+  { href: '/LogIn', icon: <LogInIcon />, label: 'Log Out' },
+]
 
-  const navigate = [
-    { href: '/', icon: <HomeIcon />, label: 'home' },
-    { href: '/create', icon: <CreateIcon />, label: 'create' },
-    { href: '/messanger', icon: <MessangerIcon />, label: 'Messanger' },
-    { href: '/search', icon: <SearchIcon />, label: 'search' },
-    { href: '/myprofile', icon: <MyProfileIcon />, label: 'My Profile' },
-    { href: '/Statistics', icon: <StatisticsIcon />, label: 'Statistics' },
-    { href: '/Favorites', icon: <FavoritesIcon />, label: 'Favorites' },
-    { href: '/LogIn', icon: <LogInIcon />, label: 'Log Out' },
-  ]
+export default function Layout({ children }: LayoutProps) {
+  const [isClient, setIsClient] = useState(false)
+
+  const authLocalStorage = useLocalStorage<boolean>('auth', false)
+  const [auth, setAuth] = isClient ? authLocalStorage : [false, () => {}]
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   return (
     <div className={styles.LayoutContainer}>
       <header className={styles.LayoutHeader}>
-        <Button onClick={() => setauth(!auth)} outline>
+        <Button onClick={() => setAuth(!auth)} outline>
           {auth ? 'ВЫЙТИ из аккаунта' : 'войти в аккаунт'}
         </Button>
         <Header />
