@@ -1,40 +1,60 @@
-import { ReactNode } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 
 import Header from '@/common/components/Header/Header'
+import { useLocalStorage } from '@/common/hooks/useLocalStorage'
 
 import styles from '@/styles/Layout.module.scss'
 
+import CreateIcon from '../../../../public/assets/icons/create.svg'
+import FavoritesIcon from '../../../../public/assets/icons/favorite.svg'
+import HomeIcon from '../../../../public/assets/icons/home-light.svg'
+import LogInIcon from '../../../../public/assets/icons/log-out.svg'
+import MessangerIcon from '../../../../public/assets/icons/message.svg'
+import MyProfileIcon from '../../../../public/assets/icons/person.svg'
+import SearchIcon from '../../../../public/assets/icons/search.svg'
+import StatisticsIcon from '../../../../public/assets/icons/trending-up-outline.svg'
+import Button from '../Button/Button'
 import { Navigation } from '../Navigate/Navigation'
 import Public from '../PublicPage/Public'
 
 interface LayoutProps {
   children: ReactNode
 }
+const navigate = [
+  { href: '/', icon: <HomeIcon />, label: 'home' },
+  { href: '/create', icon: <CreateIcon />, label: 'create' },
+  { href: '/messanger', icon: <MessangerIcon />, label: 'Messanger' },
+  { href: '/search', icon: <SearchIcon />, label: 'search' },
+  { href: '/myprofile', icon: <MyProfileIcon />, label: 'My Profile' },
+  { href: '/Statistics', icon: <StatisticsIcon />, label: 'Statistics' },
+  { href: '/Favorites', icon: <FavoritesIcon />, label: 'Favorites' },
+  { href: '/LogIn', icon: <LogInIcon />, label: 'Log Out' },
+]
+
 export default function Layout({ children }: LayoutProps) {
-  const auth = true
-  const navigate = [
-    { href: '/', icon: '/assets/icons/home-outline.svg', label: 'home' },
-    { href: '/create', icon: '/assets/icons/plus-square-outline.svg', label: 'create' },
-    { href: '/myprofile', icon: '/assets/icons/person-outline.svg', label: 'My Profile' },
-    { href: '/messanger', icon: '/assets/icons/message-circle-outline.svg', label: 'Messanger' },
-    { href: '/Statistics', icon: '/assets/icons/trending-up-outline.svg', label: 'Statistics' },
-    { href: '/Favorites', icon: '/assets/icons/Layer 2.svg', label: 'Favorites' },
-    { href: '/LogIn', icon: '/assets/icons/log-out.svg', label: 'Log Out' },
-  ]
+  const [isClient, setIsClient] = useState(false)
+
+  const authLocalStorage = useLocalStorage<boolean>('auth', false)
+  const [auth, setAuth] = isClient ? authLocalStorage : [false, () => {}]
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   return (
     <div className={styles.LayoutContainer}>
-      <div className={styles.LayoutHeader}>
+      <header className={styles.LayoutHeader}>
+        <Button onClick={() => setAuth(!auth)} outline>
+          {auth ? 'ВЫЙТИ из аккаунта' : 'войти в аккаунт'}
+        </Button>
         <Header />
-      </div>
+      </header>
       {auth ? (
-        <div className={styles.Layout}>
-          <div className={styles.LayoutNavbar}>
+        <div className={styles.LayoutWrapper_navBar_chiildren}>
+          <nav className={styles.Layout_navbar}>
             <Navigation navLinks={navigate} />
-          </div>
-          <div className={styles.LayoutChildrenContainer}>
-            <main className={styles.LayoutChildren}>{children}</main>
-          </div>
+          </nav>
+          <div className={styles.Layout_children}>{children}</div>
         </div>
       ) : (
         <div className={styles.LayoutPublick}>
