@@ -1,11 +1,10 @@
 .publickWrapper {
-  overflow: auto;
   display: grid;
   justify-content: center;
 
-  height: calc(100% - 50px);
   margin-top: 30px;
-  padding-top: 12vh;
+  padding: 0px 3%;
+  padding-top: 15vh;
 }
 
 .Registered {
@@ -13,7 +12,7 @@
   align-items: center;
   justify-content: space-between;
 
-  padding: 1% 3%;
+  padding: 3%;
 
   border: 1px solid #242424;
 
