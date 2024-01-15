@@ -59,6 +59,7 @@ const Slider: React.FC<SliderProps> = ({ photos }) => {
               alt={`Slide ${currentSlide + 1}`}
               height={240}
               objectFit={'cover'}
+              priority
               src={`${photos[currentSlide].urls.small}`}
               width={250}
             />
@@ -86,6 +87,7 @@ const Slider: React.FC<SliderProps> = ({ photos }) => {
               className={styles.rounded_image}
               height={40}
               objectFit={'cover'}
+              priority
               src={`${photos[currentSlide].urls.small}`}
               width={40}
             />
