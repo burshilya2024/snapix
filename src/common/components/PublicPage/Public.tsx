@@ -55,7 +55,6 @@ export default function Public() {
         </ul>
       </div>
       {/* //!mock SLIDER  */}
-      {photos[0].alt_description}
       <div className={styles.publickPhoto}>{sliders}</div>
     </div>
   )

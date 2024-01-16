@@ -20,6 +20,7 @@
     "clsx": "^2.1.0",
     "lodash": "^4.17.21",
     "next": "14.0.4",
+    "next-auth": "^4.24.5",
     "next-images": "^1.8.5",
     "next-svgr": "^0.0.2",
     "react": "^18",
