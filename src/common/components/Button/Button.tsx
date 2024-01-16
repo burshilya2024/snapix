@@ -1,5 +1,6 @@
 import React, { MouseEventHandler, ReactNode } from 'react'
 
+import clsx from 'clsx' // Импортируем библиотеку clsx
 import styles from '@/styles/Button.module.scss'
 
 interface ButtonProps {
@@ -11,24 +12,21 @@ interface ButtonProps {
   secondary?: boolean
   type?: string
 }
+
 const Button = ({
   children,
-  disabled,
+  disabled = false,
   onClick,
-  outline,
-  primary,
-  secondary,
+  outline = false,
+  primary = false,
+  secondary = false,
   type,
 }: ButtonProps) => {
-  let buttonClass = styles.button
-
-  if (primary) {
-    buttonClass += ` ${styles.primary}`
-  } else if (outline) {
-    buttonClass += ` ${styles.outline}`
-  } else if (secondary) {
-    buttonClass += ` ${styles.secondary}`
-  }
+  const buttonClass = clsx(styles.button, {
+    [styles.outline]: outline,
+    [styles.primary]: primary,
+    [styles.secondary]: secondary,
+  })
 
   return (
     <button
