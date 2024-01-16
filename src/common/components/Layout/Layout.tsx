@@ -10,12 +10,12 @@ import MessangerIcon from '@public/assets/icons/message.svg'
 import MyProfileIcon from '@public/assets/icons/person.svg'
 import SearchIcon from '@public/assets/icons/search.svg'
 import StatisticsIcon from '@public/assets/icons/trending-up-outline.svg'
+import { getServerSession } from 'next-auth'
+import { useSession } from 'next-auth/react'
 
 import styles from '@/styles/Layout.module.scss'
 
-import Button from '../Button/Button'
 import { Navigation } from '../Navigate/Navigation'
-import Public from '../PublicPage/Public'
 
 interface LayoutProps {
   children: ReactNode
@@ -32,35 +32,22 @@ const navigate = [
 ]
 
 export default function Layout({ children }: LayoutProps) {
-  const [isClient, setIsClient] = useState(false)
-
-  const authLocalStorage = useLocalStorage<boolean>('auth', false)
-  const [auth, setAuth] = isClient ? authLocalStorage : [false, () => {}]
-
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
+  const session = useSession()
 
   return (
     <div className={styles.LayoutContainer}>
       <header className={styles.LayoutHeader}>
-        <Button onClick={() => setAuth(!auth)} outline>
-          {auth ? 'ВЫЙТИ из аккаунта' : 'войти в аккаунт'}
-        </Button>
         <Header />
       </header>
-      {auth ? (
-        <div className={styles.LayoutWrapper_navBar_chiildren}>
+      <div className={styles.LayoutWrapper_navBar_chiildren}>
+        {session.data ? (
           <nav className={styles.Layout_navbar}>
             <Navigation navLinks={navigate} />
           </nav>
-          <div className={styles.Layout_children}>{children}</div>
-        </div>
-      ) : (
-        <div className={styles.LayoutPublick}>
-          <Public />
-        </div>
-      )}
+        ) : null}
+
+        <div className={styles.Layout_children}>{children}</div>
+      </div>
     </div>
   )
 }

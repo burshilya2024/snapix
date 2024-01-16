@@ -3,10 +3,31 @@ import { FieldValues, useForm } from 'react-hook-form'
 
 import Button from '@/common/components/Button/Button'
 import Card from '@/common/components/Card/Card'
+import GoogleIcons from '@public/assets/icons/google-svgrepo-com 1.svg'
+import { useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/router'
+import { signIn, useSession } from 'next-auth/react'
 
 import styles from '@/styles/LogIn.module.scss'
 
+const GoogleButton = () => {
+  const searchParams = useSearchParams()
+  const callBackUrl = searchParams.get('callbackUrl') || '/MyProfile'
+
+  return (
+    <div className={styles.googleAthIcon} onClick={() => signIn('google', { callBackUrl })}>
+      <GoogleIcons />
+    </div>
+  )
+}
+
 const LogIn: React.FC = () => {
+  const session = useSession()
+  const router = useRouter()
+
+  if (session.data) {
+    router.push('/MyProfile')
+  }
   const {
     formState: { errors, isSubmitting },
     getValues,
@@ -21,6 +42,8 @@ const LogIn: React.FC = () => {
 
   return (
     <Card>
+      <GoogleButton />
+
       <form className={styles.loginForm} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.tittle}>Sign In</div>
         <div>
