@@ -30,12 +30,7 @@ const chunkArray = (array: Photo[], size: number) => {
 }
 
 export default function Public() {
-  const { data: photos = [], error, isLoading, refetch } = useFetchDataPhotoQuery()
-
-  useEffect(() => {
-    // Выполняется при монтировании компонента
-    refetch() // Запустить запрос для получения данных
-  }, [refetch]) // Запускать запрос при изменении refetch (например, когда зависимости useEffect изменяются)
+  const { data: photos = [], error, isLoading } = useFetchDataPhotoQuery()
 
   if (isLoading) {
     return <div>Loading...</div>
@@ -60,6 +55,7 @@ export default function Public() {
         </ul>
       </div>
       {/* //!mock SLIDER  */}
+      {photos[0].alt_description}
       <div className={styles.publickPhoto}>{sliders}</div>
     </div>
   )
