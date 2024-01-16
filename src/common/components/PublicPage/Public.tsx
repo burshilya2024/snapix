@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Photo } from '@/common/types/photo'
 import { useFetchDataPhotoQuery } from '@/store/UnsplashTestApi'
@@ -30,11 +30,35 @@ const chunkArray = (array: Photo[], size: number) => {
 }
 
 export default function Public() {
-  const { data: photos = [], error, isLoading } = useFetchDataPhotoQuery()
+  const [photos, setPhotos] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<any>(null)
 
-  if (isLoading) {
-    return <div>Loading...</div>
-  }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Ваш URL с API_KEY
+        const API_KEY = '-R1NIoPats74w7LQjkm6-zdv3ilBtzlCsL8fJOViYpo'
+        const apiUrl = `https://api.unsplash.com/photos?client_id=${API_KEY}&per_page=16&page=1`
+
+        const response = await fetch(apiUrl)
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch data')
+        }
+
+        const data = await response.json()
+
+        setPhotos(data)
+        setLoading(false)
+      } catch (e) {
+        setError(e)
+        setLoading(false)
+      }
+    }
+
+    fetchData()
+  }, [])
 
   const registeredUsers = [0, 0, 9, 2, 1, 3]
 
@@ -46,6 +70,8 @@ export default function Public() {
 
   return (
     <div className={styles.publickWrapper}>
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error.message}</p>}
       <div className={styles.Registered}>
         <p>Registered users:</p>
         <ul className={styles.registered_people}>
@@ -55,7 +81,6 @@ export default function Public() {
         </ul>
       </div>
       {/* //!mock SLIDER  */}
-      {photos[0].alt_description}
       <div className={styles.publickPhoto}>{sliders}</div>
     </div>
   )
