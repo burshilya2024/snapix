@@ -34,6 +34,8 @@ const navigate = [
 export default function Layout({ children }: LayoutProps) {
   const session = useSession()
 
+  console.log(session)
+
   return (
     <div className={styles.LayoutContainer}>
       <header className={styles.LayoutHeader}>
