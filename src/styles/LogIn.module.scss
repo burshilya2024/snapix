@@ -1,3 +1,17 @@
+.googleAthIcon {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 50px;
+
+  &:hover {
+    background: rgb(36 36 36);
+  }
+}
+
 .loginForm div {
   width: 100%;
   padding: 20px;

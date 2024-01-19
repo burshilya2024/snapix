@@ -1,16 +1,19 @@
 import Link from 'next/link'
+import { signOut, useSession } from 'next-auth/react'
 
 import styles from '@/styles/Header.module.scss'
 
 import Button from '../Button/Button'
 import ThemeToggle from '../ThemeToggle/ThemeToggle'
-const auth = true
+
 const Header = () => {
+  const session = useSession()
+
   return (
     <header className={styles.header}>
       <h1 className={styles.logo}>Inctagram</h1>
 
-      {auth ? (
+      {!session?.data ? (
         <div className={styles.header_right}>
           <ThemeToggle />
           <Link href={'/LogIn'}>
@@ -21,7 +24,11 @@ const Header = () => {
           </Link>
         </div>
       ) : (
-        <div>xxx</div>
+        <div>
+          <Link href={'#'} onClick={() => signOut({ callbackUrl: '/' })}>
+            <span> sign out {session?.data?.user?.name}</span>
+          </Link>
+        </div>
       )}
     </header>
   )
