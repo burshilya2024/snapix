@@ -53,6 +53,7 @@ export const authOptions = {
       },
     }),
   ],
+  secret: 'supersecret',
   // eslint-disable-next-line perfectionist/sort-objects
   pages: {
     signIn: '/Login',
