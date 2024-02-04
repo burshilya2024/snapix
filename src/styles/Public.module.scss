@@ -1,7 +1,6 @@
 .publickWrapper {
   display: grid;
   justify-content: center;
-  margin-top: 50px;
 }
 
 .Registered {
@@ -9,7 +8,7 @@
   align-items: center;
   justify-content: space-between;
 
-  padding: 3%;
+  padding: 10px;
 
   border: 1px solid #242424;
 
@@ -18,15 +17,16 @@
     font-weight: 700;
   }
 
+  @media (width <= 676px) {
+    display: grid;
+    gap: 20px;
+    justify-content: center;
+    text-align: center;
+  }
+
   @media screen and (width <= 768px) {
     p {
       font-size: 1.5em;
-    }
-  }
-
-  @media screen and (width <= 480px) {
-    p {
-      font-size: 0.5em;
     }
   }
 }
