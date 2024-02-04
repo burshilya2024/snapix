@@ -1,0 +1,1 @@
+export {Public} from './components/PublickPage' 
