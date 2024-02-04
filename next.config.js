@@ -15,7 +15,7 @@ const nextConfig = {
     includePaths: [path.join(__dirname, 'styles')],
   },
   webpack: config => {
-    config.resolve.alias['@components'] = path.join(__dirname, 'components')
+    // config.resolve.alias['@2_pages'] = path.join(__dirname, '2_pages')
 
     return config
   },

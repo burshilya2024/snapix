@@ -1,5 +1,9 @@
 .activeIcon * {
   fill: white !important;
+
+  @media (width <= 676px) {
+    fill: rgb(14 155 255) !important;
+  }
 }
 
 .Navbar_list {
@@ -39,8 +43,8 @@
   border-radius: 12px;
 
   &:hover {
-    color: white;
-    background: rgb(49 49 49);
+    // color: white;
+    background: rgb(82 82 82 / 36.8%);
   }
 
   @media (width <= 599px) {
@@ -53,6 +57,17 @@
 
 .active {
   font-weight: 800;
-  color: white !important;
+  color: rgb(253 253 253) !important;
   background: rgb(49 49 49);
+
+  @media (width <= 676px) {
+    background: none !important;
+  }
+}
+
+.LogOutLink {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  margin-left: 10px;
 }

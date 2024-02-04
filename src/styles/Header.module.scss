@@ -23,3 +23,47 @@
   align-items: center;
   justify-content: space-between;
 }
+
+.BurgerMenu * {
+  cursor: pointer;
+  fill: rgb(97 97 97) !important;
+}
+
+.BurgerWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-color: #e4000060;
+}
+
+.burgerList {
+  cursor: pointer;
+
+  position: absolute;
+  top: 10vh;
+  right: 30px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  min-height: 100px;
+  padding: 20px;
+
+  background-color: rgb(48 48 48);
+  border: 1px solid rgb(192 192 192);
+
+  li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    &:hover {
+      background: red;
+    }
+  }
+}
