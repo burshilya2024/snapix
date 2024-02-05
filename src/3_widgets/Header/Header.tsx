@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import ThemeToggle from '@/4_features/ThemeToggle/ThemeToggle'
+import { Typography } from '@/6_shared/ui/Typography'
 import Button from '@/6_shared/ui/ui-button'
 import {
   IconButton,
