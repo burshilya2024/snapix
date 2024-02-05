@@ -2,6 +2,8 @@ import NextAuth, { User } from 'next-auth'
 import Credentials from 'next-auth/providers/credentials'
 import GoogleProvider from 'next-auth/providers/google'
 
+const NEXTAUTH_URL = 'https://9art.ru'
+
 const users = [
   {
     email: 'bursh2023@gmail.com',
@@ -29,8 +31,9 @@ const users = [
 export const authOptions = {
   providers: [
     GoogleProvider({
-      clientId: '939464150373-ecpcd6fr0kr8nuv300t2gtugkb9loo4e.apps.googleusercontent.com'!,
-      clientSecret: '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'!,
+      clientId:
+        '939464150373-j2d0ds9b7dhqgh5546sm9uoglkq9rl39.apps.googleusercontent.com' as string,
+      clientSecret: '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' as string,
     }),
     Credentials({
       async authorize(credentials) {
