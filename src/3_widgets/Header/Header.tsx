@@ -29,7 +29,7 @@ export const Header = () => {
 
   return (
     <header className={styles.header}>
-      <h1 className={styles.logo}>Inctagram</h1>
+      <Typography.H1 className={styles.logo}>Inctagram</Typography.H1>
 
       {!session.data ? (
         <div className={styles.header_right}>
