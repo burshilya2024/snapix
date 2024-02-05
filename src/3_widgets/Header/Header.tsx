@@ -44,15 +44,10 @@ export const Header = () => {
         </div>
       ) : (
         <Menu>
-          <span className={styles.BurgerMenu}>
-            <MenuButton
-              aria-label={'Options'}
-              as={IconButton}
-              icon={<BurgerMenu />}
-              variant={'outline'}
-            />
+          <span className={`svg ${styles.BurgerMenu}`}>
+            <MenuButton aria-label={'Options'} as={IconButton} icon={<BurgerMenu />} />
           </span>
-          <MenuList>
+          <MenuList className={'svg'}>
             <MenuItem icon={<ProfileSettings />}>Settings</MenuItem>
             <MenuItem icon={<Statistics />}>Statistics</MenuItem>
             <MenuItem icon={<Favorite />}>Favorite</MenuItem>
