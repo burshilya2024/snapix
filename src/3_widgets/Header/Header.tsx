@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import ThemeToggle from '@/4_features/ThemeToggle/ThemeToggle'
+import { Typography } from '@/6_shared/ui/Typography'
 import Button from '@/6_shared/ui/ui-button'
 import {
   IconButton,
@@ -28,7 +29,7 @@ export const Header = () => {
 
   return (
     <header className={styles.header}>
-      <h1 className={styles.logo}>Inctagram</h1>
+      <Typography.H1 className={styles.logo}>Inctagram</Typography.H1>
 
       {!session.data ? (
         <div className={styles.header_right}>
@@ -43,15 +44,10 @@ export const Header = () => {
         </div>
       ) : (
         <Menu>
-          <span className={styles.BurgerMenu}>
-            <MenuButton
-              aria-label={'Options'}
-              as={IconButton}
-              icon={<BurgerMenu />}
-              variant={'outline'}
-            />
+          <span className={`svg ${styles.BurgerMenu}`}>
+            <MenuButton aria-label={'Options'} as={IconButton} icon={<BurgerMenu />} />
           </span>
-          <MenuList>
+          <MenuList className={'svg'}>
             <MenuItem icon={<ProfileSettings />}>Settings</MenuItem>
             <MenuItem icon={<Statistics />}>Statistics</MenuItem>
             <MenuItem icon={<Favorite />}>Favorite</MenuItem>
