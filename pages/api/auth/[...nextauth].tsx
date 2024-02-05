@@ -32,8 +32,8 @@ export const authOptions = {
   providers: [
     GoogleProvider({
       clientId:
-        '939464150373-j2d0ds9b7dhqgh5546sm9uoglkq9rl39.apps.googleusercontent.com' as string,
-      clientSecret: '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' as string,
+        '742398509930-cdjrjbdminheqjduu8lm20tbr09lp5b7.apps.googleusercontent.com' as string,
+      clientSecret: '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' as string,
     }),
     Credentials({
       async authorize(credentials) {
