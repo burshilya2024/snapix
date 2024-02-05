@@ -21,4 +21,4 @@ npm install
 ##
 npm run dev
 ##
-npm run lint npm run format, для форматирования кода, если не работает автоматически 
+npm run lint npm run format, для форматирования кода, если не получается в вашей IDE настроить автоматическое исправление
