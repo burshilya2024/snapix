@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import ThemeToggle from '@/4_features/ThemeToggle/ThemeToggle'
+import { Typography } from '@/6_shared/ui/Typography'
 import Button from '@/6_shared/ui/ui-button'
 import {
   IconButton,
@@ -28,7 +29,7 @@ export const Header = () => {
 
   return (
     <header className={styles.header}>
-      <h1 className={styles.logo}>Inctagram</h1>
+      <Typography.H1 className={styles.logo}>Inctagram</Typography.H1>
 
       {!session.data ? (
         <div className={styles.header_right}>
