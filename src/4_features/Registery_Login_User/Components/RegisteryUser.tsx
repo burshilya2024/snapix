@@ -2,6 +2,7 @@ import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
 import { useRegisterMutation } from '@/4_features/Registery_Login_User/api/registery_Login_Api'
+import { useTranslation } from '@/6_shared/config/i18n/hook/useTranslation'
 import Card from '@/6_shared/ui/Card'
 import Button from '@/6_shared/ui/ui-button'
 import Link from 'next/link'
@@ -17,7 +18,7 @@ export const SignUpCompontnts: React.FC<any> = () => {
     reset,
   } = useForm()
   const [register, { error, isLoading }] = useRegisterMutation()
-
+  const { t } = useTranslation()
   const onSubmit = async (data: any) => {
     try {
       if (isLoading) {
@@ -42,7 +43,7 @@ export const SignUpCompontnts: React.FC<any> = () => {
   return (
     <Card>
       <form className={styles.loginForm} onSubmit={handleSubmit(onSubmit)}>
-        <div className={styles.tittle}>Sign Up</div>
+        <div className={styles.tittle}>{t.SignIn_SignUp.signUp}</div>
         <div>
           <Controller
             control={control}
@@ -107,17 +108,17 @@ export const SignUpCompontnts: React.FC<any> = () => {
             }}
           />
         </div>
-        <div>Forgot Password?</div>
+
         <div>
           <Button primary type={'submit'}>
-            Sign Up
+            {t.SignIn_SignUp.signUp}
           </Button>
         </div>
-        <div>Уже есть аккаунт?</div>
+        <div>{t.SignIn_SignUp.HaveAccount}</div>
         <div>
           <Link href={'/LogIn'}>
             <Button outline type={'submit'}>
-              Sign In
+              {t.SignIn_SignUp.signIn}
             </Button>
           </Link>
         </div>
