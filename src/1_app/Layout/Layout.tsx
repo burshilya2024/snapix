@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 
 import { Header, NavBar } from '@/3_widgets'
+import { useTranslation } from '@/6_shared/config/i18n/hook/useTranslation'
 import CreateIcon from '@public/assets/icons/create.svg'
 import FavoritesIcon from '@public/assets/icons/favorite.svg'
 import HomeIcon from '@public/assets/icons/home-light.svg'
@@ -15,18 +16,19 @@ import styles from '@/styles/Layout.module.scss'
 interface LayoutProps {
   children: ReactNode
 }
-const navigate = [
-  { href: '/', icon: <HomeIcon />, label: 'home' },
-  { href: '/create', icon: <CreateIcon />, label: 'create' },
-  { href: '/messanger', icon: <MessangerIcon />, label: 'Messanger' },
-  { href: '/search', icon: <SearchIcon />, label: 'search' },
-  { href: '/MyProfile', icon: <MyProfileIcon />, label: 'My Profile' },
-  { href: '/Statistics', icon: <StatisticsIcon />, label: 'Statistics' },
-  { href: '/Favorites', icon: <FavoritesIcon />, label: 'Favorites' },
-]
 
 export default function Layout({ children }: LayoutProps) {
   const session = useSession()
+  const { t } = useTranslation()
+  const navigate = [
+    { href: '/', icon: <HomeIcon />, label: t.navBar.home },
+    { href: '/create', icon: <CreateIcon />, label: t.navBar.create },
+    { href: '/messanger', icon: <MessangerIcon />, label: t.navBar.messanger },
+    { href: '/search', icon: <SearchIcon />, label: t.navBar.search },
+    { href: '/MyProfile', icon: <MyProfileIcon />, label: t.navBar.myProfile },
+    { href: '/Statistics', icon: <StatisticsIcon />, label: t.navBar.statistics },
+    { href: '/Favorites', icon: <FavoritesIcon />, label: t.navBar.favorites },
+  ]
 
   return (
     <div className={styles.LayoutContainer}>
