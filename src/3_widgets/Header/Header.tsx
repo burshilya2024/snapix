@@ -1,9 +1,5 @@
-import { useState } from 'react'
-
 import { LangSelect } from '@/4_features/Lang/LangSelect'
 import ThemeToggle from '@/4_features/ThemeToggle/ThemeToggle'
-import { en } from '@/6_shared/config/i18n/Locales/en'
-import { ru } from '@/6_shared/config/i18n/Locales/ru'
 import { useTranslation } from '@/6_shared/config/i18n/hook/useTranslation'
 import { Typography } from '@/6_shared/ui/Typography'
 import Button from '@/6_shared/ui/ui-button'
@@ -27,11 +23,13 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { signOut, useSession } from 'next-auth/react'
 
-// !вынести menu в в фичи
+// TODO:вынести menu в в фичи
 import styles from '@/styles/Header.module.scss'
 export const Header = () => {
   const session = useSession()
   const { t } = useTranslation()
+
+  console.log(session)
 
   return (
     <header className={styles.header}>
