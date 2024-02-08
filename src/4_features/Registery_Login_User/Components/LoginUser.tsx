@@ -3,6 +3,7 @@ import { FieldValues, useForm } from 'react-hook-form'
 
 import { GoogleButton } from '@/4_features/GoogleAuthButton/GoogleAuthButton'
 import { useLoginMutation } from '@/4_features/Registery_Login_User/api/registery_Login_Api'
+import { useTranslation } from '@/6_shared/config/i18n/hook/useTranslation'
 import Card from '@/6_shared/ui/Card'
 import Button from '@/6_shared/ui/ui-button'
 import Link from 'next/link'
@@ -16,6 +17,7 @@ import styles from '@/styles/LogIn.module.scss'
 export const LoginComponents: React.FC = () => {
   const session = useSession()
   const router = useRouter()
+  const { t } = useTranslation()
 
   if (session.data) {
     router.push('/MyProfile')
@@ -53,7 +55,7 @@ export const LoginComponents: React.FC = () => {
   return (
     <Card>
       <form className={styles.loginForm} onSubmit={handleSubmit(onSubmit)}>
-        <div className={styles.tittle}>Sign In</div>
+        <div className={styles.tittle}>{t.SignIn_SignUp.signIn}</div>
         <GoogleButton />
         <div>
           <input
@@ -79,17 +81,17 @@ export const LoginComponents: React.FC = () => {
           />
           {errors.password && <p>{`${errors.password.message}`}</p>}
         </div>
-        <div>Forgot Password?</div>
+        <div>{t.SignIn_SignUp.forgetPasswotd}</div>
         <div>
           <Button primary type={'submit'}>
-            Sign in
+            {t.SignIn_SignUp.signIn}
           </Button>
         </div>
-        <div> Dont have an account?</div>
+        <div> {t.SignIn_SignUp.dontHaveAccount}</div>
         <div>
           <Link href={'/SignUp'}>
             <Button outline type={'submit'}>
-              Sign up
+              {t.SignIn_SignUp.signUp}
             </Button>
           </Link>
         </div>

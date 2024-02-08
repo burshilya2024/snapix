@@ -2,6 +2,10 @@ const path = require('path')
 const withSvgr = require('next-svgr')
 
 const nextConfig = {
+  i18n: {
+    defaultLocale: 'ru',
+    locales: ['en', 'ru'],
+  },
   images: {
     remotePatterns: [
       {

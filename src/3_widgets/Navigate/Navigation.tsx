@@ -1,3 +1,4 @@
+import { useTranslation } from '@/6_shared/config/i18n/hook/useTranslation'
 import useWindowSize from '@/6_shared/lib/hooks/useWindowsSize'
 import LogInIcon from '@public/assets/icons/log-out.svg'
 import Link from 'next/link'
@@ -18,6 +19,7 @@ type Props = {
 export const NavBar = ({ navLinks }: Props) => {
   const pathname = usePathname()
   const isMobile = useWindowSize()
+  const { t } = useTranslation()
 
   return (
     <div className={styles.Navbar_list}>
@@ -49,7 +51,7 @@ export const NavBar = ({ navLinks }: Props) => {
           <span className={'svg'}>
             <LogInIcon />
           </span>
-          <span>logOut</span>
+          <span>{t.SignIn_SignUp.logout}</span>
         </Link>
       )}
     </div>
