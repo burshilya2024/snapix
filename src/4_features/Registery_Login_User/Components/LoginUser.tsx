@@ -81,7 +81,7 @@ export const LoginComponents: React.FC = () => {
           />
           {errors.password && <p>{`${errors.password.message}`}</p>}
         </div>
-        <div>{t.SignIn_SignUp.forgetPasswotd}</div>
+        <div><Link href={'/ResetPassword'}>{t.SignIn_SignUp.forgetPasswotd}</Link></div>
         <div>
           <Button primary type={'submit'}>
             {t.SignIn_SignUp.signIn}
