@@ -1,17 +1,33 @@
 // styles/globals.scss
+
+//Dark
+
 $background-color-dark: #0d0d0d;
+$background-gray-dark: #171717;
+$background-gray-outline-dark: #333;
+$background-gray-light: #f0f0f0;
+$background-gray-outline-light: #ccc;
+$dark-100: #4c4c4c;
+$dark-300: #333;
+$dark-500: #171717;
+$dark-700: #0d0d0d;
+$dark-900: #000;
+
+//Light
+$light-900: #8d9094;
+
+//Primary
+$primary-500: #397df6;
+
+//
 $text-color-dark: #fff;
 $btn-outline-hover-dark: #397df6;
 $btn-outline-text-color-dark: #397df6;
 $btn-text-color-dark: #fff;
 $btn-background-dark: #397df6;
-$background-gray-dark: #171717;
-$background-gray-outline-dark: #333;
 $background-color-light: #fff;
 $text-color-light: #000;
 $btn-outline-hover-light: #397df6;
 $btn-outline-text-color-light: #397df6;
 $btn-text-color-light: #fff;
 $btn-background-light: #397df6;
-$background-gray-light: #f0f0f0;
-$background-gray-outline-light: #ccc;

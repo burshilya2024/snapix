@@ -1,9 +1,10 @@
 import React, { FormEventHandler } from 'react'
 import { useForm } from 'react-hook-form'
 
+import { GoogleButton } from '@/4_features/GoogleAuthButton/GoogleAuthButton'
+import { useLoginMutation } from '@/4_features/Registery_Login_User/api/registery_Login_Api'
 import { useTranslation } from '@/6_shared/config/i18n/hook/useTranslation'
 import Button from '@/6_shared/ui/ui-button'
-import Cookies from 'js-cookie'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { signIn, useSession } from 'next-auth/react'
@@ -50,46 +51,49 @@ export const LoginComponents: React.FC = () => {
   }
 
   return (
-    <form className={styles.loginForm} onSubmit={handleSubmitLogin}>
-      <div className={styles.tittle}>{t.SignIn_SignUp.signIn}</div>
-      <div>
-        <input
-          {...register('email', { required: 'Email is required' })}
-          className={styles.inputField}
-          placeholder={'Email'}
-          type={'email'}
-        />
-        {errors.email && <p>{`${errors.email.message}`}</p>}
-      </div>
-      <div>
-        <input
-          {...register('password', {
-            minLength: {
-              message: 'Password must be at least 6 characters заглавная буква и нижнее тире',
-              value: 10,
-            },
-            required: 'Password is required',
-          })}
-          className={styles.inputField}
-          placeholder={'Password'}
-          type={'password'}
-        />
-        {errors.password && <p>{`${errors.password.message}`}</p>}
-      </div>
-      <div>{t.SignIn_SignUp.forgetPasswotd}</div>
-      <div>
-        <Button primary type={'submit'}>
-          {t.SignIn_SignUp.signIn}
-        </Button>
-      </div>
-      <div> {t.SignIn_SignUp.dontHaveAccount}</div>
-      <div>
-        <Link href={'/SignUp'}>
-          <Button outline type={'submit'}>
-            {t.SignIn_SignUp.signUp}
+    <Card>
+      <form className={styles.loginForm} onSubmit={handleSubmit(onSubmit)}>
+        <div className={styles.tittle}>{t.SignIn_SignUp.signIn}</div>
+        <GoogleButton />
+        <div>
+          <input
+            {...register('email', { required: 'Email is required' })}
+            className={styles.inputField}
+            placeholder={'Email'}
+            type={'email'}
+          />
+          {errors.email && <p>{`${errors.email.message}`}</p>}
+        </div>
+        <div>
+          <input
+            {...register('password', {
+              minLength: {
+                message: 'Password must be at least 6 characters заглавная буква и нижнее тире',
+                value: 10,
+              },
+              required: 'Password is required',
+            })}
+            className={styles.inputField}
+            placeholder={'Password'}
+            type={'password'}
+          />
+          {errors.password && <p>{`${errors.password.message}`}</p>}
+        </div>
+        <div>{t.SignIn_SignUp.forgetPasswotd}</div>
+        <div>
+          <Button primary type={'submit'}>
+            {t.SignIn_SignUp.signIn}
           </Button>
-        </Link>
-      </div>
-    </form>
+        </div>
+        <div> {t.SignIn_SignUp.dontHaveAccount}</div>
+        <div>
+          <Link href={'/SignUp'}>
+            <Button outline type={'submit'}>
+              {t.SignIn_SignUp.signUp}
+            </Button>
+          </Link>
+        </div>
+      </form>
+    </Card>
   )
 }

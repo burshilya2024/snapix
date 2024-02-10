@@ -3,10 +3,10 @@ export const en = {
     HaveAccount: 'alredy have account?',
     SignOut: 'Sign out',
     dontHaveAccount: "Don't have an account?",
-    forgetPasswotd: 'Forgot password?',
+    forgetPasswotd: 'Forgot password',
     logout: 'logout',
-    signIn: 'Sign in',
-    signUp: 'Sign up',
+    signIn: 'Sign In',
+    signUp: 'Sign Up',
   },
   navBar: {
     create: 'Create',
