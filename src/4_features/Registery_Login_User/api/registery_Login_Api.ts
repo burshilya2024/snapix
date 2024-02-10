@@ -1,5 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
+import { IResponseRegisterApi } from '../types'
+
 const BASE_URL = 'https://9art.ru/api/v1/auth'
 
 export const Registery_Login_Api = createApi({
@@ -7,35 +9,27 @@ export const Registery_Login_Api = createApi({
     baseUrl: BASE_URL,
   }),
   endpoints: builder => ({
-    login: builder.mutation<any, any>({
-      query: body => ({
-        body,
+    login: builder.mutation<string, { email: string; password: string }>({
+      query: credentials => ({
+        body: credentials,
         method: 'POST',
         url: '/login',
       }),
-      // transformResponse: (response: IResponseRegisterApi) => {
-      //   localStorage.setItem('access_token', response.access_token || '')
-      //   localStorage.setItem('refresh_token', response.refresh_token || '')
-      //   localStorage.setItem('isAuth', 'true')
-      //   return response
-      // },
+      transformResponse: (response: any) => {
+        localStorage.setItem('access_token', response.accesstoken || '')
+        localStorage.setItem('isAuth', 'true')
+
+        return response
+      },
     }),
     refresh: builder.mutation<any, any>({
-      query: ({ access_token, body }) => ({
-        body,
+      query: ({ refresh_token }: any) => ({
         headers: {
-          Authorization: `Bearer ${access_token}`,
+          Authorization: `Bearer ${refresh_token}`,
         },
         method: 'POST',
-        url: '/refresh',
+        url: '/refresh-token',
       }),
-      // transformResponse: (response: IResponseRegisterApi) => {
-      //   localStorage.setItem('access_token', response.access_token || '')
-      //   localStorage.setItem('refresh_token', response.refresh_token || '')
-      //   localStorage.setItem('isAuth', 'true')
-
-      //   return response
-      // },
     }),
     register: builder.mutation<any, any>({
       query: body => ({
@@ -43,16 +37,9 @@ export const Registery_Login_Api = createApi({
         method: 'POST',
         url: `/register`,
       }),
-      // transformResponse: (response: IResponseRegisterApi) => {
-      //   localStorage.setItem('access_token', response.access_token || '')
-      //   localStorage.setItem('refresh_token', response.refresh_token || '')
-      //   localStorage.setItem('isAuth', 'true')
-
-      //   return response
-      // },
     }),
   }),
   reducerPath: 'Registery_Login_Api',
 })
 
-export const { useLoginMutation, useRegisterMutation } = Registery_Login_Api
+export const { useLoginMutation, useRefreshMutation, useRegisterMutation } = Registery_Login_Api

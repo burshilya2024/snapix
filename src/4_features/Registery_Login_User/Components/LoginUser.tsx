@@ -1,23 +1,23 @@
-import React from 'react'
-import { FieldValues, useForm } from 'react-hook-form'
+import React, { FormEventHandler } from 'react'
+import { useForm } from 'react-hook-form'
 
-import { GoogleButton } from '@/4_features/GoogleAuthButton/GoogleAuthButton'
-import { useLoginMutation } from '@/4_features/Registery_Login_User/api/registery_Login_Api'
 import { useTranslation } from '@/6_shared/config/i18n/hook/useTranslation'
-import Card from '@/6_shared/ui/Card'
 import Button from '@/6_shared/ui/ui-button'
+import Cookies from 'js-cookie'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useSession } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 
 import styles from '@/styles/LogIn.module.scss'
 
-// ! Доработаю!!! еще не работает как нужно! Авторизация через гугл тестовая, и в будушем изменится
-// ! на Swagger No parameters, не знаю что и как отправлять.
+import { useLoginMutation, useRefreshMutation } from '../api/registery_Login_Api'
+
 export const LoginComponents: React.FC = () => {
   const session = useSession()
   const router = useRouter()
   const { t } = useTranslation()
+  // !рабочий логин к серверу.(но есть нюансы, надо работать)
+  const [loginMutation, { error, isError, isLoading }] = useLoginMutation()
 
   if (session.data) {
     router.push('/MyProfile')
@@ -30,72 +30,66 @@ export const LoginComponents: React.FC = () => {
     register,
     reset,
   } = useForm()
-  const [login, { error, isLoading }] = useLoginMutation()
-  const onSubmit = async (data: FieldValues) => {
-    try {
-      if (isLoading) {
-        return <div>Loading...</div>
-      }
+  // Тестовый вход по логину и паролю
+  const handleSubmitLogin: FormEventHandler<HTMLFormElement> = async event => {
+    event.preventDefault()
 
-      //! Отправляем данные на сервер
-      await login(data)
+    const formData = new FormData(event.currentTarget)
 
-      if (!error) {
-        alert('Login successful!')
-      }
-    } catch (error) {
-      alert(JSON.stringify(error || 'Error during login'))
-      console.error('Login failed:', error)
-    } finally {
-      // Очищаем форму
-      reset()
+    const res = await signIn('credentials', {
+      email: formData.get('email'),
+      password: formData.get('password'),
+      redirect: false,
+    })
+
+    if (res && !res.error) {
+      router.push('/profile')
+    } else {
+      console.log(res)
     }
   }
 
   return (
-    <Card>
-      <form className={styles.loginForm} onSubmit={handleSubmit(onSubmit)}>
-        <div className={styles.tittle}>{t.SignIn_SignUp.signIn}</div>
-        <GoogleButton />
-        <div>
-          <input
-            {...register('email', { required: 'Email is required' })}
-            className={styles.inputField}
-            placeholder={'Email'}
-            type={'email'}
-          />
-          {errors.email && <p>{`${errors.email.message}`}</p>}
-        </div>
-        <div>
-          <input
-            {...register('password', {
-              minLength: {
-                message: 'Password must be at least 6 characters заглавная буква и нижнее тире',
-                value: 10,
-              },
-              required: 'Password is required',
-            })}
-            className={styles.inputField}
-            placeholder={'Password'}
-            type={'password'}
-          />
-          {errors.password && <p>{`${errors.password.message}`}</p>}
-        </div>
-        <div>{t.SignIn_SignUp.forgetPasswotd}</div>
-        <div>
-          <Button primary type={'submit'}>
-            {t.SignIn_SignUp.signIn}
+    <form className={styles.loginForm} onSubmit={handleSubmitLogin}>
+      <div className={styles.tittle}>{t.SignIn_SignUp.signIn}</div>
+      <div>
+        <input
+          {...register('email', { required: 'Email is required' })}
+          className={styles.inputField}
+          placeholder={'Email'}
+          type={'email'}
+        />
+        {errors.email && <p>{`${errors.email.message}`}</p>}
+      </div>
+      <div>
+        <input
+          {...register('password', {
+            minLength: {
+              message: 'Password must be at least 6 characters заглавная буква и нижнее тире',
+              value: 10,
+            },
+            required: 'Password is required',
+          })}
+          className={styles.inputField}
+          placeholder={'Password'}
+          type={'password'}
+        />
+        {errors.password && <p>{`${errors.password.message}`}</p>}
+      </div>
+      <div>{t.SignIn_SignUp.forgetPasswotd}</div>
+      <div>
+        <Button primary type={'submit'}>
+          {t.SignIn_SignUp.signIn}
+        </Button>
+      </div>
+      <div> {t.SignIn_SignUp.dontHaveAccount}</div>
+      <div>
+        <Link href={'/SignUp'}>
+          <Button outline type={'submit'}>
+            {t.SignIn_SignUp.signUp}
           </Button>
-        </div>
-        <div> {t.SignIn_SignUp.dontHaveAccount}</div>
-        <div>
-          <Link href={'/SignUp'}>
-            <Button outline type={'submit'}>
-              {t.SignIn_SignUp.signUp}
-            </Button>
-          </Link>
-        </div>
-      </form>
-    </Card>
+        </Link>
+      </div>
+    </form>
   )
 }

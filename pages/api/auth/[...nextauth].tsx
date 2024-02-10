@@ -2,7 +2,7 @@ import NextAuth, { User } from 'next-auth'
 import Credentials from 'next-auth/providers/credentials'
 import GoogleProvider from 'next-auth/providers/google'
 
-const NEXTAUTH_URL = 'https://9art.ru'
+const BACKEND_BASE_URL = 'https://9art.ru/api'
 
 const users = [
   {
