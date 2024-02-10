@@ -1,11 +1,13 @@
 import React from 'react'
 import { FieldValues, useForm } from 'react-hook-form'
 
+import { GitHubAuthButton } from '@/4_features/GitHubAuthButton/GitHubAuthButton'
 import { GoogleButton } from '@/4_features/GoogleAuthButton/GoogleAuthButton'
 import { useLoginMutation } from '@/4_features/Registery_Login_User/api/registery_Login_Api'
 import { useTranslation } from '@/6_shared/config/i18n/hook/useTranslation'
 import Card from '@/6_shared/ui/Card'
 import Button from '@/6_shared/ui/ui-button'
+import EyeOff from '@public/assets/icons/eye-off.svg'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/react'
@@ -55,40 +57,54 @@ export const LoginComponents: React.FC = () => {
   return (
     <Card>
       <form className={styles.loginForm} onSubmit={handleSubmit(onSubmit)}>
-        <div className={styles.tittle}>{t.SignIn_SignUp.signIn}</div>
-        <GoogleButton />
-        <div>
-          <input
-            {...register('email', { required: 'Email is required' })}
-            className={styles.inputField}
-            placeholder={'Email'}
-            type={'email'}
-          />
-          {errors.email && <p>{`${errors.email.message}`}</p>}
+        <h1 className={styles.tittle}>{t.SignIn_SignUp.signIn}</h1>
+        <div className={styles.icons}>
+          <GoogleButton />
+          <GitHubAuthButton />
         </div>
-        <div>
-          <input
-            {...register('password', {
-              minLength: {
-                message: 'Password must be at least 6 characters заглавная буква и нижнее тире',
-                value: 10,
-              },
-              required: 'Password is required',
-            })}
-            className={styles.inputField}
-            placeholder={'Password'}
-            type={'password'}
-          />
-          {errors.password && <p>{`${errors.password.message}`}</p>}
+        <div className={styles.inputForms}>
+          <div className={styles.inputForm}>
+            <span className={styles.inputTitle}>Email</span>
+            <input
+              {...register('email', { required: 'Email is required' })}
+              className={styles.inputField}
+              placeholder={'Email'}
+              type={'email'}
+            />
+            {errors.email && <p>{`${errors.email.message}`}</p>}
+          </div>
+          <div className={styles.inputForm}>
+            <span className={styles.inputTitle}>Password</span>
+            <div className={styles.inputContainer}>
+              <input
+                {...register('password', {
+                  minLength: {
+                    message: 'Password must be at least 6 characters заглавная буква и нижнее тире',
+                    value: 10,
+                  },
+                  required: 'Password is required',
+                })}
+                className={styles.inputField}
+                placeholder={'Password'}
+                type={'password'}
+              />
+              <span className={styles.eye}>
+                <EyeOff />
+              </span>
+            </div>
+
+            {errors.password && <p>{`${errors.password.message}`}</p>}
+            <span className={styles.inputTitle}>{t.SignIn_SignUp.forgetPasswotd}</span>
+          </div>
         </div>
-        <div>{t.SignIn_SignUp.forgetPasswotd}</div>
-        <div>
+
+        <div className={styles.btnSignIn}>
           <Button primary type={'submit'}>
             {t.SignIn_SignUp.signIn}
           </Button>
         </div>
-        <div> {t.SignIn_SignUp.dontHaveAccount}</div>
-        <div>
+        <div className={styles.infoAccount}> {t.SignIn_SignUp.dontHaveAccount}</div>
+        <div className={styles.btnSignUp}>
           <Link href={'/SignUp'}>
             <Button outline type={'submit'}>
               {t.SignIn_SignUp.signUp}

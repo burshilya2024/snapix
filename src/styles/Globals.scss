@@ -1,4 +1,5 @@
 @import './variables.module';
+@import 'https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap';
 
 * {
   box-sizing: border-box;
@@ -10,7 +11,7 @@ html,
 body {
   overflow-x: hidden;
   max-width: 100vw;
-  font-family: Arial, sans-serif;
+  font-family: Inter, Arial, sans-serif;
 }
 
 a {
@@ -151,7 +152,7 @@ body[data-theme='dark'] {
 
 // размеры шрифтов для Typography
 :root {
-  --font-family-primary: 'Roboto', sans-serif;
+  --font-family-primary: 'Inter', 'Roboto', sans-serif;
 
   // line heights
   --line-height-s: 16px;

@@ -2,7 +2,7 @@
   cursor: pointer;
 
   width: 100%;
-  padding: 10px 20px;
+  padding: 6px 20px;
 
   font-size: 16px;
   font-weight: 600;
@@ -10,16 +10,16 @@
 
   background-color: #397df6;
   border: none;
-  border-radius: 4px;
+  border-radius: 2px;
 
   transition: all 0.3s ease;
 }
 
-.button:hover {
-  transform: translateY(-3px);
-  color: white;
-  background-color: #5991f9;
-}
+//.button:hover {
+//  transform: translateY(-3px);
+//  color: white;
+//  background-color: #5991f9;
+//}
 
 .primary {
   color: #fff;

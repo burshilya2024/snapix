@@ -39,11 +39,9 @@ export const Header = () => {
         <div className={styles.header_right}>
           <LangSelect />
           <Link href={'/LogIn'}>
-            {' '}
             <Button outline>{t.SignIn_SignUp.signIn}</Button>
           </Link>
           <Link href={'/SignUp'}>
-            {' '}
             <Button primary>{t.SignIn_SignUp.signUp}</Button>
           </Link>
         </div>
