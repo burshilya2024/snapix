@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Controller, FieldValues, SubmitHandler, useForm } from 'react-hook-form'
-import { toast } from 'react-hot-toast'
 
 import { useRegisterMutation } from '@/4_features/Registery_Login_User/api/registery_Login_Api'
 import { useTranslation } from '@/6_shared/config/i18n/hook/useTranslation'
 import Button from '@/6_shared/ui/ui-button'
-import { Spinner, useToast } from '@chakra-ui/react'
+import { Card, Spinner, useToast } from '@chakra-ui/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -52,7 +51,7 @@ export const SignUpComponent: React.FC<any> = () => {
   return (
     <Card>
       <form className={styles.loginForm} onSubmit={handleSubmit(onSubmit)}>
-        <div className={styles.tittle}>{t.SignIn_SignUp.signUp}</div>
+        <div className={styles.tittle}>{t.signIn_SignUp.signUp}</div>
         <div>
           <Controller
             control={control}
@@ -137,15 +136,15 @@ export const SignUpComponent: React.FC<any> = () => {
             </div>
           ) : (
             <Button primary type={'submit'}>
-              {t.SignIn_SignUp.signUp}
+              {t.signIn_SignUp.signUp}
             </Button>
           )}
         </div>
-        <div>{t.SignIn_SignUp.HaveAccount}</div>
+        <div>{t.signIn_SignUp.haveAccount}</div>
         <div>
           <Link href={'/LogIn'}>
             <Button outline type={'submit'}>
-              {t.SignIn_SignUp.signIn}
+              {t.signIn_SignUp.signIn}
             </Button>
           </Link>
         </div>
