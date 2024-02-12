@@ -6,8 +6,10 @@ export function MyProfile() {
 
   return (
     <div>
-      <div>{session.data?.user?.name}</div>
-      <div>{session.data?.user?.email}</div>
+      <div>{session.data?.user?.name ? session.data?.user?.name : 'нету имени'}</div>
+      <div>
+        {session.data?.user?.email ? session.data?.user?.email : 'от backend я ничего не вижу'}
+      </div>
       <img alt={''} src={session?.data?.user?.image || '/default-image.jpg'} />
     </div>
   )

@@ -1,27 +1,27 @@
-import React from 'react'
-import { FieldValues, useForm } from 'react-hook-form'
+import React, { FormEventHandler, useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { toast } from 'react-hot-toast'
 
-import { GoogleButton } from '@/4_features/GoogleAuthButton/GoogleAuthButton'
-import { useLoginMutation } from '@/4_features/Registery_Login_User/api/registery_Login_Api'
 import { useTranslation } from '@/6_shared/config/i18n/hook/useTranslation'
-import Card from '@/6_shared/ui/Card'
 import Button from '@/6_shared/ui/ui-button'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useSession } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 
 import styles from '@/styles/LogIn.module.scss'
 
-// ! Доработаю!!! еще не работает как нужно! Авторизация через гугл тестовая, и в будушем изменится
-// ! на Swagger No parameters, не знаю что и как отправлять.
 export const LoginComponents: React.FC = () => {
-  const session = useSession()
+  const { data: session } = useSession()
   const router = useRouter()
   const { t } = useTranslation()
 
-  if (session.data) {
-    router.push('/MyProfile')
-  }
+  console.log('data session', session)
+  useEffect(() => {
+    if (session?.user?.name) {
+      router.push('/MyProfile')
+    }
+  })
+
   const {
     formState: { errors, isSubmitting },
     getValues,
@@ -30,33 +30,30 @@ export const LoginComponents: React.FC = () => {
     register,
     reset,
   } = useForm()
-  const [login, { error, isLoading }] = useLoginMutation()
-  const onSubmit = async (data: FieldValues) => {
-    try {
-      if (isLoading) {
-        return <div>Loading...</div>
+
+  const handleSubmitLogin: FormEventHandler<HTMLFormElement> = async event => {
+    event.preventDefault()
+
+    const formData = new FormData(event.currentTarget)
+
+    await signIn('credentials', {
+      email: formData.get('email'),
+      password: formData.get('password'),
+      redirect: false,
+    }).then(callback => {
+      if (callback?.error) {
+        toast.error(callback.error)
       }
 
-      //! Отправляем данные на сервер
-      await login(data)
-
-      if (!error) {
-        alert('Login successful!')
+      if (callback?.ok && !callback?.error) {
+        toast.success('Logged in successfully!')
       }
-    } catch (error) {
-      alert(JSON.stringify(error || 'Error during login'))
-      console.error('Login failed:', error)
-    } finally {
-      // Очищаем форму
-      reset()
-    }
+    })
   }
 
   return (
-    <Card>
-      <form className={styles.loginForm} onSubmit={handleSubmit(onSubmit)}>
-        <div className={styles.tittle}>{t.SignIn_SignUp.signIn}</div>
-        <GoogleButton />
+    <div>
+      <form className={styles.loginForm} onSubmit={handleSubmitLogin}>
         <div>
           <input
             {...register('email', { required: 'Email is required' })}
@@ -70,7 +67,7 @@ export const LoginComponents: React.FC = () => {
           <input
             {...register('password', {
               minLength: {
-                message: 'Password must be at least 6 characters заглавная буква и нижнее тире',
+                message: 'Password must contain an uppercase letter and an underscore (_)',
                 value: 10,
               },
               required: 'Password is required',
@@ -96,6 +93,6 @@ export const LoginComponents: React.FC = () => {
           </Link>
         </div>
       </form>
-    </Card>
+    </div>
   )
 }
