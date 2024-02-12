@@ -65,7 +65,7 @@ export const SignUpCompontnts: React.FC<any> = () => {
         </div>
       ) : (
         <form className={styles.loginForm} onSubmit={handleSubmit(onSubmit)}>
-          <div className={styles.tittle}>{t.SignIn_SignUp.signUp}</div>
+          <div className={styles.tittle}>{t.signIn_SignUp.signUp}</div>
           <div>
             <Controller
               control={control}
@@ -133,14 +133,14 @@ export const SignUpCompontnts: React.FC<any> = () => {
 
           <div>
             <Button primary type={'submit'}>
-              {t.SignIn_SignUp.signUp}
+              {t.signIn_SignUp.signUp}
             </Button>
           </div>
-          <div>{t.SignIn_SignUp.HaveAccount}</div>
+          <div>{t.signIn_SignUp.haveAccount}</div>
           <div>
             <Link href={'/LogIn'}>
               <Button outline type={'submit'}>
-                {t.SignIn_SignUp.signIn}
+                {t.signIn_SignUp.signIn}
               </Button>
             </Link>
           </div>

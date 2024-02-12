@@ -1,9 +1,9 @@
 export const en = {
-  SignIn_SignUp: {
-    HaveAccount: 'alredy have account?',
-    SignOut: 'Sign out',
-    dontHaveAccount: "Don't have an account?",
-    forgetPasswotd: 'Forgot password?',
+  signIn_SignUp: {
+    haveAccount: 'Already have an account?',
+    singOut: 'Sign out',
+    dontHaveAccount: "Don't have an account yet?",
+    forgotPassword: 'Forgot password?',
     logout: 'logout',
     signIn: 'Sign in',
     signUp: 'Sign up',
@@ -12,7 +12,7 @@ export const en = {
     create: 'Create',
     favorites: 'Favorites',
     home: 'Home',
-    messanger: 'Messanger',
+    messenger: 'Messenger',
     myProfile: 'My Profile',
     search: 'Search',
     statistics: 'Statistics',

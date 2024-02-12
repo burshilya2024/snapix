@@ -51,7 +51,7 @@ export const NavBar = ({ navLinks }: Props) => {
           <span className={'svg'}>
             <LogInIcon />
           </span>
-          <span>{t.SignIn_SignUp.logout}</span>
+          <span>{t.signIn_SignUp.logout}</span>
         </Link>
       )}
     </div>

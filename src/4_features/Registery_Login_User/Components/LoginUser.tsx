@@ -1,7 +1,6 @@
 import React, { FormEventHandler, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
-
 import { useTranslation } from '@/6_shared/config/i18n/hook/useTranslation'
 import Button from '@/6_shared/ui/ui-button'
 import Link from 'next/link'
@@ -78,17 +77,17 @@ export const LoginComponents: React.FC = () => {
           />
           {errors.password && <p>{`${errors.password.message}`}</p>}
         </div>
-        <div>{t.SignIn_SignUp.forgetPasswotd}</div>
+        <div>{t.signIn_SignUp.forgotPassword}</div>
         <div>
           <Button primary type={'submit'}>
-            {t.SignIn_SignUp.signIn}
+            {t.signIn_SignUp.signIn}
           </Button>
         </div>
-        <div> {t.SignIn_SignUp.dontHaveAccount}</div>
+        <div> {t.signIn_SignUp.dontHaveAccount}</div>
         <div>
           <Link href={'/SignUp'}>
             <Button outline type={'submit'}>
-              {t.SignIn_SignUp.signUp}
+              {t.signIn_SignUp.signUp}
             </Button>
           </Link>
         </div>

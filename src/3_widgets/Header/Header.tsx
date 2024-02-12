@@ -1,9 +1,4 @@
-import { useState } from 'react'
-
-import { LangSelect } from '@/4_features/Lang/LangSelect'
 import ThemeToggle from '@/4_features/ThemeToggle/ThemeToggle'
-import { en } from '@/6_shared/config/i18n/Locales/en'
-import { ru } from '@/6_shared/config/i18n/Locales/ru'
 import { useTranslation } from '@/6_shared/config/i18n/hook/useTranslation'
 import { Typography } from '@/6_shared/ui/Typography'
 import Button from '@/6_shared/ui/ui-button'
@@ -24,11 +19,11 @@ import BurgerMenu from '@public/assets/icons/menu-outline.svg'
 import ProfileSettings from '@public/assets/icons/settings.svg'
 import Statistics from '@public/assets/icons/trending-up.svg'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { signOut, useSession } from 'next-auth/react'
 
 // !вынести menu в в фичи
 import styles from '@/styles/Header.module.scss'
+import LangSelect from '@/4_features/Lang/LangSelect'
 export const Header = () => {
   const session = useSession()
   const { t } = useTranslation()
@@ -42,11 +37,11 @@ export const Header = () => {
           <LangSelect />
           <Link href={'/LogIn'}>
             {' '}
-            <Button outline>{t.SignIn_SignUp.signIn}</Button>
+            <Button outline>{t.signIn_SignUp.signIn}</Button>
           </Link>
           <Link href={'/SignUp'}>
             {' '}
-            <Button primary>{t.SignIn_SignUp.signUp}</Button>
+            <Button primary>{t.signIn_SignUp.signUp}</Button>
           </Link>
         </div>
       ) : (
@@ -59,10 +54,9 @@ export const Header = () => {
             <MenuItem icon={<Statistics />}>{t.navBar.statistics}</MenuItem>
             <MenuItem icon={<Favorite />}>{t.navBar.favorites}</MenuItem>
             <Link href={'#'} onClick={() => signOut({ callbackUrl: '/' })}>
-              <MenuItem icon={<LogOut />}>{t.SignIn_SignUp.logout}</MenuItem>
+              <MenuItem icon={<LogOut />}>{t.signIn_SignUp.logout}</MenuItem>
             </Link>
             <ThemeToggle />
-            <LangSelect />
           </MenuList>
         </Menu>
       )}
