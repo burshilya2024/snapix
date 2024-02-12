@@ -1,7 +1,15 @@
 export interface IResponseRegisterApi {
   access_token?: string
+  message: string
+}
+
+export type RegistrationData = {
   email: string
-  refresh_token?: string
+  password: string
+  username: string
+}
+export type RegistrationResponse = {
+  message: string
 }
 
 export interface IRequestRegisterApi {

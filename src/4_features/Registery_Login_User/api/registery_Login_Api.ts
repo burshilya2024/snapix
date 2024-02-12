@@ -1,5 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
+import { IResponseRegisterApi, RegistrationData, RegistrationResponse } from '../types'
+
 const BASE_URL = 'https://9art.ru/api/v1/auth'
 
 export const Registery_Login_Api = createApi({
@@ -37,19 +39,12 @@ export const Registery_Login_Api = createApi({
       //   return response
       // },
     }),
-    register: builder.mutation<any, any>({
+    register: builder.mutation<Promise<string>, RegistrationData>({
       query: body => ({
         body,
         method: 'POST',
         url: `/register`,
       }),
-      // transformResponse: (response: IResponseRegisterApi) => {
-      //   localStorage.setItem('access_token', response.access_token || '')
-      //   localStorage.setItem('refresh_token', response.refresh_token || '')
-      //   localStorage.setItem('isAuth', 'true')
-
-      //   return response
-      // },
     }),
   }),
   reducerPath: 'Registery_Login_Api',
