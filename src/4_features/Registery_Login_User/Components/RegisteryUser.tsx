@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import { Controller, FieldValues, SubmitHandler, useForm } from 'react-hook-form'
+import React from 'react'
+import { Controller, useForm } from 'react-hook-form'
 
 import { useRegisterMutation } from '@/4_features/Registery_Login_User/api/registery_Login_Api'
 import { useTranslation } from '@/6_shared/config/i18n/hook/useTranslation'
+import Card from '@/6_shared/ui/Card'
 import Button from '@/6_shared/ui/ui-button'
-import { Card, Spinner, useToast } from '@chakra-ui/react'
+import { Spinner, useToast } from '@chakra-ui/react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 
 import styles from '@/styles/LogIn.module.scss'
 
-// !Регистрация работает! statusCode 201. нужно будет сделать красивые уведомления и логику при успешной регистрации.
 export const SignUpComponent: React.FC<any> = () => {
   const {
     control,
@@ -27,7 +26,7 @@ export const SignUpComponent: React.FC<any> = () => {
       .unwrap()
       .then(res => {
         toast({
-          description: `${res.message}`,
+          description: `${res?.message || 'успешно!'}`,
           duration: 9000,
           isClosable: true,
           status: 'success',
@@ -36,7 +35,7 @@ export const SignUpComponent: React.FC<any> = () => {
       })
       .catch(error => {
         toast({
-          description: `${error.data.errors.username.message}`,
+          description: `${error?.data?.errors?.username?.message}`,
           duration: 9000,
           isClosable: true,
           status: 'error',
