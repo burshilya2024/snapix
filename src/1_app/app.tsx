@@ -7,6 +7,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { SessionProvider } from 'next-auth/react'
 
 import Layout from './Layout/Layout'
+import ToasterContext from './Providers/ToasterProvider'
 import { setupStore } from './store'
 const store = setupStore()
 
@@ -15,6 +16,7 @@ export function App({ Component, pageProps: { session, ...pageProps } }: AppProp
     <ChakraProvider>
       <SessionProvider session={session}>
         <Provider store={store}>
+          <ToasterContext />
           <Layout>
             <Component {...pageProps} />
           </Layout>
