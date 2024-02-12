@@ -2,4 +2,4 @@
 // в features находиться бизнес логика, думаю это основная папка, где будет самое большое количество компоненты
 
 export { LoginComponents } from './Registery_Login_User/Components/LoginUser'
-export { SignUpCompontnts } from './Registery_Login_User/Components/RegisteryUser'
+export { SignUpComponent } from './Registery_Login_User/Components/RegisteryUser'
