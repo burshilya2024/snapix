@@ -1,13 +1,4 @@
 export const nl = {
-  signIn_SignUp: {
-    haveAccount: 'Heb je al een account?',
-    singOut: 'Sign out',
-    dontHaveAccount: 'Heb je nog geen account?',
-    forgotPassword: 'Wachtwoord vergeten?',
-    logout: 'Uitloggen',
-    signIn: 'Aanmelden',
-    signUp: 'Registreren',
-  },
   navBar: {
     create: 'Maken',
     favorites: 'Favorieten',
@@ -16,5 +7,14 @@ export const nl = {
     myProfile: 'My Profile',
     search: 'Zoeken',
     statistics: 'Statistieken',
+  },
+  signIn_SignUp: {
+    dontHaveAccount: 'Heb je nog geen account?',
+    forgotPassword: 'Wachtwoord vergeten?',
+    haveAccount: 'Heb je al een account?',
+    logout: 'Uitloggen',
+    signIn: 'Aanmelden',
+    signUp: 'Registreren',
+    singOut: 'Sign out',
   },
 }

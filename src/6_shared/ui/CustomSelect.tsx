@@ -1,33 +1,34 @@
 import React from 'react'
 import Select, {
   ActionMeta,
-  components,
   OptionProps,
   SingleValue,
   SingleValueProps,
+  components,
 } from 'react-select'
 
 type IOptionType = {
-  value: string
-  label: string
   img: string
+  label: string
+  value: string
 }
 
 type CustomSelectProps = {
-  options: IOptionType[]
   defaultOptionValue: string | undefined
   handlerFunction: (newValue: string | undefined) => void
+  options: IOptionType[]
 }
 
-const SingleValue: React.FC<SingleValueProps<IOptionType, false>> = props => {
+const CustomSingleValue: React.FC<SingleValueProps<IOptionType, false>> = props => {
   const {
-    data: { value, label, img },
     children,
+    data: { img, label, value },
   } = props
+
   return (
     <components.SingleValue {...props}>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <img src={img} style={{ width: '20px', height: '20px', marginRight: '10px' }} alt="" />
+      <div style={{ alignItems: 'center', display: 'flex' }}>
+        <img alt={''} src={img} style={{ height: '20px', marginRight: '10px', width: '20px' }} />
         {children}
       </div>
     </components.SingleValue>
@@ -36,12 +37,13 @@ const SingleValue: React.FC<SingleValueProps<IOptionType, false>> = props => {
 
 const Option: React.FC<OptionProps<IOptionType, false>> = props => {
   const {
-    data: { value, label, img },
+    data: { img, label, value },
   } = props
+
   return (
     <components.Option {...props}>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <img src={img} style={{ width: '20px', height: '20px', marginRight: '10px' }} alt="" />
+      <div style={{ alignItems: 'center', display: 'flex' }}>
+        <img alt={''} src={img} style={{ height: '20px', marginRight: '10px', width: '20px' }} />
         {label}
       </div>
     </components.Option>
@@ -49,9 +51,9 @@ const Option: React.FC<OptionProps<IOptionType, false>> = props => {
 }
 
 const CustomSelect: React.FC<CustomSelectProps> = ({
-  options,
   defaultOptionValue,
   handlerFunction,
+  options,
 }) => {
   const onChangeHandler = (
     newValue: SingleValue<IOptionType>,
@@ -62,10 +64,10 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
 
   return (
     <Select
+      components={{ Option, SingleValue: CustomSingleValue }}
       defaultValue={options?.find(option => option?.value === defaultOptionValue)}
-      options={options}
-      components={{ SingleValue, Option }}
       onChange={onChangeHandler}
+      options={options}
     />
   )
 }

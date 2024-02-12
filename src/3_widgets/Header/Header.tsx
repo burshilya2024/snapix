@@ -1,3 +1,4 @@
+import LangSelect from '@/4_features/Lang/LangSelect'
 import ThemeToggle from '@/4_features/ThemeToggle/ThemeToggle'
 import { useTranslation } from '@/6_shared/config/i18n/hook/useTranslation'
 import { Typography } from '@/6_shared/ui/Typography'
@@ -23,7 +24,6 @@ import { signOut, useSession } from 'next-auth/react'
 
 // !вынести menu в в фичи
 import styles from '@/styles/Header.module.scss'
-import LangSelect from '@/4_features/Lang/LangSelect'
 export const Header = () => {
   const session = useSession()
   const { t } = useTranslation()
@@ -57,6 +57,7 @@ export const Header = () => {
               <MenuItem icon={<LogOut />}>{t.signIn_SignUp.logout}</MenuItem>
             </Link>
             <ThemeToggle />
+            <LangSelect />
           </MenuList>
         </Menu>
       )}

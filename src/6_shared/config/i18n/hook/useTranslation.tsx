@@ -1,8 +1,9 @@
-import { useRouter } from 'next/router'
-import { en } from '../Locales/en'
-import { ru } from '../Locales/ru'
-import { nl } from '../Locales/nl'
 import { useLocalesData } from '@/6_shared/config/i18n/hook/useLocalesData'
+import { useRouter } from 'next/router'
+
+import { en } from '../Locales/en'
+import { nl } from '../Locales/nl'
+import { ru } from '../Locales/ru'
 
 export const useTranslation = () => {
   const router = useRouter()

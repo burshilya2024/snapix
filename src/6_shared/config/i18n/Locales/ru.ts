@@ -1,13 +1,4 @@
 export const ru = {
-  signIn_SignUp: {
-    haveAccount: 'Уже есть аккаунт?',
-    singOut: 'Выход',
-    dontHaveAccount: 'Нет аккаунта?',
-    forgotPassword: 'Забыли пароль?',
-    logout: 'Выход',
-    signIn: 'Войти',
-    signUp: 'Регистрация',
-  },
   navBar: {
     create: 'Создать',
     favorites: 'Избранное',
@@ -16,6 +7,15 @@ export const ru = {
     myProfile: 'Мой профиль',
     search: 'Поиск',
     statistics: 'Статистика',
+  },
+  signIn_SignUp: {
+    dontHaveAccount: 'Нет аккаунта?',
+    forgotPassword: 'Забыли пароль?',
+    haveAccount: 'Уже есть аккаунт?',
+    logout: 'Выход',
+    signIn: 'Войти',
+    signUp: 'Регистрация',
+    singOut: 'Выход',
   },
 }
 
