@@ -1,11 +1,13 @@
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
+
 import { useRegisterMutation } from '@/4_features/Registery_Login_User/api/registery_Login_Api'
 import { useTranslation } from '@/6_shared/config/i18n/hook/useTranslation'
 import Card from '@/6_shared/ui/Card'
 import Button from '@/6_shared/ui/ui-button'
 import { Spinner, useToast } from '@chakra-ui/react'
 import Link from 'next/link'
+
 import styles from '@/styles/LogIn.module.scss'
 
 export const SignUpComponent: React.FC<any> = () => {

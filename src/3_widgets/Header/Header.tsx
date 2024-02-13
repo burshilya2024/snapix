@@ -1,11 +1,12 @@
+import { HeaderMenu } from '@/4_features/HeaderMenu/HeaderMenu'
 import LangSelect from '@/4_features/Lang/LangSelect'
 import { useTranslation } from '@/6_shared/config/i18n/hook/useTranslation'
 import { Typography } from '@/6_shared/ui/Typography'
 import Button from '@/6_shared/ui/ui-button'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
+
 import styles from '@/styles/Header.module.scss'
-import { HeaderMenu } from '@/4_features/HeaderMenu/HeaderMenu'
 export const Header = () => {
   const session = useSession()
   const { t } = useTranslation()

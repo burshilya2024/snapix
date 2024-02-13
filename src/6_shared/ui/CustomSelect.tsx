@@ -1,6 +1,4 @@
 import React from 'react'
-import styles from '@/styles/CustomSelect.module.scss'
-
 import Select, {
   ActionMeta,
   OptionProps,
@@ -8,6 +6,8 @@ import Select, {
   SingleValueProps,
   components,
 } from 'react-select'
+
+import styles from '@/styles/CustomSelect.module.scss'
 
 type IOptionType = {
   img: string
@@ -66,11 +66,11 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
 
   return (
     <Select
+      className={styles.select}
       components={{ Option, SingleValue: CustomSingleValue }}
       defaultValue={options?.find(option => option?.value === defaultOptionValue)}
       onChange={onChangeHandler}
       options={options}
-      className={styles.select}
     />
   )
 }

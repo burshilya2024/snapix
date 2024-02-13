@@ -9,6 +9,7 @@ import ProfileSettings from '@public/assets/icons/settings.svg'
 import Statistics from '@public/assets/icons/trending-up.svg'
 import Link from 'next/link'
 import { signOut } from 'next-auth/react'
+
 import styles from '@/styles/HeaderMenu.module.scss'
 export const HeaderMenu = () => {
   const { t } = useTranslation()

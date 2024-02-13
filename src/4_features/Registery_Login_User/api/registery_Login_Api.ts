@@ -8,6 +8,7 @@ export const Registery_Login_Api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,
   }),
+  // !не используется, оставил для наглядности
   endpoints: builder => ({
     login: builder.mutation<any, any>({
       query: body => ({

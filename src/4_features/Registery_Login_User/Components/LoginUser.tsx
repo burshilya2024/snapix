@@ -1,5 +1,5 @@
 import React, { FormEventHandler, useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
 
 import { useTranslation } from '@/6_shared/config/i18n/hook/useTranslation'
@@ -31,7 +31,7 @@ export const LoginComponents: React.FC = () => {
     reset,
   } = useForm()
 
-  const handleSubmitLogin: FormEventHandler<HTMLFormElement> = async event => {
+  const handleSubmitLogin: SubmitHandler<FieldValues> = async event => {
     event.preventDefault()
 
     const formData = new FormData(event.currentTarget)
@@ -53,7 +53,7 @@ export const LoginComponents: React.FC = () => {
 
   return (
     <div>
-      <form className={styles.loginForm} onSubmit={handleSubmitLogin}>
+      <form className={styles.loginForm} onSubmit={handleSubmit(handleSubmitLogin)}>
         <div>
           <input
             {...register('email', { required: 'Email is required' })}
