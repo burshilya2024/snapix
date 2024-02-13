@@ -1,6 +1,7 @@
 import React, { FormEventHandler, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
+import { IUserData } from '@/4_features/Registery_Login_User/types'
 import { useTranslation } from '@/6_shared/config/i18n/hook/useTranslation'
 import Button from '@/6_shared/ui/ui-button'
 import { Spinner, useToast } from '@chakra-ui/react'
@@ -26,25 +27,20 @@ export const LoginComponents: React.FC = () => {
   const {
     formState: { errors, isSubmitting },
     getValues,
-    //?если будут ошибки, onSubmit не будет выполнена
     handleSubmit,
     register,
     reset,
-  } = useForm()
+  } = useForm<IUserData>()
 
-  const handleSubmitLogin: FormEventHandler<HTMLFormElement> = async event => {
-    event.preventDefault()
-
-    const formData = new FormData(event.currentTarget)
-
+  const handleSubmitLogin = async (data: IUserData) => {
     await signIn('credentials', {
-      email: formData.get('email'),
-      password: formData.get('password'),
+      email: data.email,
+      password: data.password,
       redirect: false,
     }).then(callback => {
       if (callback?.error) {
         toast({
-          description: `${callback.error}`,
+          description: `Invalid email or password`,
           duration: 9000,
           isClosable: true,
           status: 'error',
@@ -66,10 +62,16 @@ export const LoginComponents: React.FC = () => {
 
   return (
     <div>
-      <form className={styles.loginForm} onSubmit={handleSubmitLogin}>
+      <form className={styles.loginForm} onSubmit={handleSubmit(handleSubmitLogin)}>
         <div>
           <input
-            {...register('email', { required: 'Email is required' })}
+            {...register('email', {
+              pattern: {
+                message: 'Invalid email',
+                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,20}$/,
+              },
+              required: 'Email is required',
+            })}
             className={styles.inputField}
             placeholder={'Email'}
             type={'email'}
