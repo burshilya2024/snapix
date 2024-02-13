@@ -32,8 +32,7 @@ const chunkArray = (array: Photo[], size: number) => {
 }
 
 export  function Public() {
-  const { data: photos = [], error, isLoading } = useFetchDataPhotoQuery()
-
+  const { data: photos = [], isLoading } = useFetchDataPhotoQuery()
 
   if (isLoading) {
     return <div>Loading...</div>
