@@ -9,6 +9,7 @@ import { Spinner, useToast } from '@chakra-ui/react'
 import Link from 'next/link'
 
 import styles from '@/styles/LogIn.module.scss'
+import { IRequestRegisterApi } from '@/4_features/Registery_Login_User/types'
 
 // !Регистрация работает! statusCode 201. нужно будет сделать красивые уведомления и логику при успешной регистрации.
 export const SignUpComponent: React.FC<any> = () => {
@@ -17,12 +18,12 @@ export const SignUpComponent: React.FC<any> = () => {
     formState: { errors, isSubmitting },
     handleSubmit,
     reset,
-  } = useForm()
+  } = useForm<IRequestRegisterApi>()
   const [register] = useRegisterMutation()
   const { t } = useTranslation()
   const toast = useToast()
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: IRequestRegisterApi) => {
     await register(data)
       .unwrap()
       .then(res => {
