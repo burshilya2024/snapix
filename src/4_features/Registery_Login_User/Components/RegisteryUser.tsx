@@ -5,39 +5,47 @@ import { useRegisterMutation } from '@/4_features/Registery_Login_User/api/regis
 import { useTranslation } from '@/6_shared/config/i18n/hook/useTranslation'
 import Card from '@/6_shared/ui/Card'
 import Button from '@/6_shared/ui/ui-button'
+import { Spinner, useToast } from '@chakra-ui/react'
 import Link from 'next/link'
 
 import styles from '@/styles/LogIn.module.scss'
 
 // !Регистрация работает! statusCode 201. нужно будет сделать красивые уведомления и логику при успешной регистрации.
-export const SignUpCompontnts: React.FC<any> = () => {
+export const SignUpComponent: React.FC<any> = () => {
   const {
     control,
     formState: { errors, isSubmitting },
     handleSubmit,
     reset,
   } = useForm()
-  const [register, { error, isLoading }] = useRegisterMutation()
+  const [register] = useRegisterMutation()
   const { t } = useTranslation()
+  const toast = useToast()
+
   const onSubmit = async (data: any) => {
-    try {
-      if (isLoading) {
-        return <div>Loading...</div>
-      }
-
-      await register(data)
-
-      // Если успешно зарегистрировались, показываем уведомление
-      if (!error) {
-        alert('Registration successful!')
-      }
-    } catch (error) {
-      alert(JSON.stringify(error || 'Error during registration'))
-      console.error('Registration failed:', error)
-    } finally {
-      // Сбрасываем форму в любом случае
-      reset({ email: '', password: '', username: '' })
-    }
+    await register(data)
+      .unwrap()
+      .then(res => {
+        toast({
+          description: `${res.message} || успешно!`,
+          duration: 9000,
+          isClosable: true,
+          status: 'success',
+          title: 'Successful!',
+        })
+      })
+      .catch(error => {
+        toast({
+          description: `${error?.data?.errors?.username?.message}`,
+          duration: 9000,
+          isClosable: true,
+          status: 'error',
+          title: 'Ooops!',
+        })
+      })
+      .finally(() => {
+        reset({ email: '', password: '', username: '' })
+      })
   }
 
   return (
@@ -61,6 +69,10 @@ export const SignUpCompontnts: React.FC<any> = () => {
             )}
             rules={{
               minLength: { message: 'Username must be at least 6 characters', value: 6 },
+              pattern: {
+                message: 'Username must be one word without spaces and special symbols',
+                value: /^[a-zA-Z0-9_-]+$/,
+              },
               required: 'Username is required',
             }}
           />
@@ -80,7 +92,13 @@ export const SignUpCompontnts: React.FC<any> = () => {
                 {errors.email && <p>{`${errors.email.message}`}</p>}
               </>
             )}
-            rules={{ required: 'Email is required' }}
+            rules={{
+              pattern: {
+                message: 'Invalid Email',
+                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,20}$/,
+              },
+              required: 'Email is required',
+            }}
           />
         </div>
         <div>
@@ -101,25 +119,38 @@ export const SignUpCompontnts: React.FC<any> = () => {
             rules={{
               minLength: { message: 'Password must be at least 6 characters', value: 6 },
               pattern: {
-                message: 'Password must contain an uppercase letter and an underscore (_)',
-                value: /^(?=.*[A-Z])(?=.*_)/,
+                message: 'Password must contain an uppercase letter, number and an underscore (_)',
+                value:
+                  /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]).*/,
               },
               required: 'Password is required',
             }}
           />
         </div>
 
-        <div>
-          <Button primary type={'submit'}>
-            {t.SignIn_SignUp.signUp}
-          </Button>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          {isSubmitting ? (
+            <div style={{ height: '2px', width: '2px' }}>
+              {isSubmitting && (
+                <Spinner
+                  color={'blue.500'}
+                  emptyColor={'gray.200'}
+                  size={'lg'}
+                  speed={'0.65s'}
+                  thickness={'4px'}
+                />
+              )}
+            </div>
+          ) : (
+            <Button primary type={'submit'}>
+              {t.SignIn_SignUp.signUp}
+            </Button>
+          )}
         </div>
         <div>{t.SignIn_SignUp.HaveAccount}</div>
         <div>
           <Link href={'/LogIn'}>
-            <Button outline type={'submit'}>
-              {t.SignIn_SignUp.signIn}
-            </Button>
+            <Button outline>{t.SignIn_SignUp.signIn}</Button>
           </Link>
         </div>
       </form>
