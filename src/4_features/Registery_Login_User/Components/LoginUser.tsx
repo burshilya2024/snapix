@@ -1,26 +1,27 @@
 import React, { FormEventHandler, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { toast } from 'react-hot-toast'
 
 import { useTranslation } from '@/6_shared/config/i18n/hook/useTranslation'
 import Button from '@/6_shared/ui/ui-button'
+import { Spinner, useToast } from '@chakra-ui/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { signIn, useSession } from 'next-auth/react'
+import { signIn } from 'next-auth/react'
 
 import styles from '@/styles/LogIn.module.scss'
 
 export const LoginComponents: React.FC = () => {
-  const { data: session } = useSession()
+  //const { data: session } = useSession()
   const router = useRouter()
   const { t } = useTranslation()
+  const toast = useToast()
 
-  console.log('data session', session)
-  useEffect(() => {
-    if (session?.user?.name) {
-      router.push('/MyProfile')
-    }
-  })
+  // console.log('data session', session)
+  // useEffect(() => {
+  //   if (session?.user?.name) {
+  //     router.push('/MyProfile')
+  //   }
+  // })
 
   const {
     formState: { errors, isSubmitting },
@@ -42,11 +43,23 @@ export const LoginComponents: React.FC = () => {
       redirect: false,
     }).then(callback => {
       if (callback?.error) {
-        toast.error(callback.error)
+        toast({
+          description: `${callback.error}`,
+          duration: 9000,
+          isClosable: true,
+          status: 'error',
+          title: 'Ooops!',
+        })
       }
 
       if (callback?.ok && !callback?.error) {
-        toast.success('Logged in successfully!')
+        router.push('/MyProfile')
+        toast({
+          description: `Welcome!`,
+          duration: 3000,
+          isClosable: true,
+          status: 'success',
+        })
       }
     })
   }
