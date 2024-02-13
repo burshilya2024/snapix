@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import React, { ReactNode } from 'react'
 
 import { Header, NavBar } from '@/3_widgets'
 import { useTranslation } from '@/6_shared/config/i18n/hook/useTranslation'
