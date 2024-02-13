@@ -27,7 +27,7 @@ export const SignUpComponent: React.FC<any> = () => {
       .unwrap()
       .then(res => {
         toast({
-          description: `${res.message}`,
+          description: `${res.message} || успешно!`,
           duration: 9000,
           isClosable: true,
           status: 'success',
@@ -36,7 +36,7 @@ export const SignUpComponent: React.FC<any> = () => {
       })
       .catch(error => {
         toast({
-          description: `${error.data.errors.username.message}`,
+          description: `${error?.data?.errors?.username?.message}`,
           duration: 9000,
           isClosable: true,
           status: 'error',
@@ -150,9 +150,7 @@ export const SignUpComponent: React.FC<any> = () => {
         <div>{t.SignIn_SignUp.HaveAccount}</div>
         <div>
           <Link href={'/LogIn'}>
-            <Button outline type={'submit'}>
-              {t.SignIn_SignUp.signIn}
-            </Button>
+            <Button outline>{t.SignIn_SignUp.signIn}</Button>
           </Link>
         </div>
       </form>
