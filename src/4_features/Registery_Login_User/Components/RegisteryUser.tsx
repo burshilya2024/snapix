@@ -70,8 +70,8 @@ export const SignUpComponent: React.FC<any> = () => {
             rules={{
               minLength: { message: 'Username must be at least 6 characters', value: 6 },
               pattern: {
-                message: 'Username must be one word without spaces',
-                value: /^[a-zA-Zа]+$/,
+                message: 'Username must be one word without spaces and special symbols',
+                value: /^[a-zA-Z0-9_-]+$/,
               },
               required: 'Username is required',
             }}
@@ -92,7 +92,13 @@ export const SignUpComponent: React.FC<any> = () => {
                 {errors.email && <p>{`${errors.email.message}`}</p>}
               </>
             )}
-            rules={{ required: 'Email is required' }}
+            rules={{
+              pattern: {
+                message: 'Invalid Email',
+                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,20}$/,
+              },
+              required: 'Email is required',
+            }}
           />
         </div>
         <div>
@@ -113,8 +119,9 @@ export const SignUpComponent: React.FC<any> = () => {
             rules={{
               minLength: { message: 'Password must be at least 6 characters', value: 6 },
               pattern: {
-                message: 'Password must contain an uppercase letter and an underscore (_)',
-                value: /^(?=.*[A-Z])(?=.*_)/,
+                message: 'Password must contain an uppercase letter, number and an underscore (_)',
+                value:
+                  /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]).*/,
               },
               required: 'Password is required',
             }}
