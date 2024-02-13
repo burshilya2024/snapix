@@ -1,4 +1,6 @@
 import React from 'react'
+import styles from '@/styles/CustomSelect.module.scss'
+
 import Select, {
   ActionMeta,
   OptionProps,
@@ -68,6 +70,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
       defaultValue={options?.find(option => option?.value === defaultOptionValue)}
       onChange={onChangeHandler}
       options={options}
+      className={styles.select}
     />
   )
 }
