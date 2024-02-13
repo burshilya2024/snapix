@@ -1,4 +1,4 @@
 //@ts-ignore
-import { Favoretes } from '@/2_pages'
+import { Favorites } from '@/2_pages'
 
-export default Favoretes
+export default Favorites
