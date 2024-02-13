@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-import { IResponseRegisterApi } from '../types'
+import { IResponseRegisterApi, RegistrationData, RegistrationResponse } from '../types'
 
 const BASE_URL = 'https://9art.ru/api/v1/auth'
 
@@ -8,6 +8,7 @@ export const Registery_Login_Api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,
   }),
+  // !не используется, оставил для наглядности
   endpoints: builder => ({
     login: builder.mutation<string, { email: string; password: string }>({
       query: credentials => ({
@@ -30,8 +31,15 @@ export const Registery_Login_Api = createApi({
         method: 'POST',
         url: '/refresh-token',
       }),
+      // transformResponse: (response: IResponseRegisterApi) => {
+      //   localStorage.setItem('access_token', response.access_token || '')
+      //   localStorage.setItem('refresh_token', response.refresh_token || '')
+      //   localStorage.setItem('isAuth', 'true')
+
+      //   return response
+      // },
     }),
-    register: builder.mutation<any, any>({
+    register: builder.mutation<Promise<string>, RegistrationData>({
       query: body => ({
         body,
         method: 'POST',

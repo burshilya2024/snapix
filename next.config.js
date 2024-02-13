@@ -4,7 +4,7 @@ const withSvgr = require('next-svgr')
 const nextConfig = {
   i18n: {
     defaultLocale: 'ru',
-    locales: ['en', 'ru'],
+    locales: ['en', 'ru', 'nl'],
   },
   images: {
     remotePatterns: [

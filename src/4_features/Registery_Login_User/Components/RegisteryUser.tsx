@@ -10,7 +10,6 @@ import Link from 'next/link'
 
 import styles from '@/styles/LogIn.module.scss'
 
-// !Регистрация работает! statusCode 201. нужно будет сделать красивые уведомления и логику при успешной регистрации.
 export const SignUpComponent: React.FC<any> = () => {
   const {
     control,
@@ -22,19 +21,20 @@ export const SignUpComponent: React.FC<any> = () => {
   const { t } = useTranslation()
   const toast = useToast()
 
+  // TODO: Add TS
   const onSubmit = async (data: any) => {
     await register(data)
       .unwrap()
-      .then(res => {
+      .then((res: any) => {
         toast({
-          description: `${res.message} || успешно!`,
+          description: res.message || 'успешно!',
           duration: 9000,
           isClosable: true,
           status: 'success',
           title: 'Successful!',
         })
       })
-      .catch(error => {
+      .catch((error: any) => {
         toast({
           description: `${error?.data?.errors?.username?.message}`,
           duration: 9000,
@@ -51,7 +51,7 @@ export const SignUpComponent: React.FC<any> = () => {
   return (
     <Card>
       <form className={styles.loginForm} onSubmit={handleSubmit(onSubmit)}>
-        <div className={styles.tittle}>{t.SignIn_SignUp.signUp}</div>
+        <div className={styles.tittle}>{t.signIn_SignUp.signUp}</div>
         <div>
           <Controller
             control={control}
@@ -143,14 +143,16 @@ export const SignUpComponent: React.FC<any> = () => {
             </div>
           ) : (
             <Button primary type={'submit'}>
-              {t.SignIn_SignUp.signUp}
+              {t.signIn_SignUp.signUp}
             </Button>
           )}
         </div>
-        <div>{t.SignIn_SignUp.HaveAccount}</div>
+        <div>{t.signIn_SignUp.haveAccount}</div>
         <div>
           <Link href={'/LogIn'}>
-            <Button outline>{t.SignIn_SignUp.signIn}</Button>
+            <Button outline type={'submit'}>
+              {t.signIn_SignUp.signIn}
+            </Button>
           </Link>
         </div>
       </form>

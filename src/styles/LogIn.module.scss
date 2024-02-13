@@ -42,77 +42,36 @@
     align-items: center;
     justify-content: center;
 
-    fill: #f0f0f0;
+  height: 50px;
+
+  &:hover {
+    background: rgb(36 36 36);
   }
+}
 
-  .inputForms {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
+.loginForm div {
+  width: 100%;
+  padding: 20px;
+}
 
-    .inputForm {
-      width: 100%;
+.loginForm p {
+  color: red;
+}
 
-      .inputTitle {
-        display: block;
+.inputField {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #4c4c4c;
+  border-radius: 4px;
+}
 
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 24px;
-        color: $light-900;
-        text-align: left;
+.tittle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-        &:last-child {
-          margin-top: 35px;
-          text-align: right;
-        }
-      }
+  padding: 15px;
 
-      .inputContainer {
-        position: relative;
-
-        .eye {
-          position: absolute;
-          top: 50%;
-          right: 10px;
-          transform: translateY(-50%);
-
-          fill: #f0f0f0;
-        }
-      }
-
-      .inputField {
-        width: 100%;
-        padding: 6px;
-
-        color: $light-900;
-
-        background-color: $dark-500;
-        border: 1px solid $dark-100;
-        border-radius: 2px;
-      }
-
-      input::placeholder {
-        color: $light-900;
-      }
-    }
-  }
-
-  .btnSignIn {
-    margin: 25px 0 18px;
-    padding: 0 6px;
-  }
-
-  .infoAccount {
-    margin-bottom: 12px;
-    font-size: 16px;
-    line-height: 24px;
-    text-align: center;
-  }
-
-  .btnSignUp {
-    margin-bottom: 30px;
-    font-weight: 600;
-    color: $primary-500;
-  }
+  font-size: large;
+  font-weight: 800;
 }
