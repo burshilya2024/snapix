@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3749848e-7261-40d5-932b-51d58a0a0050" name="Changes" comment="refactored LogIn component">
+      <change beforePath="$PROJECT_DIR$/src/4_features/Registery_Login_User/Components/RegisteryUser.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/4_features/Registery_Login_User/Components/RegisteryUser.tsx" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="development" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2anm6WxXlcsuCLewcUWo45O39mi" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "signUpComponent-refactoring",
+    "last_opened_file_path": "D:/it-incubator/cards-project",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.stylelint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.stylelint": "D:\\it-incubator\\snapix\\node_modules\\stylelint",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.dev.executor": "Run",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "ts.external.directory.path": "D:\\it-incubator\\snapix\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\it-incubator\snapix\public\assets" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.dev" />
+        <item itemvalue="npm.dev" />
+        <item itemvalue="npm.dev" />
+        <item itemvalue="npm.dev" />
+        <item itemvalue="npm.dev" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3749848e-7261-40d5-932b-51d58a0a0050" name="Changes" comment="" />
+      <created>1704962542582</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1704962542582</updated>
+      <workItem from="1704962543676" duration="2305000" />
+      <workItem from="1705307972810" duration="816000" />
+      <workItem from="1705329475372" duration="72000" />
+      <workItem from="1706348289449" duration="107000" />
+      <workItem from="1707059095107" duration="3667000" />
+      <workItem from="1707128885404" duration="2525000" />
+      <workItem from="1707135254495" duration="3670000" />
+      <workItem from="1707722034281" duration="1193000" />
+      <workItem from="1707729924886" duration="15769000" />
+      <workItem from="1707802382667" duration="20387000" />
+      <workItem from="1707826393759" duration="117000" />
+      <workItem from="1707826528066" duration="6537000" />
+    </task>
+    <task id="LOCAL-00001" summary="added Typography (added styles for fonts in Globals.scss)">
+      <option name="closed" value="true" />
+      <created>1707139573949</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1707139573949</updated>
+    </task>
+    <task id="LOCAL-00002" summary="added Typography (added styles for fonts in Globals.scss). Changed &lt;H1&gt; in Header.tsx on &lt;Typography.H1&gt; for test">
+      <option name="closed" value="true" />
+      <created>1707140003281</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1707140003281</updated>
+    </task>
+    <task id="LOCAL-00003" summary="refactor RegisteryUser.tsx: &#10;- added toasts after submitting&#10;- fix userName validation&#10;- added Spinner (Submitting loader)">
+      <option name="closed" value="true" />
+      <created>1707751258955</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1707751258955</updated>
+    </task>
+    <task id="LOCAL-00004" summary="refactored validation regex">
+      <option name="closed" value="true" />
+      <created>1707806284957</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1707806284957</updated>
+    </task>
+    <task id="LOCAL-00005" summary="refactored SignIn component:&#10;- added toasts notifications&#10;- deleted useEffect">
+      <option name="closed" value="true" />
+      <created>1707815570502</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1707815570502</updated>
+    </task>
+    <task id="LOCAL-00006" summary="refactored SignIn component:&#10;- added toasts notifications&#10;- deleted useEffect">
+      <option name="closed" value="true" />
+      <created>1707816150509</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1707816150510</updated>
+    </task>
+    <task id="LOCAL-00007" summary="added confirm-register.tsx">
+      <option name="closed" value="true" />
+      <created>1707825080273</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1707825080273</updated>
+    </task>
+    <task id="LOCAL-00008" summary="added confirm-register.tsx">
+      <option name="closed" value="true" />
+      <created>1707825463525</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1707825463525</updated>
+    </task>
+    <task id="LOCAL-00009" summary="added confirm-register.tsx">
+      <option name="closed" value="true" />
+      <created>1707826230622</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1707826230622</updated>
+    </task>
+    <task id="LOCAL-00010" summary="added link-expired.tsx">
+      <option name="closed" value="true" />
+      <created>1707827187754</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1707827187754</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="added Typography (added styles for fonts in Globals.scss)" />
+    <MESSAGE value="added Typography (added styles for fonts in Globals.scss). Changed &lt;H1&gt; in Header.tsx on &lt;Typography.H1&gt; for test" />
+    <MESSAGE value="refactor RegisteryUser.tsx: &#10;- added toasts after submitting&#10;- fix userName validation&#10;- added Spinner (Submitting loader)" />
+    <MESSAGE value="refactored validation regex" />
+    <MESSAGE value="refactored SignIn component:&#10;- added toasts notifications&#10;- deleted useEffect" />
+    <MESSAGE value="added confirm-register.tsx" />
+    <MESSAGE value="added link-expired.tsx" />
+    <MESSAGE value="refactored LogIn component" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactored LogIn component" />
+  </component>
+</project>
