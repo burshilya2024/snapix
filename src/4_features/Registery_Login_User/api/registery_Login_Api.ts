@@ -39,7 +39,7 @@ export const Registery_Login_Api = createApi({
       //   return response
       // },
     }),
-    register: builder.mutation<Promise<string>, RegistrationData>({
+    register: builder.mutation<RegistrationResponse, RegistrationData>({
       query: body => ({
         body,
         method: 'POST',

@@ -1,54 +1,61 @@
 import React, { FormEventHandler, useEffect, useState } from 'react'
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
-import { toast } from 'react-hot-toast'
+import { useForm } from 'react-hook-form'
 
+import { IUserData } from '@/4_features/Registery_Login_User/types'
 import { useTranslation } from '@/6_shared/config/i18n/hook/useTranslation'
 import Button from '@/6_shared/ui/ui-button'
+import { Spinner, useToast } from '@chakra-ui/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { signIn, useSession } from 'next-auth/react'
+import { signIn } from 'next-auth/react'
 
 import styles from '@/styles/LogIn.module.scss'
 
 export const LoginComponents: React.FC = () => {
-  const { data: session } = useSession()
+  //const { data: session } = useSession()
   const router = useRouter()
   const { t } = useTranslation()
-  // !рабочий логин к серверу.(но есть нюансы, надо работать)
-  const [loginMutation, { error, isError, isLoading }] = useLoginMutation()
+  const toast = useToast()
 
-  console.log('data session', session)
-  useEffect(() => {
-    if (session?.user?.name) {
-      router.push('/MyProfile')
-    }
-  })
+  // console.log('data session', session)
+  // useEffect(() => {
+  //   if (session?.user?.name) {
+  //     router.push('/MyProfile')
+  //   }
+  // })
 
   const {
     formState: { errors, isSubmitting },
     getValues,
-    //?если будут ошибки, onSubmit не будет выполнена
     handleSubmit,
     register,
     reset,
-  } = useForm()
+  } = useForm<IUserData>()
 
-  const handleSubmitLogin: SubmitHandler<FieldValues> = async event => {
-    event.preventDefault()
-
-    const formData = new FormData(event.currentTarget)
-
+  const handleSubmitLogin = async (data: IUserData) => {
     await signIn('credentials', {
-      email: formData.get('email'),
-      password: formData.get('password'),
+      email: data.email,
+      password: data.password,
       redirect: false,
     }).then(callback => {
       if (callback?.error) {
-        toast.error(callback.error)
+        toast({
+          description: `Invalid email or password`,
+          duration: 9000,
+          isClosable: true,
+          status: 'error',
+          title: 'Ooops!',
+        })
       }
 
       if (callback?.ok && !callback?.error) {
-        toast.success('Logged in successfully!')
+        router.push('/MyProfile')
+        toast({
+          description: `Welcome!`,
+          duration: 3000,
+          isClosable: true,
+          status: 'success',
+        })
       }
     })
   }
@@ -58,7 +65,13 @@ export const LoginComponents: React.FC = () => {
       <form className={styles.loginForm} onSubmit={handleSubmit(handleSubmitLogin)}>
         <div>
           <input
-            {...register('email', { required: 'Email is required' })}
+            {...register('email', {
+              pattern: {
+                message: 'Invalid email',
+                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,20}$/,
+              },
+              required: 'Email is required',
+            })}
             className={styles.inputField}
             placeholder={'Email'}
             type={'email'}
