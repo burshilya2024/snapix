@@ -15,20 +15,24 @@ type IFormInput = {
 export const ResetPasswordComponents = () => {
   const { register, handleSubmit, reset } = useForm<IFormInput>()
   const router = useRouter()
-  const { token } = router.query
+  let { token } = router.query
   const [resetPassword, { error, isLoading }] = useResetPasswordMutation()
+
 
   const onSubmit = async (data: FieldValues) => {
 
     try {
-      const res = await resetPassword({ password: data.newPassword, token, })
-      console.log(res)
-      // router.push('/LogIn')
+      await resetPassword({ password: data.newPassword, token, })
+
+      if (!error) {
+        alert(`Password successfully changed!`)
+      }
 
     } catch (error) {
       alert(JSON.stringify(error))
+
     } finally {
-      reset()
+      router.push('/LogIn')
     }
 
   }

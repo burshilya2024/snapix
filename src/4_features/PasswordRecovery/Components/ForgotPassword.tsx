@@ -21,11 +21,10 @@ export const ForgotPasswordComponents = () => {
   const onSubmit = async (email: FieldValues) => {
 
     try {
-      const res = await passwordRecovery(email).unwrap()
-      console.log(res)
+      const res = await passwordRecovery(email)
 
-      if(!error) {
-        alert(`We have sent a link to confirm your email to ${email.email}`)
+      if (!error) {
+        alert(`We have sent a link to ${email.email}. Follow the link to create new password.` )
       }
 
     } catch (error) {
