@@ -1,3 +1,49 @@
-.select {
+@import './variables.module';
+.customSelect {
+  min-width: 163px;
   padding-top: 2%;
+  position: relative;
+  font-family: sans-serif;
+  img{
+    width: 25px;
+    height: 25px;
+    margin: 10px;
+  }
+}
+
+.control {
+  display: flex;
+  align-items: center;
+  border: 1px solid darkgray;
+  cursor: pointer;
+  user-select: none;
+}
+
+.menu {
+  position: absolute;
+  width: 100%;
+  border: 1px solid darkgray;
+  border-top: 0;
+  z-index: 10;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.option {
+  background-color: $background-color-light;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  &:hover {
+    background-color: #EDF3FA;
+  }
+}
+
+.optionSelected {
+  background-color: #D5DAE0;
+}
+
+.arrow {
+  margin-left: auto;
+  padding-right: 5%;
 }
