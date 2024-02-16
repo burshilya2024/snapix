@@ -15,7 +15,7 @@ export const ResetPasswordComponent = () => {
   })
 
   const router = useRouter()
-  const { token } = router.query
+  const { token }: ParsedUrlQuery = router.query
   const [resetPassword, { }] = useResetPasswordMutation()
   const [verifyToken, { }] = useVerifyTokenMutation()
 
@@ -30,7 +30,10 @@ export const ResetPasswordComponent = () => {
         router.push('/ResendEmail')
       }
     }
-    // checkTokenFresh(token)
+    if (typeof token === 'string') {
+      checkTokenFresh(token)
+    }
+
   }, [])
 
 
