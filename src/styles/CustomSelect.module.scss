@@ -1,10 +1,12 @@
 @import './variables.module';
+
 .customSelect {
+  position: relative;
   min-width: 163px;
   padding-top: 2%;
-  position: relative;
   font-family: sans-serif;
-  img{
+
+  img {
     width: 25px;
     height: 25px;
     margin: 10px;
@@ -12,35 +14,41 @@
 }
 
 .control {
-  display: flex;
-  align-items: center;
-  border: 1px solid darkgray;
   cursor: pointer;
   user-select: none;
+
+  display: flex;
+  align-items: center;
+
+  border: 1px solid darkgray;
 }
 
 .menu {
   position: absolute;
+  z-index: 10;
+
+  overflow-y: auto;
+
   width: 100%;
+  max-height: 200px;
+
   border: 1px solid darkgray;
   border-top: 0;
-  z-index: 10;
-  max-height: 200px;
-  overflow-y: auto;
 }
 
 .option {
-  background-color: $background-color-light;
   cursor: pointer;
   display: flex;
   align-items: center;
+  background-color: $background-color-light;
+
   &:hover {
-    background-color: #EDF3FA;
+    background-color: #edf3fa;
   }
 }
 
 .optionSelected {
-  background-color: #D5DAE0;
+  background-color: #d5dae0;
 }
 
 .arrow {

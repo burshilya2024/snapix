@@ -7,22 +7,21 @@ import Button from '@/6_shared/ui/ui-button'
 import { Spinner, useToast } from '@chakra-ui/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { signIn } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 
 import styles from '@/styles/LogIn.module.scss'
 
 export const LoginComponents: React.FC = () => {
-  //const { data: session } = useSession()
+  const { data: session } = useSession()
   const router = useRouter()
   const { t } = useTranslation()
   const toast = useToast()
 
-  // console.log('data session', session)
-  // useEffect(() => {
-  //   if (session?.user?.name) {
-  //     router.push('/MyProfile')
-  //   }
-  // })
+  useEffect(() => {
+    if (session?.user?.name) {
+      router.push('/MyProfile')
+    }
+  })
 
   const {
     formState: { errors, isSubmitting },
@@ -93,7 +92,9 @@ export const LoginComponents: React.FC = () => {
           />
           {errors.password && <p>{`${errors.password.message}`}</p>}
         </div>
-        <div><Link href={'/forgot-password'}>{t.signIn_SignUp.forgotPassword}</Link></div>
+        <div>
+          <Link href={'/forgot-password'}>{t.signIn_SignUp.forgotPassword}</Link>
+        </div>
         <div>
           <Button primary type={'submit'}>
             {t.signIn_SignUp.signIn}

@@ -60,19 +60,21 @@ body[data-theme='dark'] {
     color: $text-color-dark;
   }
 
-  .arrow{
+  .arrow {
     fill: $text-color-dark;
   }
-  .selectOption{
-    background-color: #2D3748;
-    &:hover{
+
+  .selectOption {
+    background-color: #2d3748;
+
+    &:hover {
       background-color: #3a4354;
     }
-  }.selectedOption{
-        background-color: #3a4771;
-     }
+  }
 
-
+  .selectedOption {
+    background-color: #3a4771;
+  }
 }
 
 // !1)switcher dark/light(theme)

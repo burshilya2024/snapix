@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
-import styles from '@/styles/CustomSelect.module.scss'
+
 import ArrowDown from '@public/assets/icons/arrow-ios-Down-outline.svg'
+
+import styles from '@/styles/CustomSelect.module.scss'
 
 type IOptionType = {
   img: string
@@ -35,7 +37,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
       <div className={styles.control} onClick={() => setIsOpen(!isOpen)}>
         {selectedOption ? (
           <>
-            <img src={selectedOption.img} alt={selectedOption.label} />
+            <img alt={selectedOption.label} src={selectedOption.img} />
             <span>{selectedOption.label}</span>
           </>
         ) : (
@@ -49,15 +51,15 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
         <div className={styles.menu}>
           {options.map(option => (
             <div
-              key={option.value}
               className={`selectOption ${styles.option} ${
                 selectedOption?.value === option.value
                   ? `selectedOption ${styles.optionSelected}`
                   : ''
               }`}
+              key={option.value}
               onClick={() => handleOptionClick(option)}
             >
-              <img src={option.img} alt={option.label} />
+              <img alt={option.label} src={option.img} />
               <span>{option.label}</span>
             </div>
           ))}
