@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { ResetPasswordComponents } from '@/4_features'
+import { ResetPasswordComponent } from '@/4_features'
 
 export const ResetPassword: React.FC<any> = () => {
-  return <ResetPasswordComponents />
+  return <ResetPasswordComponent />
 }

@@ -2,51 +2,97 @@ import { FieldValues, useForm } from "react-hook-form";
 import Card from "@/6_shared/ui/Card";
 import Button from "@/6_shared/ui/ui-button";
 import styles from '@/styles/ResetPassword.module.scss'
-import { usePasswordRecoveryMutation, useResetPasswordMutation } from "../api/PasswordRecovery_api";
+import { useResetPasswordMutation, useVerifyTokenMutation } from "../api/PasswordRecovery_api";
 import { useRouter } from "next/router";
+import { IResetPasswordErrorResponse, IResetPasswordForm } from "../types";
+import { ErrorMessage } from '@hookform/error-message';
+import { useEffect } from "react";
+import { ParsedUrlQuery } from "querystring";
 
-const pattern = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]).*/
+export const ResetPasswordComponent = () => {
+  const { register, handleSubmit, formState: { errors } } = useForm<IResetPasswordForm>({
+    mode: 'onBlur'
+  })
 
-type IFormInput = {
-  newPassword: string
-  confirmedPassword: string
-}
-
-export const ResetPasswordComponents = () => {
-  const { register, handleSubmit, reset } = useForm<IFormInput>()
   const router = useRouter()
-  let { token } = router.query
-  const [resetPassword, { error, isLoading }] = useResetPasswordMutation()
+  const { token } = router.query
+  const [resetPassword, { }] = useResetPasswordMutation()
+  const [verifyToken, { }] = useVerifyTokenMutation()
+
+  const pattern = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]).*/
+
+  useEffect(() => {
+    const checkTokenFresh = async (token: string) => {
+      try {
+        const res = await verifyToken(token).unwrap()
+        console.log('token fresh', res)
+      } catch (error) {
+        router.push('/ResendEmail')
+      }
+    }
+    // checkTokenFresh(token)
+  }, [])
 
 
   const onSubmit = async (data: FieldValues) => {
 
-    try {
-      await resetPassword({ password: data.newPassword, token, })
-
-      if (!error) {
+    if (data.newPassword !== data.confirmedPassword) {
+      alert('Passwords do not match!')
+    } else {
+      try {
+        await resetPassword({ password: data.newPassword, token, }).unwrap()
         alert(`Password successfully changed!`)
+        router.push('/LogIn')
+
+      } catch (error) {
+        const err = error as IResetPasswordErrorResponse
+        alert(JSON.stringify(err.data.errors.token.message))
       }
-
-    } catch (error) {
-      alert(JSON.stringify(error))
-
-    } finally {
-      router.push('/LogIn')
     }
 
   }
-
 
   return (
     <Card>
       <form className={styles.loginForm} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.tittle}>Reset Password</div>
         <div>
-          <input {...register("newPassword", { required: true, minLength: 6, maxLength: 20, })} className={styles.inputField} type="password" placeholder="Password" />
+          <input {...register("newPassword", {
+            required: true,
+            minLength: {
+              message: 'Password must be at least 10 symbols long',
+              value: 10
+            },
+            maxLength: {
+              message: 'Password must be less than 20 symbols long',
+              value: 20
+            },
+            pattern: {
+              message: 'Password must contain an underscore, at least one letter and at least one capital letter',
+              value: pattern,
+            }
+          })}
+            className={styles.inputField} type="password" placeholder="New Password" />
+          <ErrorMessage errors={errors} name="newPassword" render={({ message }) => <p>{message}</p>} />
         </div>
         <div>
-          <input {...register("confirmedPassword", { required: true, minLength: 6, maxLength: 20, })} className={styles.inputField} type="password" placeholder="Confirm Password" />
+          <input {...register("confirmedPassword", {
+            required: true,
+            minLength: {
+              message: 'Password must be at least 10 characters long',
+              value: 10
+            },
+            maxLength: {
+              message: 'Password must be less than 20 characters long',
+              value: 20
+            },
+            pattern: {
+              message: 'Password must contain an underscore, at least one letter and at least one capital letter',
+              value: pattern,
+            }
+          })}
+            className={styles.inputField} type="password" placeholder="Confirm Password" />
+          <ErrorMessage errors={errors} name="confirmedPassword" render={({ message }) => <p>{message}</p>} />
         </div>
         <div>
           <Button primary type={'submit'}>Create New Password</Button>

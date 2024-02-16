@@ -21,8 +21,15 @@ export const PasswordRecovery_Api = createApi({
         url: '/new-password',
       }),
     }),
+    verifyToken: builder.mutation<any, string>({
+      query: body => ({
+        body,
+        method: 'POST',
+        url: '/verify-token',
+      }),
+    }),
   }),
   reducerPath: 'PasswordRecovery_Api',
 })
 
-export const { usePasswordRecoveryMutation, useResetPasswordMutation } = PasswordRecovery_Api
+export const { usePasswordRecoveryMutation, useResetPasswordMutation, useVerifyTokenMutation } = PasswordRecovery_Api

@@ -6,36 +6,30 @@ import ReCAPTCHA from 'react-google-recaptcha'
 import styles from '@/styles/ResetPassword.module.scss'
 import { useState } from "react";
 import { usePasswordRecoveryMutation } from "../api/PasswordRecovery_api";
+import { IForgotPasswordErrorResponse, IForgotPasswordForm } from "../types";
 
-type IFormInput = {
-  email: string
-}
-
-export const ForgotPasswordComponents = () => {
-  const { register, handleSubmit, reset } = useForm<IFormInput>()
+export const ForgotPasswordComponent = () => {
+  const { register, handleSubmit, reset } = useForm<IForgotPasswordForm>()
   const [captcha, setCaptcha] = useState<string | null>(null)
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,20}$/g
 
-  const [passwordRecovery, { error, isLoading }] = usePasswordRecoveryMutation()
+  const [passwordRecovery, { }] = usePasswordRecoveryMutation()
 
   const onSubmit = async (email: FieldValues) => {
 
     try {
-      const res = await passwordRecovery(email)
-
-      if (!error) {
-        alert(`We have sent a link to ${email.email}. Follow the link to create new password.` )
-      }
+      await passwordRecovery(email).unwrap()
+      alert(`We have sent a link to ${email.email}. Follow the link to create new password.`)
 
     } catch (error) {
-      alert(JSON.stringify(error))
-      console.error(error)
+      const err = error as IForgotPasswordErrorResponse
+      alert(JSON.stringify(err.data.errors.email.message))
+
     } finally {
       reset()
     }
 
   }
-
 
   return (
     <Card>
