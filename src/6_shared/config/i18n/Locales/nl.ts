@@ -2,9 +2,9 @@ export const nl = {
   navBar: {
     create: 'Maken',
     favorites: 'Favorieten',
-    home: 'Home',
+    home: 'Thuis',
     messenger: 'Messenger',
-    myProfile: 'My Profile',
+    myProfile: 'Mijn profiel',
     search: 'Zoeken',
     statistics: 'Statistieken',
   },
@@ -13,9 +13,11 @@ export const nl = {
     forgotPassword: 'Wachtwoord vergeten?',
     haveAccount: 'Heb je al een account?',
     logout: 'Uitloggen',
+    passwordRequirements:
+      'Het wachtwoord moet minstens één hoofdletter, één kleine letter, één cijfer, één speciaal teken bevatten en tussen de 6 en 20 tekens lang zijn',
     signIn: 'Aanmelden',
     signUp: 'Registreren',
-    singOut: 'Sign out',
+    singOut: 'Uitloggen',
   },
   passwordRecovery: {
     passwordRecovery: 'Password Recovery',

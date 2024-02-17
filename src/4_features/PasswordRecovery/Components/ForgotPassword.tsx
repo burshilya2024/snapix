@@ -73,10 +73,12 @@ export const ForgotPasswordComponent = () => {
         <div>
           {t.passwordRecovery.instructions}
         </div>
+        <div>Enter your email and we will send you further instruction</div>
         <div>
           <ReCAPTCHA
-            sitekey="6Lczb20pAAAAAF2H5j-PhmyWrZBkckqqUCR6cxoR"
-            onChange={val => setCaptcha(val)} />
+            onChange={val => setCaptcha(val)}
+            sitekey={'6Lczb20pAAAAAF2H5j-PhmyWrZBkckqqUCR6cxoR'}
+          />
         </div>
         <div>
           <Button disabled={!captcha} primary type={'submit'}>{t.passwordRecovery.sendLink}</Button>

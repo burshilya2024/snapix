@@ -3,6 +3,7 @@ import {
   ComponentProps,
   ElementType,
   FC,
+  JSX,
   JSXElementConstructor,
   ReactNode,
   memo,

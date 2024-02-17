@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 
 import { Header, NavBar } from '@/3_widgets'
-import { useTranslation } from '@/6_shared/config/i18n/hook/useTranslation'
+import { useTranslation } from '@/6_shared/config/i18n/hooks/useTranslation'
 import CreateIcon from '@public/assets/icons/create.svg'
 import FavoritesIcon from '@public/assets/icons/favorite.svg'
 import HomeIcon from '@public/assets/icons/home-light.svg'
