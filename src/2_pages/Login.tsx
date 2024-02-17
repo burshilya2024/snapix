@@ -11,7 +11,7 @@ export const LogIn: React.FC<any> = () => {
 
   return (
     <Card>
-      <div className={styles.tittle}>{t.SignIn_SignUp.signIn}</div>
+      <div className={styles.tittle}>{t.signIn_SignUp.signIn}</div>
       <GoogleButton />
       <LoginComponents />
     </Card>

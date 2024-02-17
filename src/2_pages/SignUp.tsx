@@ -1,13 +1,7 @@
 import React from 'react'
 
-import { SignUpCompontnts } from '@/4_features'
-import { GoogleButton } from '@/4_features/GoogleAuthButton/GoogleAuthButton'
-import Card from '@/6_shared/ui/Card'
+import { SignUpComponent } from '@/4_features'
 
 export const SignUp: React.FC<any> = () => {
-  return (
-    <Card>
-      <SignUpCompontnts />
-    </Card>
-  )
+  return <SignUpComponent />
 }

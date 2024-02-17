@@ -1,6 +1,7 @@
 // store.ts
 import { useDispatch } from 'react-redux'
 
+import { PasswordRecovery_Api } from '@/4_features/PasswordRecovery/api/PasswordRecovery_Api'
 import { Registery_Login_Api } from '@/4_features/Registery_Login_User/api/registery_Login_Api'
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 
@@ -8,6 +9,7 @@ import { UnsplashTextApi } from '../../4_features/public/api/UnsplashTestApi'
 import { PlaceHolderApi } from './PlaceholderTestApi'
 
 const rootReducer = combineReducers({
+  [PasswordRecovery_Api.reducerPath]: PasswordRecovery_Api.reducer,
   [PlaceHolderApi.reducerPath]: PlaceHolderApi.reducer,
   [Registery_Login_Api.reducerPath]: Registery_Login_Api.reducer,
   [UnsplashTextApi.reducerPath]: UnsplashTextApi.reducer,
@@ -19,7 +21,8 @@ export const setupStore = () => {
       getDefaultMiddleware()
         .concat(UnsplashTextApi.middleware)
         .concat(PlaceHolderApi.middleware)
-        .concat(Registery_Login_Api.middleware),
+        .concat(Registery_Login_Api.middleware)
+        .concat(PasswordRecovery_Api.middleware),
     reducer: rootReducer,
   })
 }

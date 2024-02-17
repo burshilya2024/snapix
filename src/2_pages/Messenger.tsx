@@ -1,8 +1,8 @@
-export function Favoretes() {
+export function Messenger() {
   return (
     <div>
-      <h1>Favoretes</h1>
-      <h2>заголовок страницы Favorites</h2>
+      <h1>Messenger</h1>
+      <h2>заголовок страницы Messenger</h2>
       <p>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quia aut repellat, dolorum omnis,
         expedita, corporis sit ad autem doloremque reprehenderit tempora eaque cupiditate eveniet.

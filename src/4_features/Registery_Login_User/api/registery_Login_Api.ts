@@ -8,6 +8,7 @@ export const Registery_Login_Api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,
   }),
+  // !не используется, оставил для наглядности
   endpoints: builder => ({
     login: builder.mutation<any, any>({
       query: body => ({
@@ -39,7 +40,7 @@ export const Registery_Login_Api = createApi({
       //   return response
       // },
     }),
-    register: builder.mutation<Promise<string>, RegistrationData>({
+    register: builder.mutation<RegistrationResponse, RegistrationData>({
       query: body => ({
         body,
         method: 'POST',

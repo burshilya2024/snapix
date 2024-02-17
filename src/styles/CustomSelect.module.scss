@@ -1,0 +1,57 @@
+@import './variables.module';
+
+.customSelect {
+  position: relative;
+  min-width: 163px;
+  padding-top: 2%;
+  font-family: sans-serif;
+
+  img {
+    width: 25px;
+    height: 25px;
+    margin: 10px;
+  }
+}
+
+.control {
+  cursor: pointer;
+  user-select: none;
+
+  display: flex;
+  align-items: center;
+
+  border: 1px solid darkgray;
+}
+
+.menu {
+  position: absolute;
+  z-index: 10;
+
+  overflow-y: auto;
+
+  width: 100%;
+  max-height: 200px;
+
+  border: 1px solid darkgray;
+  border-top: 0;
+}
+
+.option {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  background-color: $background-color-light;
+
+  &:hover {
+    background-color: #edf3fa;
+  }
+}
+
+.optionSelected {
+  background-color: #d5dae0;
+}
+
+.arrow {
+  margin-left: auto;
+  padding-right: 5%;
+}
