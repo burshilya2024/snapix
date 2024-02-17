@@ -8,24 +8,23 @@ import { useEffect } from "react";
 import { useTranslation } from "@/6_shared/config/i18n/hook/useTranslation";
 import { IResetPasswordErrorResponse, IResetPasswordForm } from "../types";
 import { ErrorMessage } from '@hookform/error-message';
-import { ParsedUrlQuery } from "querystring";
 import { useSession } from "next-auth/react";
 import { useToast } from "@chakra-ui/react";
 
-
-
 export const ResetPasswordComponent: React.FC = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm<IResetPasswordForm>({
-    mode: 'onBlur'
-  })
   const toast = useToast()
   const { t }: any = useTranslation()
   const router = useRouter()
+  const session = useSession()
   const { token } = router.query
   const [resetPassword, { }] = useResetPasswordMutation()
   const [verifyToken, { }] = useVerifyTokenMutation()
 
-  const pattern = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]).*/
+  const { register, handleSubmit, formState: { errors } } = useForm<IResetPasswordForm>({
+    mode: 'onBlur'
+  })
+
+  if (session.status === 'authenticated') router.push('/MyProfile')
 
   useEffect(() => {
     const checkTokenIsValid = async (token: string) => {
@@ -42,7 +41,6 @@ export const ResetPasswordComponent: React.FC = () => {
     // }
 
   }, [])
-
 
   const onSubmit = async (data: FieldValues) => {
 
@@ -66,7 +64,6 @@ export const ResetPasswordComponent: React.FC = () => {
 
       } catch (error) {
         const err = error as IResetPasswordErrorResponse
-        alert(JSON.stringify(err.data.errors.token.message))
         toast({
           description: `${JSON.stringify(err.data.errors.token.message)}`,
           isClosable: true,
@@ -75,7 +72,6 @@ export const ResetPasswordComponent: React.FC = () => {
         })
       }
     }
-
   }
 
   return (
@@ -95,7 +91,7 @@ export const ResetPasswordComponent: React.FC = () => {
             },
             pattern: {
               message: 'Password must contain an underscore, at least one letter and at least one capital letter',
-              value: pattern,
+              value: /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]).*/,
             }
           })}
             className={styles.inputField} type="password" placeholder="New Password" />
@@ -114,7 +110,7 @@ export const ResetPasswordComponent: React.FC = () => {
             },
             pattern: {
               message: 'Password must contain an underscore, at least one letter and at least one capital letter',
-              value: pattern,
+              value: /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]).*/,
             }
           })}
             className={styles.inputField} type="password" placeholder="Confirm Password" />

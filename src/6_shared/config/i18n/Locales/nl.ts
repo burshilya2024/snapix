@@ -17,4 +17,14 @@ export const nl = {
     signUp: 'Registreren',
     singOut: 'Sign out',
   },
+  passwordRecovery: {
+    passwordRecovery: 'Password Recovery',
+    instructions: 'Enter your email and we will send you further instruction',
+    sendLink: 'Send Link',
+    backToSignIn: 'Back to Sign In',
+    resetPassword: 'Reset Password',
+    createNewPassword: 'Create New Password',
+    resendEmailInstructions: 'Looks like the verification link has expired. Not to worry, we can send the link again',
+    resendLink: 'Resend Link',
+  },
 }

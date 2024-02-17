@@ -1,4 +1,4 @@
-import { FieldValues, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import Card from "@/6_shared/ui/Card";
 import Button from "@/6_shared/ui/ui-button";
 import Link from "next/link";
@@ -10,17 +10,23 @@ import { useTranslation } from "@/6_shared/config/i18n/hook/useTranslation";
 import { IForgotPasswordErrorResponse, IForgotPasswordForm } from "../types";
 import { ErrorMessage } from "@hookform/error-message";
 import { useToast } from "@chakra-ui/react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+
 
 export const ForgotPasswordComponent = () => {
+  const { t }: any = useTranslation()
+  const toast = useToast()
+  const session = useSession()
+  const router = useRouter()
+  const [captcha, setCaptcha] = useState<string | null>(null)
 
+  const [passwordRecovery, { }] = usePasswordRecoveryMutation()
   const { register, handleSubmit, reset, formState: { errors } } = useForm<IForgotPasswordForm>({
     mode: 'onBlur'
   })
-  const { t }: any = useTranslation()
-  const toast = useToast()
-  const [passwordRecovery, { }] = usePasswordRecoveryMutation()
-  const [captcha, setCaptcha] = useState<string | null>(null)
-  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,20}$/g
+
+  if (session.status === 'authenticated') router.push('/MyProfile')
 
   const onSubmit = async (email: IForgotPasswordForm) => {
     try {
@@ -58,7 +64,7 @@ export const ForgotPasswordComponent = () => {
             required: true,
             pattern: {
               message: 'Must be a valid email',
-              value: emailRegex,
+              value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,20}$/g,
             }
           })}
             className={styles.inputField} type="email" placeholder="Email" />
