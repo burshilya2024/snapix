@@ -1,7 +1,7 @@
 // store.ts
 import { useDispatch } from 'react-redux'
 
-import { Register_Login_Api } from '@/4_features/Register_Login_User/api/Register_Login_Api'
+import { Register_Login_Api } from '@/4_features/Register_Login_User/api/register_Login_Api'
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 
 import { UnsplashTextApi } from '../../4_features/public/api/UnsplashTestApi'
