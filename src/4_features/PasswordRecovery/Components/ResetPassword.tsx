@@ -4,25 +4,31 @@ import Button from "@/6_shared/ui/ui-button";
 import styles from '@/styles/ResetPassword.module.scss'
 import { useResetPasswordMutation, useVerifyTokenMutation } from "../api/PasswordRecovery_api";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { useTranslation } from "@/6_shared/config/i18n/hook/useTranslation";
 import { IResetPasswordErrorResponse, IResetPasswordForm } from "../types";
 import { ErrorMessage } from '@hookform/error-message';
-import { useEffect } from "react";
 import { ParsedUrlQuery } from "querystring";
+import { useSession } from "next-auth/react";
+import { useToast } from "@chakra-ui/react";
 
-export const ResetPasswordComponent = () => {
+
+
+export const ResetPasswordComponent: React.FC = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<IResetPasswordForm>({
     mode: 'onBlur'
   })
-
+  const toast = useToast()
+  const { t }: any = useTranslation()
   const router = useRouter()
-  const { token }: ParsedUrlQuery = router.query
+  const { token } = router.query
   const [resetPassword, { }] = useResetPasswordMutation()
   const [verifyToken, { }] = useVerifyTokenMutation()
 
   const pattern = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]).*/
 
   useEffect(() => {
-    const checkTokenFresh = async (token: string) => {
+    const checkTokenIsValid = async (token: string) => {
       try {
         const res = await verifyToken(token).unwrap()
         console.log('token fresh: ', res)
@@ -32,7 +38,7 @@ export const ResetPasswordComponent = () => {
     }
     // AWAITING FOR ENDPOINT '/verify-token'
     // if (typeof token === 'string') {
-    //   checkTokenFresh(token)
+    //   checkTokenIsValid(token)
     // }
 
   }, [])
@@ -41,16 +47,32 @@ export const ResetPasswordComponent = () => {
   const onSubmit = async (data: FieldValues) => {
 
     if (data.newPassword !== data.confirmedPassword) {
-      alert('Passwords must match!')
+      toast({
+        description: 'Passwords must match!',
+        isClosable: true,
+        status: 'warning',
+        title: 'Warning!!!',
+      })
     } else {
       try {
-        await resetPassword({ password: data.newPassword, token, }).unwrap()
-        alert(`Password successfully changed!`)
+        if (typeof token === 'string') await resetPassword({ password: data.newPassword, token, }).unwrap()
+        toast({
+          description: `Password successfully changed!`,
+          isClosable: true,
+          status: 'success',
+          title: 'Success!',
+        })
         router.push('/LogIn')
 
       } catch (error) {
         const err = error as IResetPasswordErrorResponse
         alert(JSON.stringify(err.data.errors.token.message))
+        toast({
+          description: `${JSON.stringify(err.data.errors.token.message)}`,
+          isClosable: true,
+          status: 'error',
+          title: 'Ooops!',
+        })
       }
     }
 
@@ -59,7 +81,7 @@ export const ResetPasswordComponent = () => {
   return (
     <Card>
       <form className={styles.loginForm} onSubmit={handleSubmit(onSubmit)}>
-        <div className={styles.tittle}>Reset Password</div>
+        <div className={styles.tittle}>{t.passwordRecovery.resetPassword}</div>
         <div>
           <input {...register("newPassword", {
             required: true,
@@ -99,7 +121,7 @@ export const ResetPasswordComponent = () => {
           <ErrorMessage errors={errors} name="confirmedPassword" render={({ message }) => <p>{message}</p>} />
         </div>
         <div>
-          <Button primary type={'submit'}>Create New Password</Button>
+          <Button primary type={'submit'}>{t.passwordRecovery.createNewPassword}</Button>
         </div>
       </form>
     </Card>

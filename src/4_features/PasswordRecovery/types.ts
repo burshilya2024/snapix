@@ -7,6 +7,11 @@ export interface IResetPasswordForm {
   confirmedPassword: string
 }
 
+export interface IResetPasswordRequest {
+  password: string
+  token: string
+}
+
 //================ERROR TYPES============================================================
 
 export interface Email {

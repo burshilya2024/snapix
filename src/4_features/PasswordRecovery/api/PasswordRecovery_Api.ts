@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { IForgotPasswordForm, IResetPasswordForm, IResetPasswordRequest } from '../types'
 
 const BASE_URL = 'https://9art.ru/api/v1/auth'
 
@@ -7,14 +8,14 @@ export const PasswordRecovery_Api = createApi({
     baseUrl: BASE_URL,
   }),
   endpoints: builder => ({
-    passwordRecovery: builder.mutation<any, any>({
+    passwordRecovery: builder.mutation<null, IForgotPasswordForm>({
       query: body => ({
         body,
         method: 'POST',
         url: '/forgot-password',
       }),
     }),
-    resetPassword: builder.mutation<any, any>({
+    resetPassword: builder.mutation<null, IResetPasswordRequest>({
       query: body => ({
         body,
         method: 'POST',

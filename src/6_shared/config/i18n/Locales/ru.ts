@@ -17,6 +17,16 @@ export const ru = {
     signUp: 'Регистрация',
     singOut: 'Выход',
   },
+  passwordRecovery: {
+    passwordRecovery: 'Восстановление Пароля',
+    instructions: 'Введите свой email адрес и мы отправим Вам ссылку для восстановления пароля',
+    sendLink: 'Отправить',
+    backToSignIn: 'Назад',
+    resetPassword: 'Создание Нового Пароля',
+    createNewPassword: 'Создать Пароль',
+    resendEmailInstructions: 'Похоже, что время перехода по ссылке истекло. Не волнуйтесь, мы можем отправить Вам новую ссылку',
+    resendLink: 'Отправить Еще Раз О_о',
+  },
 }
 
 export type LocaleType = typeof ru
