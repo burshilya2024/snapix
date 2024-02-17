@@ -3,5 +3,5 @@
 
 export { ForgotPasswordComponents } from './PasswordRecovery/Components/ForgotPassword'
 export { ResetPasswordComponents } from './PasswordRecovery/Components/ResetPassword'
-export { LoginComponents } from './Registery_Login_User/Components/LoginUser'
-export { SignUpComponent } from './Registery_Login_User/Components/RegisteryUser'
+export { LoginComponents } from '@/4_features/Register_Login_User/Components/LoginUser'
+export { SignUpComponent } from '@/4_features/Register_Login_User/Components/RegisterUser'

@@ -4,11 +4,11 @@ import { IResponseRegisterApi, RegistrationData, RegistrationResponse } from '..
 
 const BASE_URL = 'https://9art.ru/api/v1/auth'
 
-export const Registery_Login_Api = createApi({
+export const Register_Login_Api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,
   }),
-  // !не используется, оставил для наглядности
+  // ! login не используется, оставил для наглядности
   endpoints: builder => ({
     login: builder.mutation<any, any>({
       query: body => ({
@@ -16,12 +16,12 @@ export const Registery_Login_Api = createApi({
         method: 'POST',
         url: '/login',
       }),
-      // transformResponse: (response: IResponseRegisterApi) => {
-      //   localStorage.setItem('access_token', response.access_token || '')
-      //   localStorage.setItem('refresh_token', response.refresh_token || '')
-      //   localStorage.setItem('isAuth', 'true')
-      //   return response
-      // },
+    }),
+    logout: builder.mutation({
+      query: () => ({
+        url: '/logout',
+        method: 'POST',
+      }),
     }),
     refresh: builder.mutation<any, any>({
       query: ({ access_token, body }) => ({
@@ -48,7 +48,7 @@ export const Registery_Login_Api = createApi({
       }),
     }),
   }),
-  reducerPath: 'Registery_Login_Api',
+  reducerPath: 'Register_Login_Api',
 })
 
-export const { useLoginMutation, useRegisterMutation } = Registery_Login_Api
+export const { useLoginMutation, useLogoutMutation, useRegisterMutation } = Register_Login_Api

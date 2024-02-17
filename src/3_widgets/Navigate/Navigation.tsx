@@ -1,4 +1,4 @@
-import { useTranslation } from '@/6_shared/config/i18n/hook/useTranslation'
+import { useTranslation } from '@/6_shared/config/i18n/hooks/useTranslation'
 import useWindowSize from '@/6_shared/lib/hooks/useWindowsSize'
 import LogInIcon from '@public/assets/icons/log-out.svg'
 import Link from 'next/link'
@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 import { signOut } from 'next-auth/react'
 
 import styles from '@/styles/Navigation.module.scss'
+import { useLogout } from '@/4_features/Register_Login_User/hooks/useLogout'
 
 type NavLink = {
   href: string
@@ -20,7 +21,7 @@ export const NavBar = ({ navLinks }: Props) => {
   const pathname = usePathname()
   const isMobile = useWindowSize()
   const { t } = useTranslation()
-
+  const logOut = useLogout()
   return (
     <div className={styles.Navbar_list}>
       {navLinks.map((link, index) => {
@@ -43,11 +44,7 @@ export const NavBar = ({ navLinks }: Props) => {
         )
       })}
       {!isMobile && (
-        <Link
-          className={styles.LogOutLink}
-          href={'#'}
-          onClick={() => signOut({ callbackUrl: '/' })}
-        >
+        <Link className={styles.LogOutLink} href={'#'} onClick={() => logOut()}>
           <span className={'svg'}>
             <LogInIcon />
           </span>

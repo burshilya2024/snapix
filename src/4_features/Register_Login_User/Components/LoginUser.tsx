@@ -1,8 +1,8 @@
 import React, { FormEventHandler, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { IUserData } from '@/4_features/Registery_Login_User/types'
-import { useTranslation } from '@/6_shared/config/i18n/hook/useTranslation'
+import { IUserData } from '@/4_features/Register_Login_User/types'
+import { useTranslation } from '@/6_shared/config/i18n/hooks/useTranslation'
 import Button from '@/6_shared/ui/ui-button'
 import { Spinner, useToast } from '@chakra-ui/react'
 import Link from 'next/link'

@@ -1,4 +1,4 @@
-import { useLocalesData } from '@/6_shared/config/i18n/hook/useLocalesData'
+import { useLocalesData } from '@/6_shared/config/i18n/hooks/useLocalesData'
 import CustomSelect from '@/6_shared/ui/CustomSelect'
 import { useRouter } from 'next/router'
 
