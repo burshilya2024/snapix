@@ -29,7 +29,9 @@ export const LoginComponents: React.FC = () => {
     handleSubmit,
     register,
     reset,
-  } = useForm<IUserData>()
+  } = useForm<IUserData>({
+    mode: 'onBlur',
+  })
 
   const handleSubmitLogin = async (data: IUserData) => {
     await signIn('credentials', {
