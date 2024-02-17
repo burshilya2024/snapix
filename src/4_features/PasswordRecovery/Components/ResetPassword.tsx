@@ -25,14 +25,15 @@ export const ResetPasswordComponent = () => {
     const checkTokenFresh = async (token: string) => {
       try {
         const res = await verifyToken(token).unwrap()
-        console.log('token fresh', res)
+        console.log('token fresh: ', res)
       } catch (error) {
         router.push('/ResendEmail')
       }
     }
-    if (typeof token === 'string') {
-      checkTokenFresh(token)
-    }
+    // AWAITING FOR ENDPOINT '/verify-token'
+    // if (typeof token === 'string') {
+    //   checkTokenFresh(token)
+    // }
 
   }, [])
 
@@ -40,7 +41,7 @@ export const ResetPasswordComponent = () => {
   const onSubmit = async (data: FieldValues) => {
 
     if (data.newPassword !== data.confirmedPassword) {
-      alert('Passwords do not match!')
+      alert('Passwords must match!')
     } else {
       try {
         await resetPassword({ password: data.newPassword, token, }).unwrap()

@@ -16,12 +16,13 @@ export const ForgotPasswordComponent = () => {
   const [passwordRecovery, { }] = usePasswordRecoveryMutation()
 
   const onSubmit = async (email: FieldValues) => {
-
     try {
       await passwordRecovery(email).unwrap()
       alert(`We have sent a link to ${email.email}. Follow the link to create new password.`)
+      localStorage.setItem('forgot_password_email', email.email)
 
     } catch (error) {
+      console.log(error)
       const err = error as IForgotPasswordErrorResponse
       alert(JSON.stringify(err.data.errors.email.message))
 
