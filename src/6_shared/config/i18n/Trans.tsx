@@ -1,4 +1,4 @@
-import { FC, Fragment } from 'react'
+import { FC, Fragment, JSX } from 'react'
 
 const tagsRegex = /(<\d+>[^<>]*<\/\d+>)/
 const openCloseTagRegex = /<(\d+)>([^<>]*)<\/(\d+)>/

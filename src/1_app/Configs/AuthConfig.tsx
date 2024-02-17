@@ -29,9 +29,6 @@ export const authOptions = {
             // @ts-ignore
             const user = accessToken.user
 
-            console.log(response.data)
-            console.log('userINAUTHconfig', user)
-
             return user
           } else {
             return null

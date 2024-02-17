@@ -13,6 +13,8 @@ export const en = {
     forgotPassword: 'Forgot password?',
     haveAccount: 'Already have an account?',
     logout: 'logout',
+    passwordRequirements:
+      'Password must contain at least one uppercase letter, one lowercase letter, one digit, one special character and be between 6 to 20 characters long',
     signIn: 'Sign in',
     signUp: 'Sign up',
     singOut: 'Sign out',

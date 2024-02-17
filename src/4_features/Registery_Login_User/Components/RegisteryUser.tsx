@@ -1,50 +1,69 @@
 import React from 'react'
-import { Controller, useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { useRegisterMutation } from '@/4_features/Registery_Login_User/api/registery_Login_Api'
 import { useTranslation } from '@/6_shared/config/i18n/hook/useTranslation'
 import Card from '@/6_shared/ui/Card'
+import { MyCustomSpinner } from '@/6_shared/ui/CustomSpinner'
 import Button from '@/6_shared/ui/ui-button'
-import { Spinner, useToast } from '@chakra-ui/react'
+import { useToast } from '@chakra-ui/react'
 import Link from 'next/link'
 
 import styles from '@/styles/LogIn.module.scss'
 
+type FormData = {
+  email: string
+  password: string
+  username: string
+}
+type SuccessResponse = {
+  message: string
+}
+type ErrorMessage = {
+  data: {
+    errors: {
+      message: string
+    }
+  }
+}
 export const SignUpComponent: React.FC<any> = () => {
   const {
-    control,
-    formState: { errors, isSubmitting },
+    formState: { errors, isValid },
     handleSubmit,
+    register,
     reset,
-  } = useForm()
-  const [register] = useRegisterMutation()
+  } = useForm({
+    mode: 'onBlur',
+  })
+  const [registerForm, { isError: errorRegistery, isLoading: registerLoading }] =
+    useRegisterMutation()
   const { t } = useTranslation()
   const toast = useToast()
 
   // TODO: Add TS
-  const onSubmit = async (data: any) => {
-    await register(data)
+  const onSubmit: SubmitHandler<any> = async (data: FormData) => {
+    await registerForm(data)
       .unwrap()
-      .then((res: any) => {
+      .then((res: SuccessResponse) => {
         toast({
-          description: res.message || 'успешно!',
+          description: res.message || 'successful registration',
           duration: 9000,
           isClosable: true,
           status: 'success',
           title: 'Successful!',
         })
+        reset() // Сброс формы после успешной регистрации
       })
-      .catch((error: any) => {
+      .catch((error: ErrorMessage) => {
+        const errorMessage = error?.data.errors.message
+
         toast({
-          description: `${error?.data?.errors?.username?.message}`,
+          description: errorMessage,
           duration: 9000,
           isClosable: true,
           status: 'error',
           title: 'Ooops!',
         })
-      })
-      .finally(() => {
-        reset({ email: '', password: '', username: '' })
       })
   }
 
@@ -53,99 +72,70 @@ export const SignUpComponent: React.FC<any> = () => {
       <form className={styles.loginForm} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.tittle}>{t.signIn_SignUp.signUp}</div>
         <div>
-          <Controller
-            control={control}
-            name={'username'}
-            render={({ field }) => (
-              <>
-                <input
-                  {...field}
-                  className={styles.inputField}
-                  placeholder={'Username'}
-                  type={'text'}
-                />
-                {errors.username && <p>{`${errors.username.message}`}</p>}
-              </>
-            )}
-            rules={{
-              minLength: { message: 'Username must be at least 6 characters', value: 6 },
-              pattern: {
-                message: 'Username must be one word without spaces',
-                value: /^[a-zA-Zа]+$/,
-              },
-              required: 'Username is required',
-            }}
-          />
+          <>
+            <input
+              {...register('username', {
+                minLength: {
+                  message: 'мleast 6 characters',
+                  value: 6,
+                },
+                pattern: /^[a-zA-Z]+$/,
+                required: 'username is required',
+              })}
+              className={styles.inputField}
+              placeholder={'username'}
+              // placeholder={t.signIn_SignUp.username}
+              type={'username'}
+            />
+
+            {errors.username && <p>{String(errors.username.message) || 'error is name'}</p>}
+          </>
         </div>
         <div>
-          <Controller
-            control={control}
-            name={'email'}
-            render={({ field }) => (
-              <>
-                <input
-                  {...field}
-                  className={styles.inputField}
-                  placeholder={'Email'}
-                  type={'email'}
-                />
-                {errors.email && <p>{`${errors.email.message}`}</p>}
-              </>
-            )}
-            rules={{ required: 'Email is required' }}
+          <input
+            {...register('email', { required: 'Email is required' })}
+            className={styles.inputField}
+            placeholder={'email'}
+            //placeholder={t.signIn_SignUp.email}
+            type={'email'}
           />
+          {errors.email && <p>{`${errors.email.message}`}</p>}
         </div>
         <div>
-          <Controller
-            control={control}
-            name={'password'}
-            render={({ field }) => (
-              <>
-                <input
-                  {...field}
-                  className={styles.inputField}
-                  placeholder={'Password'}
-                  type={'password'}
-                />
-                {errors.password && <p>{`${errors.password.message}`}</p>}
-              </>
-            )}
-            rules={{
+          <input
+            {...register('password', {
               minLength: { message: 'Password must be at least 6 characters', value: 6 },
               pattern: {
-                message: 'Password must contain an uppercase letter and an underscore (_)',
-                value: /^(?=.*[A-Z])(?=.*_)/,
+                message: t.signIn_SignUp.passwordRequirements,
+                value:
+                  /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]).{6,20}$/,
               },
               required: 'Password is required',
-            }}
+            })}
+            className={styles.inputField}
+            placeholder={'password'}
+            // placeholder={t.signIn_SignUp.password}
+            type={'password'}
           />
+          {errors.password && <p>{`${errors.password.message}`}</p>}
         </div>
-
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          {isSubmitting ? (
-            <div style={{ height: '2px', width: '2px' }}>
-              {isSubmitting && (
-                <Spinner
-                  color={'blue.500'}
-                  emptyColor={'gray.200'}
-                  size={'lg'}
-                  speed={'0.65s'}
-                  thickness={'4px'}
-                />
-              )}
-            </div>
+        <div>
+          {registerLoading ? (
+            <MyCustomSpinner />
           ) : (
-            <Button primary type={'submit'}>
-              {t.signIn_SignUp.signUp}
-            </Button>
+            <input
+              className={styles.inputSubmit}
+              disabled={!isValid}
+              type={'submit'}
+              value={t.signIn_SignUp.signUp}
+            />
           )}
         </div>
+
         <div>{t.signIn_SignUp.haveAccount}</div>
         <div>
           <Link href={'/LogIn'}>
-            <Button outline type={'submit'}>
-              {t.signIn_SignUp.signIn}
-            </Button>
+            <Button outline>{t.signIn_SignUp.signIn}</Button>
           </Link>
         </div>
       </form>
