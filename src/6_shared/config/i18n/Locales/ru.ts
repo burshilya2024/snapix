@@ -25,7 +25,7 @@ export const ru = {
     resetPassword: 'Создание Нового Пароля',
     createNewPassword: 'Создать Пароль',
     resendEmailInstructions: 'Похоже, что время перехода по ссылке истекло. Не волнуйтесь, мы можем отправить Вам новую ссылку',
-    resendLink: 'Отправить Еще Раз О_о',
+    resendLink: 'Отправить Еще Раз',
   },
 }
 

@@ -12,6 +12,10 @@ export interface IResetPasswordRequest {
   token: string
 }
 
+export interface IVerifyTokenRequest {
+	token: string
+}
+
 //================ERROR TYPES============================================================
 
 export interface Email {

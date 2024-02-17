@@ -2,7 +2,7 @@ import Button from "@/6_shared/ui/ui-button";
 import Card from '@/6_shared/ui/Card';
 import { useToast } from "@chakra-ui/react";
 import { useTranslation } from "@/6_shared/config/i18n/hook/useTranslation";
-import { usePasswordRecoveryMutation } from "../api/PasswordRecovery_api";
+import { usePasswordRecoveryMutation } from "../api/PasswordRecovery_Api";
 import { FormEventHandler } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";

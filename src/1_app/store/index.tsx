@@ -6,7 +6,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit'
 
 import { UnsplashTextApi } from '../../4_features/public/api/UnsplashTestApi'
 import { PlaceHolderApi } from './PlaceholderTestApi'
-import { PasswordRecovery_Api } from '@/4_features/PasswordRecovery/api/PasswordRecovery_api'
+import { PasswordRecovery_Api } from '@/4_features/PasswordRecovery/api/PasswordRecovery_Api'
 
 const rootReducer = combineReducers({
   [PlaceHolderApi.reducerPath]: PlaceHolderApi.reducer,

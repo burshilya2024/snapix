@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { IForgotPasswordForm, IResetPasswordForm, IResetPasswordRequest } from '../types'
+import { IForgotPasswordForm, IResetPasswordForm, IResetPasswordRequest, IVerifyTokenRequest } from '../types'
 
 const BASE_URL = 'https://9art.ru/api/v1/auth'
 
@@ -22,11 +22,11 @@ export const PasswordRecovery_Api = createApi({
         url: '/new-password',
       }),
     }),
-    verifyToken: builder.mutation<any, string>({
+    verifyToken: builder.mutation<null, IVerifyTokenRequest>({
       query: body => ({
         body,
         method: 'POST',
-        url: '/verify-token',
+        url: '/register/verify-token',
       }),
     }),
   }),

@@ -2,7 +2,7 @@ import { FieldValues, useForm } from "react-hook-form";
 import Card from "@/6_shared/ui/Card";
 import Button from "@/6_shared/ui/ui-button";
 import styles from '@/styles/ResetPassword.module.scss'
-import { useResetPasswordMutation, useVerifyTokenMutation } from "../api/PasswordRecovery_api";
+import { useResetPasswordMutation, useVerifyTokenMutation } from "../api/PasswordRecovery_Api";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useTranslation } from "@/6_shared/config/i18n/hook/useTranslation";
@@ -29,18 +29,17 @@ export const ResetPasswordComponent: React.FC = () => {
   useEffect(() => {
     const checkTokenIsValid = async (token: string) => {
       try {
-        const res = await verifyToken(token).unwrap()
+        const res = await verifyToken({ token }).unwrap()
         console.log('token fresh: ', res)
       } catch (error) {
-        router.push('/ResendEmail')
+        console.log('token error: ', error)
+        // router.push('/forgot-password/resend-email')
       }
     }
-    // AWAITING FOR ENDPOINT '/verify-token'
-    // if (typeof token === 'string') {
-    //   checkTokenIsValid(token)
-    // }
-
-  }, [])
+    if (typeof token === 'string') {
+      checkTokenIsValid(token)
+    }
+  }, [token])
 
   const onSubmit = async (data: FieldValues) => {
 

@@ -5,7 +5,7 @@ import Link from "next/link";
 import ReCAPTCHA from 'react-google-recaptcha'
 import styles from '@/styles/ResetPassword.module.scss'
 import { useState } from "react";
-import { usePasswordRecoveryMutation } from "../api/PasswordRecovery_api";
+import { usePasswordRecoveryMutation } from "../api/PasswordRecovery_Api";
 import { useTranslation } from "@/6_shared/config/i18n/hook/useTranslation";
 import { IForgotPasswordErrorResponse, IForgotPasswordForm } from "../types";
 import { ErrorMessage } from "@hookform/error-message";
