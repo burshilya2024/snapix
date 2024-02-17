@@ -5,7 +5,7 @@ import styles from '@/styles/ResetPassword.module.scss'
 import { useResetPasswordMutation, useVerifyTokenMutation } from "../api/PasswordRecovery_Api";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { useTranslation } from "@/6_shared/config/i18n/hook/useTranslation";
+import { useTranslation } from "@/6_shared/config/i18n/hooks/useTranslation";
 import { IResetPasswordErrorResponse, IResetPasswordForm } from "../types";
 import { ErrorMessage } from '@hookform/error-message';
 import { useSession } from "next-auth/react";
