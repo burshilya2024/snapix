@@ -2,7 +2,7 @@ import React from 'react'
 
 import { LoginComponents } from '@/4_features'
 import { GoogleButton } from '@/4_features/GoogleAuthButton/GoogleAuthButton'
-import { useTranslation } from '@/6_shared/config/i18n/hook/useTranslation'
+import { useTranslation } from '@/6_shared/config/i18n/hooks/useTranslation'
 import Card from '@/6_shared/ui/Card'
 
 import styles from '@/styles/LogIn.module.scss'
