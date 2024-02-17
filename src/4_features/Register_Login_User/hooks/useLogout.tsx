@@ -1,6 +1,6 @@
-import { signOut } from 'next-auth/react'
 import { useLogoutMutation } from '@/4_features/Register_Login_User/api/register_Login_Api'
 import { useToast } from '@chakra-ui/react'
+import { signOut } from 'next-auth/react'
 
 export const useLogout = () => {
   const [logout] = useLogoutMutation()
@@ -13,6 +13,7 @@ export const useLogout = () => {
       })
       .catch((error: any) => {
         const errorMessage = error?.message || 'An error occurred during logout.'
+
         toast({
           description: errorMessage,
           duration: 5000,
@@ -23,5 +24,6 @@ export const useLogout = () => {
       })
     // signOut({ callbackUrl: '/' })
   }
+
   return logOut
 }

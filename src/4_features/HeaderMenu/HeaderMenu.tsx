@@ -1,4 +1,5 @@
 import LangSelect from '@/4_features/Lang/LangSelect'
+import { useLogout } from '@/4_features/Register_Login_User/hooks/useLogout'
 import ThemeToggle from '@/4_features/ThemeToggle/ThemeToggle'
 import { useTranslation } from '@/6_shared/config/i18n/hooks/useTranslation'
 import { IconButton, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
@@ -10,11 +11,11 @@ import Statistics from '@public/assets/icons/trending-up.svg'
 import Link from 'next/link'
 
 import styles from '@/styles/HeaderMenu.module.scss'
-import { useLogout } from '@/4_features/Register_Login_User/hooks/useLogout'
 
 export const HeaderMenu = () => {
   const { t } = useTranslation()
   const logOut = useLogout()
+
   return (
     <Menu>
       <span className={`svg ${styles.BurgerMenu}`}>
