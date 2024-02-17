@@ -1,4 +1,5 @@
 import { useState } from 'react'
+// eslint-disable-next-line import/no-named-as-default
 import ReCAPTCHA from 'react-google-recaptcha'
 import { FieldValues, useForm } from 'react-hook-form'
 
