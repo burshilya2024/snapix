@@ -6,8 +6,8 @@ import ReCAPTCHA from 'react-google-recaptcha'
 import styles from '@/styles/ResetPassword.module.scss'
 import { useState } from "react";
 import { usePasswordRecoveryMutation } from "../api/PasswordRecovery_Api";
-import { useTranslation } from "@/6_shared/config/i18n/hooks/useTranslation"; 
-import { IForgotPasswordErrorResponse, IForgotPasswordForm } from "../types";
+import { useTranslation } from "@/6_shared/config/i18n/hooks/useTranslation";
+import { IErrorResponse, IForgotPasswordForm } from "../types";
 import { ErrorMessage } from "@hookform/error-message";
 import { useToast } from "@chakra-ui/react";
 import { useSession } from "next-auth/react";
@@ -41,9 +41,9 @@ export const ForgotPasswordComponent = () => {
       localStorage.setItem('forgot_password_email', JSON.stringify(email))
 
     } catch (error) {
-      const err = error as IForgotPasswordErrorResponse
+      const err = error as IErrorResponse
       toast({
-        description: `${JSON.stringify(err.data.errors.email.message)}`,
+        description: `${JSON.stringify(err.data.errors.email?.message)}`,
         duration: 9000,
         isClosable: true,
         status: 'error',
@@ -61,7 +61,7 @@ export const ForgotPasswordComponent = () => {
         <div className={styles.tittle}>{t.passwordRecovery.passwordRecovery}</div>
         <div>
           <input {...register("email", {
-            required: true,
+            required: 'Please enter Your email adress',
             pattern: {
               message: 'Must be a valid email',
               value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,20}$/g,
@@ -73,7 +73,6 @@ export const ForgotPasswordComponent = () => {
         <div>
           {t.passwordRecovery.instructions}
         </div>
-        <div>Enter your email and we will send you further instruction</div>
         <div>
           <ReCAPTCHA
             onChange={val => setCaptcha(val)}

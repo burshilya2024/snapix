@@ -3,18 +3,15 @@ export interface IForgotPasswordForm {
 }
 
 export interface IResetPasswordForm {
-  newPassword: string
+  password: string
   confirmedPassword: string
 }
 
-export interface IResetPasswordRequest {
-  password: string
+export type IResetPasswordRequest  = Pick<IResetPasswordForm, 'password'> & {
   token: string
 }
 
-export interface IVerifyTokenRequest {
-	token: string
-}
+export type IVerifyTokenRequest = Pick<IResetPasswordRequest, 'token'>
 
 //================ERROR TYPES============================================================
 
@@ -23,30 +20,14 @@ export interface Email {
 	property: string;
 }
 
-export interface Error {
-	email: Email;
-}
-
-export interface Data {
-	message: string;
-	errors: Error;
-	timestamp: string;
-	path: string;
-}
-
-export interface IForgotPasswordErrorResponse {
-	status: number;
-	data: Data;
-}
-
-
 export interface Token {
-	message: string;
+	message: string | number;
 	property: string;
 }
 
 export interface Error {
-	token: Token;
+	email?: Email;
+	token?: Token;
 }
 
 export interface Data {
@@ -56,7 +37,7 @@ export interface Data {
 	path: string;
 }
 
-export interface IResetPasswordErrorResponse {
+export interface IErrorResponse {
 	status: number;
 	data: Data;
 }

@@ -6,7 +6,7 @@ import { useResetPasswordMutation, useVerifyTokenMutation } from "../api/Passwor
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useTranslation } from "@/6_shared/config/i18n/hooks/useTranslation";
-import { IResetPasswordErrorResponse, IResetPasswordForm } from "../types";
+import { IErrorResponse, IResetPasswordForm } from "../types";
 import { ErrorMessage } from '@hookform/error-message';
 import { useSession } from "next-auth/react";
 import { useToast } from "@chakra-ui/react";
@@ -26,19 +26,17 @@ export const ResetPasswordComponent: React.FC = () => {
 
   if (session.status === 'authenticated') router.push('/MyProfile')
 
+  const checkTokenIsValid = async (token: string) => {
+    try {
+      await verifyToken({ token }).unwrap()
+    } catch (error) {
+      router.push('/forgot-password/resend-email')
+      return error
+    }
+  }
+
   useEffect(() => {
-    const checkTokenIsValid = async (token: string) => {
-      try {
-        const res = await verifyToken({ token }).unwrap()
-        console.log('token fresh: ', res)
-      } catch (error) {
-        console.log('token error: ', error)
-        // router.push('/forgot-password/resend-email')
-      }
-    }
-    if (typeof token === 'string') {
-      checkTokenIsValid(token)
-    }
+    if (typeof token === 'string') checkTokenIsValid(token)
   }, [token])
 
   const onSubmit = async (data: FieldValues) => {
@@ -52,19 +50,22 @@ export const ResetPasswordComponent: React.FC = () => {
       })
     } else {
       try {
-        if (typeof token === 'string') await resetPassword({ password: data.newPassword, token, }).unwrap()
-        toast({
-          description: `Password successfully changed!`,
-          isClosable: true,
-          status: 'success',
-          title: 'Success!',
-        })
-        router.push('/LogIn')
+        if (typeof token === 'string') {
+          await checkTokenIsValid(token)
+          await resetPassword({ password: data.newPassword, token, }).unwrap()
+          toast({
+            description: `Password successfully changed!`,
+            isClosable: true,
+            status: 'success',
+            title: 'Success!',
+          })
+          router.push('/LogIn')
+        }
 
       } catch (error) {
-        const err = error as IResetPasswordErrorResponse
+        const err = error as IErrorResponse
         toast({
-          description: `${JSON.stringify(err.data.errors.token.message)}`,
+          description: `${JSON.stringify(err.data.errors.token?.message)}`,
           isClosable: true,
           status: 'error',
           title: 'Ooops!',
@@ -78,7 +79,7 @@ export const ResetPasswordComponent: React.FC = () => {
       <form className={styles.loginForm} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.tittle}>{t.passwordRecovery.resetPassword}</div>
         <div>
-          <input {...register("newPassword", {
+          <input {...register("password", {
             required: true,
             minLength: {
               message: 'Password must be at least 10 symbols long',
@@ -94,7 +95,7 @@ export const ResetPasswordComponent: React.FC = () => {
             }
           })}
             className={styles.inputField} type="password" placeholder="New Password" />
-          <ErrorMessage errors={errors} name="newPassword" render={({ message }) => <p>{message}</p>} />
+          <ErrorMessage errors={errors} name="password" render={({ message }) => <p>{message}</p>} />
         </div>
         <div>
           <input {...register("confirmedPassword", {

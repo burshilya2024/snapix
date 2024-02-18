@@ -26,7 +26,7 @@ export const PasswordRecovery_Api = createApi({
       query: body => ({
         body,
         method: 'POST',
-        url: '/register/verify-token',
+        url: '/forgot-password/verify-token',
       }),
     }),
   }),
