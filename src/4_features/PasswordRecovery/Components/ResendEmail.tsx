@@ -1,13 +1,15 @@
-import Button from "@/6_shared/ui/ui-button";
-import Card from '@/6_shared/ui/Card';
-import { useToast } from "@chakra-ui/react";
-import { useTranslation } from "@/6_shared/config/i18n/hooks/useTranslation"; 
-import { usePasswordRecoveryMutation } from "../api/PasswordRecovery_Api";
-import { FormEventHandler } from "react";
-import { useRouter } from "next/router";
-import { useSession } from "next-auth/react";
+import { FormEventHandler } from 'react'
+
+import { useTranslation } from '@/6_shared/config/i18n/hooks/useTranslation'
+import Card from '@/6_shared/ui/Card'
+import Button from '@/6_shared/ui/ui-button'
+import { useToast } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
+import { useSession } from 'next-auth/react'
 
 import styles from '@/styles/ResetPassword.module.scss'
+
+import { usePasswordRecoveryMutation } from '../api/PasswordRecovery_Api'
 
 export const ResendEmailComponent = () => {
   const router = useRouter()
@@ -15,19 +17,21 @@ export const ResendEmailComponent = () => {
   const toast = useToast()
   const { t }: any = useTranslation()
 
-  const [passwordRecovery, { }] = usePasswordRecoveryMutation()
+  const [passwordRecovery, {}] = usePasswordRecoveryMutation()
 
-  if (session.status === 'authenticated') router.push('/MyProfile')
+  if (session.status === 'authenticated') {
+    router.push('/MyProfile')
+  }
 
-  const onSubmit: FormEventHandler<HTMLElement> = async (e) => {
+  const onSubmit: FormEventHandler<HTMLElement> = async e => {
     e.preventDefault()
 
     if (localStorage.getItem('forgot_password_email')) {
-
       const userEmail = localStorage.getItem('forgot_password_email')
 
       if (typeof userEmail === 'string') {
         const email = JSON.parse(userEmail)
+
         await passwordRecovery(email).unwrap()
         toast({
           description: `We have sent a link to ${email.email}. Follow the link to create new password.`,
@@ -42,23 +46,27 @@ export const ResendEmailComponent = () => {
         description: `No user email saved in localStorage. Please go back to password recovery page`,
         duration: 9000,
         isClosable: true,
-        status: 'error',
-        title: 'Ooops!',
         onCloseComplete() {
           router.push('/forgot-password')
         },
+        status: 'error',
+        title: 'Ooops!',
       })
     }
   }
 
   return (
     <Card>
-      <form onSubmit={onSubmit} className={styles.loginForm}>
-        <div className={styles.resendEmailMessage}>{t.passwordRecovery.resendEmailInstructions}</div>
+      <form className={styles.loginForm} onSubmit={onSubmit}>
+        <div className={styles.resendEmailMessage}>
+          {t.passwordRecovery.resendEmailInstructions}
+        </div>
         <div>
-          <Button primary type={'submit'}>{t.passwordRecovery.resendLink}</Button>
+          <Button primary type={'submit'}>
+            {t.passwordRecovery.resendLink}
+          </Button>
         </div>
       </form>
     </Card>
-  );
+  )
 }

@@ -1,12 +1,12 @@
 // store.ts
 import { useDispatch } from 'react-redux'
 
+import { PasswordRecovery_Api } from '@/4_features/PasswordRecovery/api/PasswordRecovery_Api'
 import { Register_Login_Api } from '@/4_features/Register_Login_User/api/register_Login_Api'
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 
 import { UnsplashTextApi } from '../../4_features/public/api/UnsplashTestApi'
 import { PlaceHolderApi } from './PlaceholderTestApi'
-import { PasswordRecovery_Api } from '@/4_features/PasswordRecovery/api/PasswordRecovery_Api'
 
 const rootReducer = combineReducers({
   [PasswordRecovery_Api.reducerPath]: PasswordRecovery_Api.reducer,

@@ -1,15 +1,18 @@
-import { FieldValues, useForm } from "react-hook-form";
-import Card from "@/6_shared/ui/Card";
-import Button from "@/6_shared/ui/ui-button";
+import { useEffect } from 'react'
+import { FieldValues, useForm } from 'react-hook-form'
+
+import { useTranslation } from '@/6_shared/config/i18n/hooks/useTranslation'
+import Card from '@/6_shared/ui/Card'
+import Button from '@/6_shared/ui/ui-button'
+import { useToast } from '@chakra-ui/react'
+import { ErrorMessage } from '@hookform/error-message'
+import { useRouter } from 'next/router'
+import { useSession } from 'next-auth/react'
+
 import styles from '@/styles/ResetPassword.module.scss'
-import { useResetPasswordMutation, useVerifyTokenMutation } from "../api/PasswordRecovery_Api";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { useTranslation } from "@/6_shared/config/i18n/hooks/useTranslation";
-import { IErrorResponse, IResetPasswordForm } from "../types";
-import { ErrorMessage } from '@hookform/error-message';
-import { useSession } from "next-auth/react";
-import { useToast } from "@chakra-ui/react";
+
+import { useResetPasswordMutation, useVerifyTokenMutation } from '../api/PasswordRecovery_Api'
+import { IErrorResponse, IResetPasswordForm } from '../types'
 
 export const ResetPasswordComponent: React.FC = () => {
   const toast = useToast()
@@ -17,30 +20,38 @@ export const ResetPasswordComponent: React.FC = () => {
   const router = useRouter()
   const session = useSession()
   const { token } = router.query
-  const [resetPassword, { }] = useResetPasswordMutation()
-  const [verifyToken, { }] = useVerifyTokenMutation()
+  const [resetPassword, {}] = useResetPasswordMutation()
+  const [verifyToken, {}] = useVerifyTokenMutation()
 
-  const { register, handleSubmit, formState: { errors } } = useForm<IResetPasswordForm>({
-    mode: 'onBlur'
+  const {
+    formState: { errors },
+    handleSubmit,
+    register,
+  } = useForm<IResetPasswordForm>({
+    mode: 'onBlur',
   })
 
-  if (session.status === 'authenticated') router.push('/MyProfile')
+  if (session.status === 'authenticated') {
+    router.push('/MyProfile')
+  }
 
   const checkTokenIsValid = async (token: string) => {
     try {
       await verifyToken({ token }).unwrap()
     } catch (error) {
       router.push('/forgot-password/resend-email')
+
       return error
     }
   }
 
   useEffect(() => {
-    if (typeof token === 'string') checkTokenIsValid(token)
+    if (typeof token === 'string') {
+      checkTokenIsValid(token)
+    }
   }, [token])
 
   const onSubmit = async (data: FieldValues) => {
-
     if (data.newPassword !== data.confirmedPassword) {
       toast({
         description: 'Passwords must match!',
@@ -52,7 +63,7 @@ export const ResetPasswordComponent: React.FC = () => {
       try {
         if (typeof token === 'string') {
           await checkTokenIsValid(token)
-          await resetPassword({ password: data.newPassword, token, }).unwrap()
+          await resetPassword({ password: data.newPassword, token }).unwrap()
           toast({
             description: `Password successfully changed!`,
             isClosable: true,
@@ -61,9 +72,9 @@ export const ResetPasswordComponent: React.FC = () => {
           })
           router.push('/LogIn')
         }
-
       } catch (error) {
         const err = error as IErrorResponse
+
         toast({
           description: `${JSON.stringify(err.data.errors.token?.message)}`,
           isClosable: true,
@@ -79,45 +90,67 @@ export const ResetPasswordComponent: React.FC = () => {
       <form className={styles.loginForm} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.tittle}>{t.passwordRecovery.resetPassword}</div>
         <div>
-          <input {...register("password", {
-            required: true,
-            minLength: {
-              message: 'Password must be at least 10 symbols long',
-              value: 10
-            },
-            maxLength: {
-              message: 'Password must be less than 20 symbols long',
-              value: 20
-            },
-            pattern: {
-              message: 'Password must contain an underscore, at least one letter and at least one capital letter',
-              value: /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]).*/,
-            }
-          })}
-            className={styles.inputField} type="password" placeholder="New Password" />
-          <ErrorMessage errors={errors} name="password" render={({ message }) => <p>{message}</p>} />
+          <input
+            {...register('password', {
+              maxLength: {
+                message: 'Password must be less than 20 symbols long',
+                value: 20,
+              },
+              minLength: {
+                message: 'Password must be at least 10 symbols long',
+                value: 10,
+              },
+              pattern: {
+                message:
+                  'Password must contain an underscore, at least one letter and at least one capital letter',
+                value:
+                  /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]).*/,
+              },
+              required: true,
+            })}
+            className={styles.inputField}
+            placeholder={'New Password'}
+            type={'password'}
+          />
+          <ErrorMessage
+            errors={errors}
+            name={'password'}
+            render={({ message }) => <p>{message}</p>}
+          />
         </div>
         <div>
-          <input {...register("confirmedPassword", {
-            required: true,
-            minLength: {
-              message: 'Password must be at least 10 characters long',
-              value: 10
-            },
-            maxLength: {
-              message: 'Password must be less than 20 characters long',
-              value: 20
-            },
-            pattern: {
-              message: 'Password must contain an underscore, at least one letter and at least one capital letter',
-              value: /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]).*/,
-            }
-          })}
-            className={styles.inputField} type="password" placeholder="Confirm Password" />
-          <ErrorMessage errors={errors} name="confirmedPassword" render={({ message }) => <p>{message}</p>} />
+          <input
+            {...register('confirmedPassword', {
+              maxLength: {
+                message: 'Password must be less than 20 characters long',
+                value: 20,
+              },
+              minLength: {
+                message: 'Password must be at least 10 characters long',
+                value: 10,
+              },
+              pattern: {
+                message:
+                  'Password must contain an underscore, at least one letter and at least one capital letter',
+                value:
+                  /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]).*/,
+              },
+              required: true,
+            })}
+            className={styles.inputField}
+            placeholder={'Confirm Password'}
+            type={'password'}
+          />
+          <ErrorMessage
+            errors={errors}
+            name={'confirmedPassword'}
+            render={({ message }) => <p>{message}</p>}
+          />
         </div>
         <div>
-          <Button primary type={'submit'}>{t.passwordRecovery.createNewPassword}</Button>
+          <Button primary type={'submit'}>
+            {t.passwordRecovery.createNewPassword}
+          </Button>
         </div>
       </form>
     </Card>

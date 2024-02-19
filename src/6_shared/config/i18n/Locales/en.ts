@@ -8,6 +8,17 @@ export const en = {
     search: 'Search',
     statistics: 'Statistics',
   },
+  passwordRecovery: {
+    backToSignIn: 'Back to Sign In',
+    createNewPassword: 'Create New Password',
+    instructions: 'Enter your email and we will send you further instruction',
+    passwordRecovery: 'Password Recovery',
+    resendEmailInstructions:
+      'Looks like the verification link has expired. Not to worry, we can send the link again',
+    resendLink: 'Resend Link',
+    resetPassword: 'Reset Password',
+    sendLink: 'Send Link',
+  },
   signIn_SignUp: {
     dontHaveAccount: "Don't have an account yet?",
     forgotPassword: 'Forgot password?',
@@ -18,15 +29,5 @@ export const en = {
     signIn: 'Sign in',
     signUp: 'Sign up',
     singOut: 'Sign out',
-  },
-  passwordRecovery: {
-    passwordRecovery: 'Password Recovery',
-    instructions: 'Enter your email and we will send you further instruction',
-    sendLink: 'Send Link',
-    backToSignIn: 'Back to Sign In',
-    resetPassword: 'Reset Password',
-    createNewPassword: 'Create New Password',
-    resendEmailInstructions: 'Looks like the verification link has expired. Not to worry, we can send the link again',
-    resendLink: 'Resend Link',
   },
 }

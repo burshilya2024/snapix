@@ -1,5 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { IForgotPasswordForm, IResetPasswordForm, IResetPasswordRequest, IVerifyTokenRequest } from '../types'
+
+import {
+  IForgotPasswordForm,
+  IResetPasswordForm,
+  IResetPasswordRequest,
+  IVerifyTokenRequest,
+} from '../types'
 
 const BASE_URL = 'https://9art.ru/api/v1/auth'
 
@@ -33,4 +39,5 @@ export const PasswordRecovery_Api = createApi({
   reducerPath: 'PasswordRecovery_Api',
 })
 
-export const { usePasswordRecoveryMutation, useResetPasswordMutation, useVerifyTokenMutation } = PasswordRecovery_Api
+export const { usePasswordRecoveryMutation, useResetPasswordMutation, useVerifyTokenMutation } =
+  PasswordRecovery_Api
