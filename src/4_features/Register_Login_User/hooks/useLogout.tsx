@@ -6,7 +6,7 @@ export const useLogout = () => {
   const [logout] = useLogoutMutation()
   const toast = useToast()
   const logOut = async () => {
-    await logout('')
+    await logout()
       .unwrap()
       .then((res: any) => {
         signOut({ callbackUrl: '/' })
@@ -22,7 +22,7 @@ export const useLogout = () => {
           title: 'Oops!',
         })
       })
-    // signOut({ callbackUrl: '/' })
+    signOut({ callbackUrl: '/' })
   }
 
   return logOut
