@@ -135,7 +135,9 @@ export const SignUpComponent: React.FC<any> = () => {
         <div>{t.signIn_SignUp.haveAccount}</div>
         <div>
           <Link href={'/LogIn'}>
-            <Button outline>{t.signIn_SignUp.signIn}</Button>
+            <Button fullwidth outline>
+              {t.signIn_SignUp.signIn}
+            </Button>
           </Link>
         </div>
       </form>

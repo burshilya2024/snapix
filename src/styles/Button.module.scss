@@ -1,7 +1,6 @@
 .button {
   cursor: pointer;
 
-  width: 100%;
   padding: 10px 20px;
 
   font-size: 16px;
@@ -34,4 +33,7 @@
 .secondary {
   color: #333;
   background-color: #f6f6f6;
+}
+.fullwidth {
+  width: 100%;
 }

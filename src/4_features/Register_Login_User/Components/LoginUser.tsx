@@ -98,14 +98,14 @@ export const LoginComponents: React.FC = () => {
           <Link href={'/forgot-password'}>{t.signIn_SignUp.forgotPassword}</Link>
         </div>
         <div>
-          <Button primary type={'submit'}>
+          <Button fullwidth primary type={'submit'}>
             {t.signIn_SignUp.signIn}
           </Button>
         </div>
         <div> {t.signIn_SignUp.dontHaveAccount}</div>
         <div>
           <Link href={'/SignUp'}>
-            <Button outline type={'submit'}>
+            <Button fullwidth outline type={'submit'}>
               {t.signIn_SignUp.signUp}
             </Button>
           </Link>
