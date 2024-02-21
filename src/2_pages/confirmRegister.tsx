@@ -13,7 +13,7 @@ export const ConfirmRegister: React.FC<ConfirmRegisterPageProps> = () => {
     const confirmRegistration = async (token: string | string[]) => {
       try {
         // Отправляем POST запрос на сервер с токеном для подтверждения регистрации
-        const response = await axios.post('https://9art.ru/api/v1/auth/registery/confirm', {
+        const response = await axios.post('https://9art.ru/api/v1/auth/register/confirm', {
           token: token,
         })
 
