@@ -17,9 +17,9 @@ import { usePasswordRecoveryMutation } from '../api/PasswordRecovery_Api'
 import { IErrorResponse, IForgotPasswordForm } from '../types'
 
 export const ForgotPasswordComponent = () => {
-  const { t }: any = useTranslation()
+  const { t } = useTranslation()
   const toast = useToast()
-  const session = useSession()
+
   const router = useRouter()
   const [captcha, setCaptcha] = useState<null | string>(null)
 
@@ -32,10 +32,6 @@ export const ForgotPasswordComponent = () => {
   } = useForm<IForgotPasswordForm>({
     mode: 'onBlur',
   })
-
-  if (session.status === 'authenticated') {
-    router.push('/MyProfile')
-  }
 
   const onSubmit = async (email: IForgotPasswordForm) => {
     try {

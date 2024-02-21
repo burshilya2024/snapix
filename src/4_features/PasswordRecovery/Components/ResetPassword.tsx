@@ -7,7 +7,6 @@ import Button from '@/6_shared/ui/ui-button'
 import { useToast } from '@chakra-ui/react'
 import { ErrorMessage } from '@hookform/error-message'
 import { useRouter } from 'next/router'
-import { useSession } from 'next-auth/react'
 
 import styles from '@/styles/ResetPassword.module.scss'
 
@@ -16,9 +15,9 @@ import { IErrorResponse, IResetPasswordForm } from '../types'
 
 export const ResetPasswordComponent: React.FC = () => {
   const toast = useToast()
-  const { t }: any = useTranslation()
+  const { t } = useTranslation()
   const router = useRouter()
-  const session = useSession()
+
   const { token } = router.query
   const [resetPassword, {}] = useResetPasswordMutation()
   const [verifyToken, {}] = useVerifyTokenMutation()
@@ -30,10 +29,6 @@ export const ResetPasswordComponent: React.FC = () => {
   } = useForm<IResetPasswordForm>({
     mode: 'onBlur',
   })
-
-  if (session.status === 'authenticated') {
-    router.push('/MyProfile')
-  }
 
   const checkTokenIsValid = async (token: string) => {
     try {

@@ -5,7 +5,6 @@ import Card from '@/6_shared/ui/Card'
 import Button from '@/6_shared/ui/ui-button'
 import { useToast } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { useSession } from 'next-auth/react'
 
 import styles from '@/styles/ResetPassword.module.scss'
 
@@ -13,15 +12,11 @@ import { usePasswordRecoveryMutation } from '../api/PasswordRecovery_Api'
 
 export const ResendEmailComponent = () => {
   const router = useRouter()
-  const session = useSession()
+
   const toast = useToast()
-  const { t }: any = useTranslation()
+  const { t } = useTranslation()
 
   const [passwordRecovery, {}] = usePasswordRecoveryMutation()
-
-  if (session.status === 'authenticated') {
-    router.push('/MyProfile')
-  }
 
   const onSubmit: FormEventHandler<HTMLElement> = async e => {
     e.preventDefault()
