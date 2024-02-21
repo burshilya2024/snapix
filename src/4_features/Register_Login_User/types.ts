@@ -1,6 +1,6 @@
 export interface IResponseRegisterApi {
-  accessToken: string
   access_token?: string
+  accessToken: string
   message: string
 }
 
