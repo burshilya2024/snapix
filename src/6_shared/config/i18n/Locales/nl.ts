@@ -8,6 +8,17 @@ export const nl = {
     search: 'Zoeken',
     statistics: 'Statistieken',
   },
+  passwordRecovery: {
+    backToSignIn: 'Back to Sign In',
+    createNewPassword: 'Create New Password',
+    instructions: 'Enter your email and we will send you further instruction',
+    passwordRecovery: 'Password Recovery',
+    resendEmailInstructions:
+      'Looks like the verification link has expired. Not to worry, we can send the link again',
+    resendLink: 'Resend Link',
+    resetPassword: 'Reset Password',
+    sendLink: 'Send Link',
+  },
   signIn_SignUp: {
     dontHaveAccount: 'Heb je nog geen account?',
     forgotPassword: 'Wachtwoord vergeten?',

@@ -8,6 +8,17 @@ export const ru = {
     search: 'Поиск',
     statistics: 'Статистика',
   },
+  passwordRecovery: {
+    backToSignIn: 'Назад',
+    createNewPassword: 'Создать Пароль',
+    instructions: 'Введите свой email адрес и мы отправим Вам ссылку для восстановления пароля',
+    passwordRecovery: 'Восстановление Пароля',
+    resendEmailInstructions:
+      'Похоже, что время перехода по ссылке истекло. Не волнуйтесь, мы можем отправить Вам новую ссылку',
+    resendLink: 'Отправить Еще Раз',
+    resetPassword: 'Создание Нового Пароля',
+    sendLink: 'Отправить',
+  },
   signIn_SignUp: {
     dontHaveAccount: 'Нет аккаунта?',
     forgotPassword: 'Забыли пароль?',

@@ -1,7 +1,8 @@
 import React, { ReactNode } from 'react'
 
 import { Header, NavBar } from '@/3_widgets'
-import { useTranslation } from '@/6_shared/config/i18n/hook/useTranslation'
+import { useTranslation } from '@/6_shared/config/i18n/hooks/useTranslation'
+import { useLocalStorage } from '@/6_shared/lib/hooks/useLocalStorage'
 import CreateIcon from '@public/assets/icons/create.svg'
 import FavoritesIcon from '@public/assets/icons/favorite.svg'
 import HomeIcon from '@public/assets/icons/home-light.svg'
@@ -18,7 +19,7 @@ interface LayoutProps {
 }
 
 export default function Layout({ children }: LayoutProps) {
-  const session = useSession()
+  const [isAuth, setIsAuth] = useLocalStorage<boolean>('isAuthSnapix', false)
   const { t } = useTranslation()
   const navigate = [
     { href: '/', icon: <HomeIcon />, label: t.navBar.home },
@@ -36,7 +37,7 @@ export default function Layout({ children }: LayoutProps) {
         <Header />
       </header>
       <div className={` ${styles.LayoutWrapper_navBar_chiildren}`}>
-        {session.data ? (
+        {isAuth ? (
           <nav className={`scrollable_container ${styles.Layout_navbar}`}>
             <NavBar navLinks={navigate} />
           </nav>

@@ -1,8 +1,8 @@
 import React, { FormEventHandler, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { IUserData } from '@/4_features/Registery_Login_User/types'
-import { useTranslation } from '@/6_shared/config/i18n/hook/useTranslation'
+import { IUserData } from '@/4_features/Register_Login_User/types'
+import { useTranslation } from '@/6_shared/config/i18n/hooks/useTranslation'
 import Button from '@/6_shared/ui/ui-button'
 import { Spinner, useToast } from '@chakra-ui/react'
 import Link from 'next/link'
@@ -11,18 +11,14 @@ import { signIn, useSession } from 'next-auth/react'
 
 import styles from '@/styles/LogIn.module.scss'
 
+import { useLoginMutation, useLogoutMutation } from '../api/register_Login_Api'
+
 export const LoginComponents: React.FC = () => {
-  const { data: session } = useSession()
   const router = useRouter()
   const { t } = useTranslation()
   const toast = useToast()
-
-  useEffect(() => {
-    if (session?.user?.name) {
-      router.push('/MyProfile')
-    }
-  })
-
+  const [Login] = useLoginMutation()
+  const [LogOut] = useLogoutMutation()
   const {
     formState: { errors, isSubmitting },
     getValues,
@@ -34,31 +30,27 @@ export const LoginComponents: React.FC = () => {
   })
 
   const handleSubmitLogin = async (data: IUserData) => {
-    await signIn('credentials', {
-      email: data.email,
-      password: data.password,
-      redirect: false,
-    }).then(callback => {
-      if (callback?.error) {
-        toast({
-          description: `Invalid email or password`,
-          duration: 9000,
-          isClosable: true,
-          status: 'error',
-          title: 'Ooops!',
-        })
-      }
+    const resp = await Login(data)
 
-      if (callback?.ok && !callback?.error) {
-        router.push('/MyProfile')
-        toast({
-          description: `Welcome!`,
-          duration: 3000,
-          isClosable: true,
-          status: 'success',
-        })
-      }
-    })
+    console.log(resp)
+
+    try {
+      router.push('/MyProfile')
+      toast({
+        description: 'welcome',
+        duration: 9000,
+        isClosable: true,
+        status: 'error',
+        title: 'Ooops!',
+      })
+    } catch (error: any) {
+      toast({
+        description: error.message,
+        duration: 3000,
+        isClosable: true,
+        status: 'success',
+      })
+    }
   }
 
   return (
@@ -111,6 +103,7 @@ export const LoginComponents: React.FC = () => {
           </Link>
         </div>
       </form>
+      <Button onClick={() => LogOut()}>LogOut</Button>
     </div>
   )
 }

@@ -1,37 +1,59 @@
 import { useState } from 'react'
-// eslint-disable-next-line import/no-named-as-default
 import ReCAPTCHA from 'react-google-recaptcha'
-import { FieldValues, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 
+import { useTranslation } from '@/6_shared/config/i18n/hooks/useTranslation'
 import Card from '@/6_shared/ui/Card'
 import Button from '@/6_shared/ui/ui-button'
+import { useToast } from '@chakra-ui/react'
+import { ErrorMessage } from '@hookform/error-message'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useSession } from 'next-auth/react'
 
 import styles from '@/styles/ResetPassword.module.scss'
 
 import { usePasswordRecoveryMutation } from '../api/PasswordRecovery_Api'
+import { IErrorResponse, IForgotPasswordForm } from '../types'
 
-type IFormInput = {
-  email: string
-}
+export const ForgotPasswordComponent = () => {
+  const { t } = useTranslation()
+  const toast = useToast()
 
-export const ForgotPasswordComponents = () => {
-  const { handleSubmit, register, reset } = useForm<IFormInput>()
+  const router = useRouter()
   const [captcha, setCaptcha] = useState<null | string>(null)
-  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,20}$/g
 
-  const [passwordRecovery, { error, isLoading }] = usePasswordRecoveryMutation()
+  const [passwordRecovery, {}] = usePasswordRecoveryMutation()
+  const {
+    formState: { errors },
+    handleSubmit,
+    register,
+    reset,
+  } = useForm<IForgotPasswordForm>({
+    mode: 'onBlur',
+  })
 
-  const onSubmit = async (email: FieldValues) => {
+  const onSubmit = async (email: IForgotPasswordForm) => {
     try {
-      const res = await passwordRecovery(email)
-
-      if (!error) {
-        alert(`We have sent a link to ${email.email}. Follow the link to create new password.`)
-      }
+      await passwordRecovery(email).unwrap()
+      toast({
+        description: `We have sent a link to ${email.email}. Follow the link to create new password.`,
+        duration: 9000,
+        isClosable: true,
+        status: 'success',
+        title: 'Successfully sent!',
+      })
+      localStorage.setItem('forgot_password_email', JSON.stringify(email))
     } catch (error) {
-      alert(JSON.stringify(error))
-      console.error(error)
+      const err = error as IErrorResponse
+
+      toast({
+        description: `${JSON.stringify(err.data.errors.email?.message)}`,
+        duration: 9000,
+        isClosable: true,
+        status: 'error',
+        title: 'Ooops!',
+      })
     } finally {
       reset()
     }
@@ -40,16 +62,23 @@ export const ForgotPasswordComponents = () => {
   return (
     <Card>
       <form className={styles.loginForm} onSubmit={handleSubmit(onSubmit)}>
-        <div className={styles.tittle}>Forgot Password</div>
+        <div className={styles.tittle}>{t.passwordRecovery.passwordRecovery}</div>
         <div>
           <input
-            {...register('email', { pattern: emailRegex, required: true })}
+            {...register('email', {
+              pattern: {
+                message: 'Must be a valid email',
+                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,20}$/g,
+              },
+              required: 'Please enter Your email adress',
+            })}
             className={styles.inputField}
             placeholder={'Email'}
             type={'email'}
           />
+          <ErrorMessage errors={errors} name={'email'} render={({ message }) => <p>{message}</p>} />
         </div>
-        <div>Enter your email and we will send you further instruction</div>
+        <div>{t.passwordRecovery.instructions}</div>
         <div>
           <ReCAPTCHA
             onChange={val => setCaptcha(val)}
@@ -58,13 +87,13 @@ export const ForgotPasswordComponents = () => {
         </div>
         <div>
           <Button disabled={!captcha} primary type={'submit'}>
-            Send Link
+            {t.passwordRecovery.sendLink}
           </Button>
         </div>
         <div>
           <Link href={'/LogIn'}>
             <Button outline type={'submit'}>
-              Back to Sign In
+              {t.passwordRecovery.backToSignIn}
             </Button>
           </Link>
         </div>

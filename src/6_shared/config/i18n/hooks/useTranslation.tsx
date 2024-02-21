@@ -1,4 +1,4 @@
-import { useLocalesData } from '@/6_shared/config/i18n/hook/useLocalesData'
+import { useLocalesData } from '@/6_shared/config/i18n/hooks/useLocalesData'
 import { useRouter } from 'next/router'
 
 import { en } from '../Locales/en'
