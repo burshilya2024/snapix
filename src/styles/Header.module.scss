@@ -3,18 +3,27 @@
   align-items: center;
   justify-content: space-between;
 
-  padding: 1rem 3rem 1rem 0.8rem;
+  height: 60px;
+  padding: 12px 65px 12px 60px;
 
   border-bottom: 1px solid #3d3d3d;
 
-  @media screen and (width <= 580px) {
-    padding: 0.8rem;
+  @media screen and (width <= 992px) {
+    padding: 12px 24px;
+  }
+
+  @media screen and (width <= 768px) {
+    padding: 12px 15px;
   }
 }
 
 .logo {
   cursor: pointer;
-  font-size: 25px;
+  font-size: 26px;
+
+  @media screen and (width <= 768px) {
+    font-size: 20px;
+  }
 }
 
 .header_right {
@@ -22,6 +31,25 @@
   gap: 25px;
   align-items: center;
   justify-content: space-between;
+
+  &_icon {
+    margin-right: 25px;
+  }
+
+  &_mobile {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media screen and (width <= 768px) {
+    gap: 10px;
+  }
+}
+
+.LangSelect {
+  margin-right: 10px;
 }
 
 .BurgerWrapper {
@@ -59,6 +87,16 @@
 
     &:hover {
       background: red;
+    }
+  }
+}
+
+body[data-theme='dark'] {
+  .header_right_icon {
+    svg {
+      path {
+        fill: white;
+      }
     }
   }
 }

@@ -1,3 +1,54 @@
-.select {
-  padding-top: 2%;
+@import '@/styles/variables.module';
+
+.css-svw1ei-control {
+  background-color: green !important;
+
+  // Другие стили для control
+}
+
+.SingleValue {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-right: 35px;
+
+  &_img {
+    width: 20px;
+    height: 20px;
+  }
+
+  @media screen and (width <= 768px) {
+    margin-right: 0;
+  }
+}
+
+.Option {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+
+  &_img {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+body[data-theme='dark'] {
+  .Select {
+    [class$='-control'] {
+      background-color: $dark700;
+    }
+  }
+
+  .SingleValue {
+    span {
+      color: #fff;
+    }
+
+    .Option {
+      [class$='-option'] {
+        background-color: $dark700;
+      }
+    }
+  }
 }

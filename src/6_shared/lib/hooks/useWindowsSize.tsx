@@ -6,7 +6,7 @@ const useWindowSize = () => {
 
   useEffect(() => {
     const checkWindowSize = () => {
-      setIsMobile(window.innerWidth <= 600)
+      setIsMobile(window.innerWidth <= 768)
     }
 
     // Выполняем проверку при монтировании компонента

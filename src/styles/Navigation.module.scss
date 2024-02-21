@@ -1,3 +1,5 @@
+@import './variables.module';
+
 .activeIcon * {
   fill: white !important;
 
@@ -9,42 +11,62 @@
 .Navbar_list {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 30px;
+  margin-top: 30px;
 
-  margin-left: 20px;
-  padding: 0 20px 0 10px;
+  > *:nth-last-child(2) {
+    margin-top: 50px;
 
-  > *:last-child {
-    margin-top: 30px;
-
-    @media (width <= 599px) {
+    @media (width <= 768px) {
       margin-top: 0;
     }
   }
 
-  @media (width <= 599px) {
-    flex-direction: row;
-    gap: 0;
+  > *:last-child {
+    margin-top: 100px;
+
+    @media (width <= 768px) {
+      margin-top: 0;
+    }
+  }
+
+  @media (width <= 768px) {
+    flex-flow: row wrap;
+    column-gap: 40px;
+    align-items: center;
+    justify-content: center;
 
     width: 100%;
-    margin-left: 0;
-    padding: 0;
+    margin: 0;
   }
 }
 
 .Navbar_list_link {
+  transform-origin: var(--popper-transform-origin) !important;
+  transform: none !important;
+
   display: flex;
-  gap: 7px;
+  gap: 15px;
   align-items: center;
 
-  width: 100%;
-  padding: 10px;
-
+  visibility: visible !important;
+  opacity: 1 !important;
   border-radius: 12px;
+
+  span {
+    transform-origin: var(--popper-transform-origin) !important;
+    transform: none !important;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
 
   &:hover {
     // color: white;
-    background: rgb(82 82 82 / 36.8%);
+    // background: rgb(82 82 82 / 36.8%);
   }
 
   @media (width <= 599px) {
@@ -56,9 +78,20 @@
 }
 
 .active {
-  font-weight: 800;
-  color: rgb(253 253 253) !important;
-  background: rgb(49 49 49);
+  svg {
+    path {
+      fill: $accent500 !important;
+    }
+  }
+
+  span {
+    font-weight: 700;
+    color: $accent500;
+
+    svg {
+      fill: $accent500 !important;
+    }
+  }
 
   @media (width <= 676px) {
     background: none !important;
@@ -67,7 +100,11 @@
 
 .LogOutLink {
   display: flex;
-  gap: 5px;
+  gap: 15px;
   align-items: center;
-  margin-left: 10px;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  // margin-left: 10px;
 }

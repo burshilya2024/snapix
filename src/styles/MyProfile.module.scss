@@ -1,0 +1,153 @@
+@import './variables.module';
+
+.Profile {
+  overflow-x: hidden;
+
+  &_container {
+    display: flex;
+    gap: 38px;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 55px;
+
+    @media screen and (width <= 992px) {
+      flex-direction: column;
+    }
+
+    @media screen and (width <= 768px) {
+      align-items: flex-start;
+    }
+  }
+
+  &_photo {
+    img {
+      border-radius: 50% / 50%;
+    }
+
+    @media screen and (width >= 992px) {
+      min-width: 204px;
+    }
+  }
+
+  &_info {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+
+    &_title {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    .settings {
+      max-width: 100%;
+      padding: 6px 24px;
+      background: $dark300;
+      border-radius: 2px;
+
+      @media screen and (width <= 768px) {
+        display: none;
+      }
+    }
+
+    &_data {
+      display: flex;
+      flex-direction: row;
+      gap: 100px;
+
+      .following,
+      .followers,
+      .publications {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 24px;
+
+        &_number {
+          font-weight: 700;
+        }
+      }
+    }
+
+    &_text {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 24px;
+    }
+
+    @media screen and (width <= 992px) {
+      align-items: center;
+      justify-content: center;
+
+      &_title {
+        gap: 75px;
+      }
+    }
+  }
+}
+
+.Photos {
+  &_container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+
+    @media screen and (width >= 1600px) {
+      // gap: 25px 55px;
+      justify-content: flex-start;
+    }
+  }
+
+  .photo {
+    &_img {
+      width: 224px;
+      height: 238px;
+    }
+  }
+}
+
+body[data-theme='light'] {
+  .settings {
+    background-color: transparent;
+    border: 1px solid $dark300;
+  }
+}
+
+.Profile_mobile {
+  display: flex;
+  flex-direction: column;
+
+  .photo_info_container {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    justify-content: flex-start;
+
+    .Profile_info_data {
+      flex-wrap: wrap;
+      gap: 35px;
+
+      .following,
+      .followers,
+      .publications {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+
+  &_title {
+    display: flex;
+    justify-content: start;
+    margin-top: 10px;
+  }
+
+  &_text {
+    margin-top: 15px;
+  }
+}

@@ -38,7 +38,8 @@ export const NavBar = ({ navLinks }: Props) => {
             key={link.label}
           >
             <span className={`${'svg'} ${isActive && styles.activeIcon} `}>{link.icon}</span>
-            {!isMobile && link.label}
+
+            {!isMobile && <span>{link.label}</span>}
           </Link>
         )
       })}

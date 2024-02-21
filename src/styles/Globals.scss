@@ -38,6 +38,11 @@ body {
   a {
     color: $text-color-light;
   }
+
+  .link {
+    color: $accent500;
+    text-decoration: underline;
+  }
 }
 
 body[data-theme='dark'] {
@@ -58,6 +63,11 @@ body[data-theme='dark'] {
 
   a {
     color: $text-color-dark;
+  }
+
+  .link {
+    color: $accent500;
+    text-decoration: underline;
   }
 }
 
@@ -162,11 +172,13 @@ body[data-theme='dark'] {
   --font-size-xs: 0.75rem;
   --font-size-s: 0.875rem;
   --font-size-m: 1rem;
+  --font-size-m_h2: 1.13rem;
   --font-size-l: 1.125rem;
   --font-size-xl: 1.25rem;
   --font-size-xxl: 1.625rem;
 
   // font weights
   --font-weight-regular: 400;
+  --font-weight-bolder: 600;
   --font-weight-bold: 700;
 }

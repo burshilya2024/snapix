@@ -1,9 +1,43 @@
-.BurgerMenu * {
+@import '@/styles/variables.module';
+
+.Menu * {
   cursor: pointer;
-  fill: rgb(97 97 97) !important;
+
+  svg {
+    &:hover {
+      path {
+        fill: $accent500;
+      }
+    }
+  }
+}
+
+.MenuList {
+  padding: 0 12px;
+}
+
+body[data-theme='dark'] {
+  .MenuList {
+    background-color: $dark100 !important;
+  }
+
+  .MenuItem {
+    background-color: $dark100 !important;
+    transition: all 0.3s ease-in-out !important;
+
+    &:hover {
+      background-color: $dark300 !important;
+    }
+  }
 }
 
 .additionalFeatures {
-  padding-right: 5%;
-  padding-left: 5%;
+  &_item {
+    margin: 10px 0;
+
+    &:last-child {
+      margin-top: 30px;
+      text-align: center;
+    }
+  }
 }

@@ -8,15 +8,15 @@
 }
 
 .h1 {
-  @include typography(var(--font-size-xxl), var(--line-height-xl), var(--font-weight-bold));
+  @include typography(var(--font-size-xl), var(--line-height-l), var(--font-weight-bold));
 }
 
 .h2 {
-  @include typography(var(--font-size-xl), var(--line-height-m), var(--font-weight-bold));
+  @include typography(var(--font-size-m_h2), var(--line-height-m), var(--font-weight-bold));
 }
 
 .h3 {
-  @include typography(var(--font-size-l), var(--line-height-m), var(--font-weight-bold));
+  @include typography(var(--font-size-m), var(--line-height-m), var(--font-weight-bolder));
 }
 
 .subtitle1 {
