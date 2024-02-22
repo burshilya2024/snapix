@@ -1,27 +1,27 @@
-import React, { FormEventHandler, useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
+import React, { useState } from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { IUserData } from '@/4_features/Register_Login_User/types'
 import { useTranslation } from '@/6_shared/config/i18n/hooks/useTranslation'
+import { MyCustomSpinner } from '@/6_shared/ui/CustomSpinner'
 import Button from '@/6_shared/ui/ui-button'
 import { Spinner, useToast } from '@chakra-ui/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { signIn, useSession } from 'next-auth/react'
 
 import styles from '@/styles/LogIn.module.scss'
 
-import { useLoginMutation, useLogoutMutation } from '../api/register_Login_Api'
+import { useLoginMutation } from '../api/register_Login_Api'
+import { ErrorMessage, SuccessResponse } from './RegisterUser'
 
 export const LoginComponents: React.FC = () => {
+  const [SuccessLogin, setSuccessLogin] = useState<boolean>(false)
   const router = useRouter()
   const { t } = useTranslation()
   const toast = useToast()
-  const [Login] = useLoginMutation()
-  const [LogOut] = useLogoutMutation()
+  const [Login, { isLoading: isLoadingLogin }] = useLoginMutation()
   const {
-    formState: { errors, isSubmitting },
-    getValues,
+    formState: { errors, isValid },
     handleSubmit,
     register,
     reset,
@@ -29,28 +29,32 @@ export const LoginComponents: React.FC = () => {
     mode: 'onBlur',
   })
 
-  const handleSubmitLogin = async (data: IUserData) => {
-    const resp = await Login(data)
-
-    console.log(resp)
-
-    try {
-      router.push('/MyProfile')
-      toast({
-        description: 'welcome',
-        duration: 9000,
-        isClosable: true,
-        status: 'error',
-        title: 'Ooops!',
+  const handleSubmitLogin: SubmitHandler<any> = async (data: FormData) => {
+    await Login(data)
+      .unwrap()
+      .then((res: SuccessResponse) => {
+        toast({
+          description: res.message || 'successful registration',
+          duration: 9000,
+          isClosable: true,
+          status: 'success',
+          title: 'Successful!',
+        })
+        reset() // Сброс формы после успешной регистрации
+        router.push('/MyProfile')
+        setSuccessLogin(true)
       })
-    } catch (error: any) {
-      toast({
-        description: error.message,
-        duration: 3000,
-        isClosable: true,
-        status: 'success',
+      .catch((error: ErrorMessage) => {
+        const errorMessage = error?.data.errors.message
+
+        toast({
+          description: errorMessage,
+          duration: 9000,
+          isClosable: true,
+          status: 'error',
+          title: 'Ooops!',
+        })
       })
-    }
   }
 
   return (
@@ -90,9 +94,13 @@ export const LoginComponents: React.FC = () => {
           <Link href={'/forgot-password'}>{t.signIn_SignUp.forgotPassword}</Link>
         </div>
         <div>
-          <Button primary type={'submit'}>
-            {t.signIn_SignUp.signIn}
-          </Button>
+          {isLoadingLogin ? (
+            <MyCustomSpinner />
+          ) : (
+            <Button disabled={!isValid} primary type={'submit'}>
+              {t.signIn_SignUp.signIn}
+            </Button>
+          )}
         </div>
         <div> {t.signIn_SignUp.dontHaveAccount}</div>
         <div>
@@ -103,7 +111,6 @@ export const LoginComponents: React.FC = () => {
           </Link>
         </div>
       </form>
-      <Button onClick={() => LogOut()}>LogOut</Button>
     </div>
   )
 }

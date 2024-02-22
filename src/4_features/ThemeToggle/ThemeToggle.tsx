@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-import { useLocalStorage } from '../../6_shared/lib/hooks/useLocalStorage'
+import { useLocalStorage } from '@/6_shared/lib/hooks/useLocalStorage'
 
 const ThemeToggle: React.FC = () => {
   // Используем хук useLocalStorage для сохранения значения темы в localStorage
@@ -26,6 +26,7 @@ const ThemeToggle: React.FC = () => {
       >
         <input
           checked={theme === 'light'}
+          className={'switch_input'}
           id={'themeToggleCheckbox'}
           onChange={handleToggleTheme}
           type={'checkbox'}

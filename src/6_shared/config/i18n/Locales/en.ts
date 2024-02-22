@@ -1,4 +1,10 @@
-export const en = {
+import { LocaleType } from '@/6_shared/config/i18n/Locales/ru'
+
+export const en: LocaleType = {
+  confrirm_Password: {
+    confirmed: 'Your email has been confirmed',
+    congratulations: 'Congratulations!',
+  },
   navBar: {
     create: 'Create',
     favorites: 'Favorites',
