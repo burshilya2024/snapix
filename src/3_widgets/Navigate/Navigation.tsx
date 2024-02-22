@@ -1,10 +1,12 @@
+import { useState } from 'react'
+
 import { useLogoutMutation } from '@/4_features/Register_Login_User/api/register_Login_Api'
-import { useLogout } from '@/4_features/Register_Login_User/hooks/useLogout'
 import { useTranslation } from '@/6_shared/config/i18n/hooks/useTranslation'
 import useWindowSize from '@/6_shared/lib/hooks/useWindowsSize'
 import LogInIcon from '@public/assets/icons/log-out.svg'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useRouter } from 'next/router'
 
 import styles from '@/styles/Navigation.module.scss'
 
@@ -18,10 +20,28 @@ type Props = {
 }
 // !вынести логику в фичи
 export const NavBar = ({ navLinks }: Props) => {
+  const [isLoggedOut, setIsLoggedOut] = useState(false)
   const pathname = usePathname()
   const isMobile = useWindowSize()
   const { t } = useTranslation()
   const [Logout] = useLogoutMutation()
+  const router = useRouter()
+
+  const logoutSubmit = async () => {
+    try {
+      await Logout()
+      setIsLoggedOut(true)
+      alert('вы вышли из системы')
+      router.push('/')
+    } catch (error) {
+      console.error('Ошибка при выходе из системы:', error)
+    }
+  }
+
+  // Перерендериваем компонент, если пользователь вышел из системы
+  if (isLoggedOut) {
+    return null
+  }
 
   return (
     <div className={styles.Navbar_list}>
@@ -45,10 +65,11 @@ export const NavBar = ({ navLinks }: Props) => {
         )
       })}
       {!isMobile && (
-        <Link className={styles.LogOutLink} href={'#'} onClick={() => Logout()}>
+        <Link className={styles.LogOutLink} href={'#'} onClick={logoutSubmit}>
           <span className={'svg'}>
             <LogInIcon />
           </span>
+
           <span>{t.signIn_SignUp.logout}</span>
         </Link>
       )}

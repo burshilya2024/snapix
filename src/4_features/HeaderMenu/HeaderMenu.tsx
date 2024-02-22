@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import LangSelect from '@/4_features/Lang/LangSelect'
 import { useLogout } from '@/4_features/Register_Login_User/hooks/useLogout'
 import ThemeToggle from '@/4_features/ThemeToggle/ThemeToggle'
@@ -18,12 +20,18 @@ import { useLogoutMutation } from '../Register_Login_User/api/register_Login_Api
 export const HeaderMenu = () => {
   const { t } = useTranslation()
   const [Logout] = useLogoutMutation()
+  const [isLoggedOut, setIsLoggedOut] = useState(false)
   const router = useRouter()
 
-  async function LogSubmit() {
-    await Logout()
-    alert('вы вышли из аккаунтв')
-    router.push('/')
+  const logoutSubmit = async () => {
+    try {
+      await Logout()
+      setIsLoggedOut(true)
+      alert('вы вышли из системы')
+      router.push('/')
+    } catch (error) {
+      console.error('Ошибка при выходе из системы:', error)
+    }
   }
 
   return (
@@ -35,7 +43,7 @@ export const HeaderMenu = () => {
         <MenuItem icon={<ProfileSettings />}>Settings</MenuItem>
         <MenuItem icon={<Statistics />}>{t.navBar.statistics}</MenuItem>
         <MenuItem icon={<Favorite />}>{t.navBar.favorites}</MenuItem>
-        <Link href={''} onClick={LogSubmit}>
+        <Link href={''} onClick={logoutSubmit}>
           <MenuItem icon={<LogOut />}>{t.signIn_SignUp.logout}</MenuItem>
         </Link>
         <div className={styles.additionalFeatures}>

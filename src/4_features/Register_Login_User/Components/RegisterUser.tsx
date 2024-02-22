@@ -16,10 +16,10 @@ type FormData = {
   password: string
   username: string
 }
-type SuccessResponse = {
+export type SuccessResponse = {
   message: string
 }
-type ErrorMessage = {
+export type ErrorMessage = {
   data: {
     errors: {
       message: string

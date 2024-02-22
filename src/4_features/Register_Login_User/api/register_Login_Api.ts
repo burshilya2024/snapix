@@ -53,22 +53,11 @@ export const Register_Login_Api = createApi({
         url: '/logout',
       }),
     }),
-    refresh: builder.mutation<any, any>({
-      query: ({ access_token, body }) => ({
-        body,
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
+    refresh: builder.mutation<void, void>({
+      query: () => ({
         method: 'POST',
-        url: '/refresh',
+        url: '/refresh-token',
       }),
-      // transformResponse: (response: IResponseRegisterApi) => {
-      //   localStorage.setItem('access_token', response.access_token || '')
-      //   localStorage.setItem('refresh_token', response.refresh_token || '')
-      //   localStorage.setItem('isAuth', 'true')
-
-      //   return response
-      // },
     }),
     register: builder.mutation<RegistrationResponse, RegistrationData>({
       query: body => ({
@@ -81,4 +70,5 @@ export const Register_Login_Api = createApi({
   reducerPath: 'Register_Login_Api',
 })
 
-export const { useLoginMutation, useLogoutMutation, useRegisterMutation } = Register_Login_Api
+export const { useLoginMutation, useLogoutMutation, useRefreshMutation, useRegisterMutation } =
+  Register_Login_Api
