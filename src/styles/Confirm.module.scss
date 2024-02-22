@@ -1,0 +1,15 @@
+.container {
+  max-width: 80%;
+  height: 80%;
+  margin: -35px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.textContainer {
+  margin: 20px auto;
+}
+.buttonContainer {
+  margin: 20px auto;
+  width: 20%;
+}

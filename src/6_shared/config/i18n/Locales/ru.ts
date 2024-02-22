@@ -1,4 +1,8 @@
 export const ru = {
+  confrirm_Password: {
+    confirmed: 'Ваш Email подтверждён',
+    congratulations: 'Поздравляем!',
+  },
   navBar: {
     create: 'Создать',
     favorites: 'Избранное',

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 
+import { ConfirmRegistrComponent } from '@/5_entites/confirm-register/confirm-register'
 import axios from 'axios'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 interface ConfirmRegisterPageProps {}
 
@@ -22,7 +22,6 @@ export const ConfirmRegister: React.FC<ConfirmRegisterPageProps> = () => {
         console.error('Error while confirming registration:', error)
       }
     }
-
     // Получаем токен из параметров URL-адреса
     const token = router.query.token
 
@@ -31,16 +30,16 @@ export const ConfirmRegister: React.FC<ConfirmRegisterPageProps> = () => {
     // Проверяем, есть ли токен в URL-адресе
     if (token) {
       // Вызываем функцию для подтверждения регистрации с полученным токеном
-      confirmRegistration(token)
+      setTimeout(() => {
+        // check in network how work this post request
+        confirmRegistration(token)
+      }, 5000)
     }
   }, [router.query.token])
 
   return (
     <div>
-      <h1>Confirmation Page</h1>
-      <h3>Вы успешно зарегистрировались</h3>
-      <h2>вы можете перейти на страницу вашего профиля</h2>
-      <Link href={'/MyProfile'}>MyProfile</Link>
+      <ConfirmRegistrComponent />
     </div>
   )
 }
