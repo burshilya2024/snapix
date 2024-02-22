@@ -38,3 +38,27 @@
   font-size: large;
   font-weight: 800;
 }
+
+.inputSubmit {
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+  height: 50px;
+
+  color: white;
+
+  background: #397df6;
+
+  &::placeholder {
+    color: white;
+    text-indent: 140px;
+  }
+}
+
+.inputSubmit:disabled {
+  cursor: not-allowed;
+  background-color: gray;
+}

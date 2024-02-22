@@ -1,7 +1,7 @@
 .activeIcon * {
   fill: white !important;
 
-  @media (width <= 676px) {
+  @media (width <= 599px) {
     fill: rgb(14 155 255) !important;
   }
 }
@@ -60,7 +60,7 @@
   color: rgb(253 253 253) !important;
   background: rgb(49 49 49);
 
-  @media (width <= 676px) {
+  @media (width <= 599px) {
     background: none !important;
   }
 }

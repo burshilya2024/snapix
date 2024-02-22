@@ -4,7 +4,7 @@ export function useLocalStorage<T>(key: string, initialValue: (() => T) | T) {
   const isServer = typeof window === 'undefined'
   const [value, setValue] = useState<T>(() => {
     if (!isServer) {
-      const jsonValue = localStorage.getItem(key)
+      const jsonValue = localStorage.getItem(key) || ''
 
       if (jsonValue == null) {
         if (typeof initialValue === 'function') {

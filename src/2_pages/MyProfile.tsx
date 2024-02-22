@@ -1,16 +1,48 @@
-import { useSession } from 'next-auth/react'
+import { useEffect, useState } from 'react'
+
+import { JwtPayload, jwtDecode } from 'jwt-decode'
+
+interface User {
+  email: string
+  id: number
+  name: string
+}
 
 export function MyProfile() {
-  const session = useSession()
-  const img = session.data?.user?.image
+  const [user, setUser] = useState<User | null>(null)
+
+  useEffect(() => {
+    const accessTokenString = localStorage.getItem('accessTokenSnapix') || ''
+
+    if (!accessTokenString) {
+      // Обработка случая, когда токен не найден в локальном хранилище
+      console.error('No access token found!')
+
+      return
+    }
+
+    try {
+      const accessToken = accessTokenString as string
+      const decodedToken = jwtDecode<JwtPayload>(accessToken)
+      //@ts-ignore
+      const decodedUser: User = decodedToken.user
+
+      setUser(decodedUser)
+    } catch (error) {
+      console.error('Invalid token:', error)
+    }
+  }, [])
+
+  if (!user) {
+    return <div>No access token found or token is invalid!</div>
+  }
+
+  console.log('user from myprofile', user)
 
   return (
     <div>
-      <div>{session.data?.user?.name ? session.data?.user?.name : 'нету имени'}</div>
-      <div>
-        {session.data?.user?.email ? session.data?.user?.email : 'от backend я ничего не вижу'}
-      </div>
-      <img alt={''} src={session?.data?.user?.image || '/default-image.jpg'} />
+      <h1>{user.email}</h1>
+      <h1>{user.name}</h1>
     </div>
   )
 }

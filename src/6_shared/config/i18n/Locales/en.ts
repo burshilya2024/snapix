@@ -14,11 +14,24 @@ export const en: LocaleType = {
     search: 'Search',
     statistics: 'Statistics',
   },
+  passwordRecovery: {
+    backToSignIn: 'Back to Sign In',
+    createNewPassword: 'Create New Password',
+    instructions: 'Enter your email and we will send you further instruction',
+    passwordRecovery: 'Password Recovery',
+    resendEmailInstructions:
+      'Looks like the verification link has expired. Not to worry, we can send the link again',
+    resendLink: 'Resend Link',
+    resetPassword: 'Reset Password',
+    sendLink: 'Send Link',
+  },
   signIn_SignUp: {
     dontHaveAccount: "Don't have an account yet?",
     forgotPassword: 'Forgot password?',
     haveAccount: 'Already have an account?',
     logout: 'logout',
+    passwordRequirements:
+      'Password must contain at least one uppercase letter, one lowercase letter, one digit, one special character and be between 6 to 20 characters long',
     signIn: 'Sign in',
     signUp: 'Sign up',
     singOut: 'Sign out',

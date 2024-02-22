@@ -1,7 +1,8 @@
-import { ReactNode } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 
-import { Header, NavBar } from '@/3_widgets'
-import { useTranslation } from '@/6_shared/config/i18n/hook/useTranslation'
+import { NavBar } from '@/3_widgets'
+import Header from '@/3_widgets/Header/Header'
+import { useTranslation } from '@/6_shared/config/i18n/hooks/useTranslation'
 import CreateIcon from '@public/assets/icons/create.svg'
 import FavoritesIcon from '@public/assets/icons/favorite.svg'
 import HomeIcon from '@public/assets/icons/home-light.svg'
@@ -9,7 +10,7 @@ import MessengerIcon from '@public/assets/icons/message.svg'
 import MyProfileIcon from '@public/assets/icons/person.svg'
 import SearchIcon from '@public/assets/icons/search.svg'
 import StatisticsIcon from '@public/assets/icons/trending-up-outline.svg'
-import { useSession } from 'next-auth/react'
+import dynamic from 'next/dynamic'
 
 import styles from '@/styles/Layout.module.scss'
 
@@ -17,9 +18,11 @@ interface LayoutProps {
   children: ReactNode
 }
 
-export default function Layout({ children }: LayoutProps) {
-  const session = useSession()
+function Layout({ children }: LayoutProps) {
   const { t } = useTranslation()
+
+  const isAuth = localStorage.getItem('isAuthSnapix')
+
   const navigate = [
     { href: '/', icon: <HomeIcon />, label: t.navBar.home },
     { href: '/Create', icon: <CreateIcon />, label: t.navBar.create },
@@ -36,7 +39,7 @@ export default function Layout({ children }: LayoutProps) {
         <Header />
       </header>
       <div className={` ${styles.LayoutWrapper_navBar_chiildren}`}>
-        {session.data ? (
+        {isAuth == 'true' ? (
           <nav className={`scrollable_container ${styles.Layout_navbar}`}>
             <NavBar navLinks={navigate} />
           </nav>
@@ -47,3 +50,5 @@ export default function Layout({ children }: LayoutProps) {
     </div>
   )
 }
+
+export default dynamic(() => Promise.resolve(Layout), { ssr: false })

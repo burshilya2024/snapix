@@ -1,11 +1,8 @@
-import React from 'react'
-import Select, {
-  ActionMeta,
-  OptionProps,
-  SingleValue,
-  SingleValueProps,
-  components,
-} from 'react-select'
+import React, { useState } from 'react'
+
+import ArrowDown from '@public/assets/icons/arrow-ios-Down-outline.svg'
+
+import styles from '@/styles/CustomSelect.module.scss'
 
 type IOptionType = {
   img: string
@@ -14,40 +11,9 @@ type IOptionType = {
 }
 
 type CustomSelectProps = {
-  defaultOptionValue: string | undefined
-  handlerFunction: (newValue: string | undefined) => void
+  defaultOptionValue?: string
+  handlerFunction: (newValue: string) => void
   options: IOptionType[]
-}
-
-const CustomSingleValue: React.FC<SingleValueProps<IOptionType, false>> = props => {
-  const {
-    children,
-    data: { img, label, value },
-  } = props
-
-  return (
-    <components.SingleValue {...props}>
-      <div style={{ alignItems: 'center', display: 'flex' }}>
-        <img alt={''} src={img} style={{ height: '20px', marginRight: '10px', width: '20px' }} />
-        {children}
-      </div>
-    </components.SingleValue>
-  )
-}
-
-const Option: React.FC<OptionProps<IOptionType, false>> = props => {
-  const {
-    data: { img, label, value },
-  } = props
-
-  return (
-    <components.Option {...props}>
-      <div style={{ alignItems: 'center', display: 'flex' }}>
-        <img alt={''} src={img} style={{ height: '20px', marginRight: '10px', width: '20px' }} />
-        {label}
-      </div>
-    </components.Option>
-  )
 }
 
 const CustomSelect: React.FC<CustomSelectProps> = ({
@@ -55,20 +21,51 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
   handlerFunction,
   options,
 }) => {
-  const onChangeHandler = (
-    newValue: SingleValue<IOptionType>,
-    actionMeta: ActionMeta<IOptionType>
-  ) => {
-    handlerFunction(newValue?.value)
+  const [selectedOption, setSelectedOption] = useState<IOptionType | undefined>(
+    options.find(option => option.value === defaultOptionValue)
+  )
+  const [isOpen, setIsOpen] = useState(false)
+
+  const handleOptionClick = (option: IOptionType) => {
+    setSelectedOption(option)
+    handlerFunction(option.value)
+    setIsOpen(false)
   }
 
   return (
-    <Select
-      components={{ Option, SingleValue: CustomSingleValue }}
-      defaultValue={options?.find(option => option?.value === defaultOptionValue)}
-      onChange={onChangeHandler}
-      options={options}
-    />
+    <div className={styles.customSelect}>
+      <div className={styles.control} onClick={() => setIsOpen(!isOpen)}>
+        {selectedOption ? (
+          <>
+            <img alt={selectedOption.label} src={selectedOption.img} />
+            <span>{selectedOption.label}</span>
+          </>
+        ) : (
+          ''
+        )}
+        <span className={styles.arrow}>
+          <ArrowDown className={'arrow'} />
+        </span>
+      </div>
+      {isOpen && (
+        <div className={styles.menu}>
+          {options.map(option => (
+            <div
+              className={`selectOption ${styles.option} ${
+                selectedOption?.value === option.value
+                  ? `selectedOption ${styles.optionSelected}`
+                  : ''
+              }`}
+              key={option.value}
+              onClick={() => handleOptionClick(option)}
+            >
+              <img alt={option.label} src={option.img} />
+              <span>{option.label}</span>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
   )
 }
 
