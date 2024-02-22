@@ -1,15 +1,15 @@
 import React from 'react'
 
-import { useTranslation } from '@/6_shared/config/i18n/hook/useTranslation'
+import { useTranslation } from '@/6_shared/config/i18n/hooks/useTranslation'
 import Button from '@/6_shared/ui/ui-button'
 import { Heading } from '@chakra-ui/react'
-import img from '@public/assets/images/confirm-success.png'
+import comfirmRegister from '@public/assets/icons/confirmRegistr.png'
 import Image from 'next/image'
 import Link from 'next/link'
 
 import styles from '@/styles/Confirm.module.scss'
 
-export function ConfirmPasswordComponent() {
+export function ConfirmRegistrComponent() {
   const { t } = useTranslation()
 
   return (
@@ -26,7 +26,7 @@ export function ConfirmPasswordComponent() {
         </Link>
       </div>
       <div className={styles.textContainer}>
-        <Image alt={''} src={img} />
+        <Image alt={''} src={comfirmRegister} />
       </div>
     </div>
   )
