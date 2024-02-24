@@ -11,6 +11,7 @@ const getToken = () => {
 export const Register_Login_Api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,
+    credentials: 'include',
     // Добавляем заголовок Authorization к каждому запросу
     prepareHeaders: headers => {
       // Получаем токен из localStorage
@@ -53,11 +54,16 @@ export const Register_Login_Api = createApi({
         url: '/logout',
       }),
     }),
-    refresh: builder.mutation<void, void>({
+    refresh: builder.mutation<any, void>({
       query: () => ({
         method: 'POST',
         url: '/refresh-token',
       }),
+      transformResponse: (response: any) => {
+        localStorage.setItem('accessTokenSnapix', response.accessToken || '')
+
+        return response
+      },
     }),
     register: builder.mutation<RegistrationResponse, RegistrationData>({
       query: body => ({
