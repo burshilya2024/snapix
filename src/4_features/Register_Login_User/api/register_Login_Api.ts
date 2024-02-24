@@ -11,6 +11,7 @@ const getToken = () => {
 export const Register_Login_Api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,
+    credentials: 'include',
     // Добавляем заголовок Authorization к каждому запросу
     prepareHeaders: headers => {
       // Получаем токен из localStorage
