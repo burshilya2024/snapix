@@ -1,8 +1,10 @@
-import React, { ReactNode, useEffect, useState } from 'react'
+import React, { ReactNode, useEffect } from 'react'
 
 import { NavBar } from '@/3_widgets'
 import Header from '@/3_widgets/Header/Header'
+import { useRefreshMutation } from '@/4_features/Register_Login_User/api/register_Login_Api'
 import { useTranslation } from '@/6_shared/config/i18n/hooks/useTranslation'
+import Button from '@/6_shared/ui/ui-button'
 import CreateIcon from '@public/assets/icons/create.svg'
 import FavoritesIcon from '@public/assets/icons/favorite.svg'
 import HomeIcon from '@public/assets/icons/home-light.svg'
@@ -22,6 +24,14 @@ function Layout({ children }: LayoutProps) {
   const { t } = useTranslation()
 
   const isAuth = localStorage.getItem('isAuthSnapix')
+  const accesTokenSnapix = localStorage.getItem('accessTokenSnapix')
+  const [refresh] = useRefreshMutation()
+
+  useEffect(() => {
+    console.log('accesTokenSnapix', accesTokenSnapix)
+
+    refresh()
+  })
 
   const navigate = [
     { href: '/', icon: <HomeIcon />, label: t.navBar.home },
@@ -36,6 +46,7 @@ function Layout({ children }: LayoutProps) {
   return (
     <div className={styles.LayoutContainer}>
       <header className={styles.LayoutHeader}>
+        <Button onClick={() => refresh()}>refresh</Button>
         <Header />
       </header>
       <div className={` ${styles.LayoutWrapper_navBar_chiildren}`}>
