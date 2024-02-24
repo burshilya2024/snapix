@@ -24,14 +24,6 @@ function Layout({ children }: LayoutProps) {
   const { t } = useTranslation()
 
   const isAuth = localStorage.getItem('isAuthSnapix')
-  const accesTokenSnapix = localStorage.getItem('accessTokenSnapix')
-  const [refresh] = useRefreshMutation()
-
-  useEffect(() => {
-    console.log('accesTokenSnapix', accesTokenSnapix)
-
-    refresh()
-  })
 
   const navigate = [
     { href: '/', icon: <HomeIcon />, label: t.navBar.home },
@@ -46,7 +38,6 @@ function Layout({ children }: LayoutProps) {
   return (
     <div className={styles.LayoutContainer}>
       <header className={styles.LayoutHeader}>
-        <Button onClick={() => refresh()}>refresh</Button>
         <Header />
       </header>
       <div className={` ${styles.LayoutWrapper_navBar_chiildren}`}>
