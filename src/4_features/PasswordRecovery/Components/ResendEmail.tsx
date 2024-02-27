@@ -39,7 +39,7 @@ export const ResendEmailComponent = () => {
     } else {
       toast({
         description: `No user email saved in localStorage. Please go back to password recovery page`,
-        duration: 9000,
+        duration: 5000,
         isClosable: true,
         onCloseComplete() {
           router.push('/forgot-password')

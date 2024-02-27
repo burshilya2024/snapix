@@ -1,10 +1,12 @@
-import { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FieldValues, useForm } from 'react-hook-form'
 
 import { useTranslation } from '@/6_shared/config/i18n/hooks/useTranslation'
 import Card from '@/6_shared/ui/Card'
 import Button from '@/6_shared/ui/ui-button'
 import { useToast } from '@chakra-ui/react'
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ErrorMessage } from '@hookform/error-message'
 import { useRouter } from 'next/router'
 
@@ -14,6 +16,7 @@ import { useResetPasswordMutation, useVerifyTokenMutation } from '../api/Passwor
 import { IErrorResponse, IResetPasswordForm } from '../types'
 
 export const ResetPasswordComponent: React.FC = () => {
+  const [passwordVisible, setPasswordVisible] = useState(false)
   const toast = useToast()
   const { t } = useTranslation()
   const router = useRouter()
@@ -47,7 +50,7 @@ export const ResetPasswordComponent: React.FC = () => {
   }, [token])
 
   const onSubmit = async (data: FieldValues) => {
-    if (data.newPassword !== data.confirmedPassword) {
+    if (data.password !== data.confirmedPassword) {
       toast({
         description: 'Passwords must match!',
         isClosable: true,
@@ -58,7 +61,7 @@ export const ResetPasswordComponent: React.FC = () => {
       try {
         if (typeof token === 'string') {
           await checkTokenIsValid(token)
-          await resetPassword({ password: data.newPassword, token }).unwrap()
+          await resetPassword({ password: data.password, token }).unwrap()
           toast({
             description: `Password successfully changed!`,
             isClosable: true,
@@ -85,28 +88,38 @@ export const ResetPasswordComponent: React.FC = () => {
       <form className={styles.loginForm} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.tittle}>{t.passwordRecovery.resetPassword}</div>
         <div>
-          <input
-            {...register('password', {
-              maxLength: {
-                message: 'Password must be less than 20 symbols long',
-                value: 20,
-              },
-              minLength: {
-                message: 'Password must be at least 10 symbols long',
-                value: 10,
-              },
-              pattern: {
-                message:
-                  'Password must contain an underscore, at least one letter and at least one capital letter',
-                value:
-                  /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]).*/,
-              },
-              required: true,
-            })}
-            className={styles.inputField}
-            placeholder={'New Password'}
-            type={'password'}
-          />
+          <div className={styles.inputGroup}>
+            <input
+              {...register('password', {
+                maxLength: {
+                  message: 'Password must be less than 20 symbols long',
+                  value: 20,
+                },
+                minLength: {
+                  message: 'Password must be at least 10 symbols long',
+                  value: 10,
+                },
+                pattern: {
+                  message:
+                    'Password must contain an underscore, at least one digit, one letter and at least one capital letter',
+                  value:
+                    /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]).*/,
+                },
+                required: 'Field is required',
+              })}
+              className={styles.inputField}
+              placeholder={'New Password'}
+              type={passwordVisible ? 'text' : 'password'}
+            />
+            <span
+              onClick={() => {
+                setPasswordVisible(prev => !prev)
+              }}
+              title={'show password'}
+            >
+              <FontAwesomeIcon icon={passwordVisible ? faEyeSlash : faEye} />
+            </span>
+          </div>
           <ErrorMessage
             errors={errors}
             name={'password'}
@@ -114,28 +127,38 @@ export const ResetPasswordComponent: React.FC = () => {
           />
         </div>
         <div>
-          <input
-            {...register('confirmedPassword', {
-              maxLength: {
-                message: 'Password must be less than 20 characters long',
-                value: 20,
-              },
-              minLength: {
-                message: 'Password must be at least 10 characters long',
-                value: 10,
-              },
-              pattern: {
-                message:
-                  'Password must contain an underscore, at least one letter and at least one capital letter',
-                value:
-                  /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]).*/,
-              },
-              required: true,
-            })}
-            className={styles.inputField}
-            placeholder={'Confirm Password'}
-            type={'password'}
-          />
+          <div className={styles.inputGroup}>
+            <input
+              {...register('confirmedPassword', {
+                maxLength: {
+                  message: 'Password must be less than 20 symbols long',
+                  value: 20,
+                },
+                minLength: {
+                  message: 'Password must be at least 10 symbols long',
+                  value: 10,
+                },
+                pattern: {
+                  message:
+                    'Password must contain an underscore, at least one digit, one letter and at least one capital letter',
+                  value:
+                    /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]).*/,
+                },
+                required: 'Field is required',
+              })}
+              className={styles.inputField}
+              placeholder={'Confirm Password'}
+              type={passwordVisible ? 'text' : 'password'}
+            />
+            <span
+              onClick={() => {
+                setPasswordVisible(prev => !prev)
+              }}
+              title={'show password'}
+            >
+              <FontAwesomeIcon icon={passwordVisible ? faEyeSlash : faEye} />
+            </span>
+          </div>
           <ErrorMessage
             errors={errors}
             name={'confirmedPassword'}
