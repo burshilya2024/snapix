@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { LoginComponents } from '@/4_features'
-import { GoogleButton } from '@/4_features/GoogleAuthButton/GoogleAuthButton'
+import { GoogleButton } from '@/4_features/Authorization/GoogleAuth/GoogleAuthButton'
 import { useTranslation } from '@/6_shared/config/i18n/hooks/useTranslation'
 import Card from '@/6_shared/ui/Card'
 
@@ -12,7 +12,7 @@ export const LogIn: React.FC<any> = () => {
   return (
     <Card>
       <div className={styles.tittle}>{t.signIn_SignUp.signIn}</div>
-      {/* <GoogleButton /> */}
+      <GoogleButton />
       <LoginComponents />
     </Card>
   )

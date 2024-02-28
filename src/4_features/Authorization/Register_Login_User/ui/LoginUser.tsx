@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
-import { IUserData } from '@/4_features/Register_Login_User/types'
+import { IUserData } from '@/4_features/Authorization/Register_Login_User/types'
 import { useTranslation } from '@/6_shared/config/i18n/hooks/useTranslation'
 import { MyCustomSpinner } from '@/6_shared/ui/CustomSpinner'
 import Button from '@/6_shared/ui/ui-button'
@@ -15,7 +15,6 @@ import { useLoginMutation } from '../api/register_Login_Api'
 import { ErrorMessage, SuccessResponse } from './RegisterUser'
 
 export const LoginComponents: React.FC = () => {
-  const [SuccessLogin, setSuccessLogin] = useState<boolean>(false)
   const router = useRouter()
   const { t } = useTranslation()
   const toast = useToast()
@@ -34,7 +33,7 @@ export const LoginComponents: React.FC = () => {
       .unwrap()
       .then((res: SuccessResponse) => {
         toast({
-          description: res.message || 'successful registration',
+          description: res.message || 'Successful authorization',
           duration: 9000,
           isClosable: true,
           status: 'success',
@@ -42,7 +41,6 @@ export const LoginComponents: React.FC = () => {
         })
         reset() // Сброс формы после успешной регистрации
         router.push('/MyProfile')
-        setSuccessLogin(true)
       })
       .catch((error: ErrorMessage) => {
         const errorMessage = error?.data.errors.message

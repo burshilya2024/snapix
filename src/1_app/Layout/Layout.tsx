@@ -1,10 +1,7 @@
-import React, { ReactNode, useEffect } from 'react'
-
+import React, { ReactNode } from 'react'
 import { NavBar } from '@/3_widgets'
 import Header from '@/3_widgets/Header/Header'
-import { useRefreshMutation } from '@/4_features/Register_Login_User/api/register_Login_Api'
 import { useTranslation } from '@/6_shared/config/i18n/hooks/useTranslation'
-import Button from '@/6_shared/ui/ui-button'
 import CreateIcon from '@public/assets/icons/create.svg'
 import FavoritesIcon from '@public/assets/icons/favorite.svg'
 import HomeIcon from '@public/assets/icons/home-light.svg'
@@ -13,7 +10,6 @@ import MyProfileIcon from '@public/assets/icons/person.svg'
 import SearchIcon from '@public/assets/icons/search.svg'
 import StatisticsIcon from '@public/assets/icons/trending-up-outline.svg'
 import dynamic from 'next/dynamic'
-
 import styles from '@/styles/Layout.module.scss'
 
 interface LayoutProps {
@@ -22,8 +18,6 @@ interface LayoutProps {
 
 function Layout({ children }: LayoutProps) {
   const { t } = useTranslation()
-
-  const isAuth = localStorage.getItem('isAuthSnapix')
 
   const navigate = [
     { href: '/', icon: <HomeIcon />, label: t.navBar.home },
@@ -40,13 +34,8 @@ function Layout({ children }: LayoutProps) {
       <header className={styles.LayoutHeader}>
         <Header />
       </header>
-      <div className={` ${styles.LayoutWrapper_navBar_chiildren}`}>
-        {isAuth == 'true' ? (
-          <nav className={`scrollable_container ${styles.Layout_navbar}`}>
-            <NavBar navLinks={navigate} />
-          </nav>
-        ) : null}
-
+      <div className={` ${styles.LayoutWrapper_navBar_children}`}>
+        <NavBar navLinks={navigate} />
         <div className={`scrollable_container ${styles.Layout_children}`}>{children}</div>
       </div>
     </div>

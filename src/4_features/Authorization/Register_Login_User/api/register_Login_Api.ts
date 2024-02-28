@@ -46,7 +46,7 @@ export const Register_Login_Api = createApi({
       onQueryStarted: async () => {
         // Удаляем токен из localStorage
         localStorage.removeItem('accessTokenSnapix')
-        // Устанавливаем isAuthSnapix в значение false
+        // // Устанавливаем isAuthSnapix в значение false
         localStorage.setItem('isAuthSnapix', 'false')
       },
       query: () => ({
@@ -54,13 +54,15 @@ export const Register_Login_Api = createApi({
         url: '/logout',
       }),
     }),
-    refresh: builder.mutation<any, void>({
+    refresh: builder.mutation<void, void>({
       query: () => ({
         method: 'POST',
         url: '/refresh-token',
       }),
       transformResponse: (response: any) => {
         localStorage.setItem('accessTokenSnapix', response.accessToken || '')
+
+        localStorage.setItem('isAuthSnapix', 'true')
 
         return response
       },
