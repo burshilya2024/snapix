@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
-import { useRouter } from 'next/router'
+
 import { useRefreshMutation } from '@/4_features/Authorization/Register_Login_User/api/register_Login_Api'
 import Cookies from 'js-cookie'
+import { useRouter } from 'next/router'
 
 type PropsType = {
   children: React.ReactNode

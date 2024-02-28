@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react'
+
 import { NavBar } from '@/3_widgets'
 import Header from '@/3_widgets/Header/Header'
 import { useTranslation } from '@/6_shared/config/i18n/hooks/useTranslation'
@@ -10,6 +11,7 @@ import MyProfileIcon from '@public/assets/icons/person.svg'
 import SearchIcon from '@public/assets/icons/search.svg'
 import StatisticsIcon from '@public/assets/icons/trending-up-outline.svg'
 import dynamic from 'next/dynamic'
+
 import styles from '@/styles/Layout.module.scss'
 
 interface LayoutProps {

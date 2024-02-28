@@ -1,5 +1,5 @@
-import LangSelect from '@/4_features/Lang/LangSelect'
 import { useLogout } from '@/4_features/Authorization/Register_Login_User/hooks/useLogout'
+import LangSelect from '@/4_features/Lang/LangSelect'
 import ThemeToggle from '@/4_features/ThemeToggle/ThemeToggle'
 import { useTranslation } from '@/6_shared/config/i18n/hooks/useTranslation'
 import { IconButton, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
-import { JwtPayload, jwtDecode } from 'jwt-decode'
 import { LoginNavigate } from '@/4_features/Authorization/Register_Login_User/hoc/LoginNavigate'
+import { JwtPayload, jwtDecode } from 'jwt-decode'
 
 interface User {
   email: string
@@ -39,6 +39,7 @@ export function MyProfile() {
   }
 
   console.log('user from myprofile', user)
+
   return (
     <LoginNavigate>
       <div>

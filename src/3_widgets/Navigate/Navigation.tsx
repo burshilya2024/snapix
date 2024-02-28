@@ -1,10 +1,11 @@
+import { useLogout } from '@/4_features/Authorization/Register_Login_User/hooks/useLogout'
 import { useTranslation } from '@/6_shared/config/i18n/hooks/useTranslation'
 import useWindowSize from '@/6_shared/lib/hooks/useWindowsSize'
 import LogInIcon from '@public/assets/icons/log-out.svg'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+
 import styles from '@/styles/Navigation.module.scss'
-import { useLogout } from '@/4_features/Authorization/Register_Login_User/hooks/useLogout'
 
 type NavLink = {
   href: string
@@ -29,10 +30,12 @@ export const NavBar = ({ navLinks }: Props) => {
           <div className={styles.Navbar_list}>
             {navLinks.map((link, index) => {
               const isActive = pathname === link.href
+
               //! Скрываем последние три элемента при использовании мобильных устройств
               if (isMobile && index >= navLinks.length - 2) {
                 return null
               }
+
               return (
                 <Link
                   className={`${styles.Navbar_list_link} ${isActive ? styles.active : ''}`}

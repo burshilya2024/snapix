@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 export const useLogout = () => {
   const [logout, { isLoading }] = useLogoutMutation()
   const toast = useToast()
+
   return async () => {
     await logout()
       .unwrap()
@@ -19,6 +20,7 @@ export const useLogout = () => {
       })
       .catch(error => {
         const errorMessage = error?.message
+
         toast({
           description: 'An error occurred while logging out:' || errorMessage,
           duration: 9000,
