@@ -11,6 +11,7 @@ const getToken = () => {
 export const Register_Login_Api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,
+    credentials: 'include',
     // Добавляем заголовок Authorization к каждому запросу
     prepareHeaders: headers => {
       // Получаем токен из localStorage
@@ -40,12 +41,11 @@ export const Register_Login_Api = createApi({
         return response
       },
     }),
-
     logout: builder.mutation<void, void>({
       onQueryStarted: async () => {
         // Удаляем токен из localStorage
         localStorage.removeItem('accessTokenSnapix')
-        // Устанавливаем isAuthSnapix в значение false
+        // // Устанавливаем isAuthSnapix в значение false
         localStorage.setItem('isAuthSnapix', 'false')
       },
       query: () => ({
@@ -58,6 +58,13 @@ export const Register_Login_Api = createApi({
         method: 'POST',
         url: '/refresh-token',
       }),
+      transformResponse: (response: any) => {
+        localStorage.setItem('accessTokenSnapix', response.accessToken || '')
+
+        localStorage.setItem('isAuthSnapix', 'true')
+
+        return response
+      },
     }),
     register: builder.mutation<RegistrationResponse, RegistrationData>({
       query: body => ({

@@ -13,7 +13,7 @@
   width: 100%;
 }
 
-.LayoutWrapper_navBar_chiildren {
+.LayoutWrapper_navBar_children {
   display: flex;
   height: 100%;
 
@@ -24,38 +24,13 @@
   }
 }
 
-.Layout_navbar {
-  z-index: 99;
-
-  overflow-y: auto;
-
-  width: 300px;
-  margin: 60px 0 0;
-  padding: 50px 0;
-
-  border-right: 1px solid #3d3d3d;
-
-  @media (width <= 599px) {
-    position: fixed;
-    bottom: 0;
-
-    display: flex;
-
-    width: 100%;
-    height: 10vh;
-    margin: 0;
-    padding: 0;
-
-    border-top: 1px solid #3d3d3d;
-    border-right: none;
-  }
-}
 
 .Layout_children {
   overflow-y: auto;
   width: 100%;
+  height: 100%;
   margin: 60px 0 0;
-  padding: 8% 5%;
+  padding: 4% 3%;
 
   @media (width <= 599px) {
     margin: 20px 0 30px;

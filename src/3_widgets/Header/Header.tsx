@@ -7,25 +7,27 @@ import Button from '@/6_shared/ui/ui-button'
 import InstagramSvg from '@public/assets/icons/instagram.svg'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
-
 import styles from '@/styles/Header.module.scss'
-
+import { useRefreshMutation } from '@/4_features/Authorization/Register_Login_User/api/register_Login_Api'
 const Header = () => {
   const { t } = useTranslation()
-
   const isAuth = localStorage.getItem('isAuthSnapix')
   const isMobile = useWindowSize()
 
+  const [Refresh, { isLoading: isLoadingLogin }] = useRefreshMutation()
+  const refreshHandler = () => {
+    Refresh()
+  }
   return (
     <header className={styles.header}>
       <Link href={'/'}>
         {isMobile ? (
           <InstagramSvg />
         ) : (
-          <Typography.H1 className={styles.logo}>Inctagram</Typography.H1>
+          <Typography.H1 className={styles.logo}>Snapix</Typography.H1>
         )}
       </Link>
-
+      <button onClick={() => refreshHandler()}>RefreshToken!</button>
       {isAuth == 'false' ? (
         <div className={styles.header_right}>
           <LangSelect />
