@@ -1,12 +1,9 @@
-import { useState } from 'react'
-
-import { useLogoutMutation } from '@/4_features/Register_Login_User/api/register_Login_Api'
+import { useLogout } from '@/4_features/Authorization/Register_Login_User/hooks/useLogout'
 import { useTranslation } from '@/6_shared/config/i18n/hooks/useTranslation'
 import useWindowSize from '@/6_shared/lib/hooks/useWindowsSize'
 import LogInIcon from '@public/assets/icons/log-out.svg'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useRouter } from 'next/router'
 
 import styles from '@/styles/Navigation.module.scss'
 
@@ -20,59 +17,47 @@ type Props = {
 }
 // !вынести логику в фичи
 export const NavBar = ({ navLinks }: Props) => {
-  const [isLoggedOut, setIsLoggedOut] = useState(false)
   const pathname = usePathname()
   const isMobile = useWindowSize()
   const { t } = useTranslation()
-  const [Logout] = useLogoutMutation()
-  const router = useRouter()
-
-  const logoutSubmit = async () => {
-    try {
-      await Logout()
-      setIsLoggedOut(true)
-      alert('вы вышли из системы')
-      router.push('/')
-    } catch (error) {
-      console.error('Ошибка при выходе из системы:', error)
-    }
-  }
-
-  // Перерендериваем компонент, если пользователь вышел из системы
-  if (isLoggedOut) {
-    return null
-  }
+  const isAuth = localStorage.getItem('isAuthSnapix')
+  const logout = useLogout()
 
   return (
-    <div className={styles.Navbar_list}>
-      {navLinks.map((link, index) => {
-        const isActive = pathname === link.href
+    <div>
+      {isAuth === 'true' ? (
+        <nav className={`scrollable_container ${styles.navbar}`}>
+          <div className={styles.Navbar_list}>
+            {navLinks.map((link, index) => {
+              const isActive = pathname === link.href
 
-        //! Скрываем последние три элемента при использовании мобильных устройств
-        if (isMobile && index >= navLinks.length - 2) {
-          return null
-        }
+              //! Скрываем последние три элемента при использовании мобильных устройств
+              if (isMobile && index >= navLinks.length - 2) {
+                return null
+              }
 
-        return (
-          <Link
-            className={`${styles.Navbar_list_link} ${isActive ? styles.active : ''}`}
-            href={link.href}
-            key={link.label}
-          >
-            <span className={`${'svg'} ${isActive && styles.activeIcon} `}>{link.icon}</span>
-            {!isMobile && link.label}
-          </Link>
-        )
-      })}
-      {!isMobile && (
-        <Link className={styles.LogOutLink} href={'#'} onClick={logoutSubmit}>
-          <span className={'svg'}>
-            <LogInIcon />
-          </span>
-
-          <span>{t.signIn_SignUp.logout}</span>
-        </Link>
-      )}
+              return (
+                <Link
+                  className={`${styles.Navbar_list_link} ${isActive ? styles.active : ''}`}
+                  href={link.href}
+                  key={link.label}
+                >
+                  <span className={`${'svg'} ${isActive && styles.activeIcon} `}>{link.icon}</span>
+                  {!isMobile && link.label}
+                </Link>
+              )
+            })}
+            {!isMobile && (
+              <Link className={styles.LogOutLink} href={'#'} onClick={() => logout()}>
+                <span className={'svg'}>
+                  <LogInIcon />
+                </span>
+                <span>{t.signIn_SignUp.logout}</span>
+              </Link>
+            )}
+          </div>
+        </nav>
+      ) : null}
     </div>
   )
 }

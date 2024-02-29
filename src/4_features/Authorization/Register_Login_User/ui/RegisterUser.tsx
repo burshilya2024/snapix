@@ -1,7 +1,7 @@
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
-import { useRegisterMutation } from '@/4_features/Register_Login_User/api/register_Login_Api' // 0_0
+import { useRegisterMutation } from '@/4_features/Authorization/Register_Login_User/api/register_Login_Api' // 0_0
 import { useTranslation } from '@/6_shared/config/i18n/hooks/useTranslation'
 import Card from '@/6_shared/ui/Card'
 import { MyCustomSpinner } from '@/6_shared/ui/CustomSpinner'

@@ -9,10 +9,8 @@ import dynamic from 'next/dynamic'
 import Link from 'next/link'
 
 import styles from '@/styles/Header.module.scss'
-
 const Header = () => {
   const { t } = useTranslation()
-
   const isAuth = localStorage.getItem('isAuthSnapix')
   const isMobile = useWindowSize()
 
@@ -22,10 +20,9 @@ const Header = () => {
         {isMobile ? (
           <InstagramSvg />
         ) : (
-          <Typography.H1 className={styles.logo}>Inctagram</Typography.H1>
+          <Typography.H1 className={styles.logo}>Snapix</Typography.H1>
         )}
       </Link>
-
       {isAuth == 'false' ? (
         <div className={styles.header_right}>
           <LangSelect />

@@ -1,8 +1,9 @@
 // store.ts
 import { useDispatch } from 'react-redux'
 
-import { PasswordRecovery_Api } from '@/4_features/PasswordRecovery/api/PasswordRecovery_Api'
-import { Register_Login_Api } from '@/4_features/Register_Login_User/api/register_Login_Api'
+import { googleAuth } from '@/4_features/Authorization/GoogleAuth/api/googleAuth'
+import { PasswordRecovery_Api } from '@/4_features/Authorization/PasswordRecovery/api/PasswordRecovery_Api'
+import { Register_Login_Api } from '@/4_features/Authorization/Register_Login_User/api/register_Login_Api'
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 
 import { UnsplashTextApi } from '../../4_features/public/api/UnsplashTestApi'
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   [PlaceHolderApi.reducerPath]: PlaceHolderApi.reducer,
   [Register_Login_Api.reducerPath]: Register_Login_Api.reducer,
   [UnsplashTextApi.reducerPath]: UnsplashTextApi.reducer,
+  [googleAuth.reducerPath]: googleAuth.reducer,
 })
 
 export const setupStore = () => {
@@ -22,7 +24,8 @@ export const setupStore = () => {
         .concat(UnsplashTextApi.middleware)
         .concat(PlaceHolderApi.middleware)
         .concat(Register_Login_Api.middleware)
-        .concat(PasswordRecovery_Api.middleware),
+        .concat(PasswordRecovery_Api.middleware)
+        .concat(googleAuth.middleware),
     reducer: rootReducer,
   })
 }
