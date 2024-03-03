@@ -57,7 +57,7 @@ export const ResendEmailComponent = () => {
           {t.passwordRecovery.resendEmailInstructions}
         </div>
         <div>
-          <Button primary type={'submit'}>
+          <Button fullWidth primary type={'submit'}>
             {t.passwordRecovery.resendLink}
           </Button>
         </div>

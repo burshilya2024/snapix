@@ -43,6 +43,10 @@
   &:disabled {
     background-color: #234E99;
   }
+  &:hover:disabled {
+    cursor: default;
+    transform: translateY(0px);
+  }
 }
 
 .secondary {
@@ -77,4 +81,8 @@
     color: #73A5FF;
     background-color: transparent;
   }
+}
+
+.fullWidth {
+  width: 100%;
 }

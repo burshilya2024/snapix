@@ -95,7 +95,7 @@ export const LoginComponents: React.FC = () => {
           {isLoadingLogin ? (
             <MyCustomSpinner />
           ) : (
-            <Button disabled={!isValid} primary type={'submit'}>
+            <Button disabled={!isValid} fullWidth primary type={'submit'}>
               {t.signIn_SignUp.signIn}
             </Button>
           )}
@@ -103,7 +103,7 @@ export const LoginComponents: React.FC = () => {
         <div> {t.signIn_SignUp.dontHaveAccount}</div>
         <div>
           <Link href={'/SignUp'}>
-            <Button outline type={'submit'}>
+            <Button fullWidth outline type={'submit'}>
               {t.signIn_SignUp.signUp}
             </Button>
           </Link>

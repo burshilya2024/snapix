@@ -7,6 +7,7 @@ import styles from '@/styles/Button.module.scss'
 interface ButtonProps {
   children: ReactNode
   disabled?: boolean
+  fullWidth?: boolean
   onClick?: MouseEventHandler<HTMLButtonElement>
   outline?: boolean
   primary?: boolean
@@ -18,6 +19,7 @@ interface ButtonProps {
 const Button = ({
   children,
   disabled = false,
+  fullWidth = false,
   onClick,
   outline = false,
   primary = false,
@@ -26,6 +28,7 @@ const Button = ({
   type,
 }: ButtonProps) => {
   const buttonClass = clsx(styles.button, {
+    [styles.fullWidth]: fullWidth,
     [styles.outline]: outline,
     [styles.primary]: primary,
     [styles.secondary]: secondary,
