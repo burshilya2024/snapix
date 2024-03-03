@@ -11,6 +11,7 @@ interface ButtonProps {
   outline?: boolean
   primary?: boolean
   secondary?: boolean
+  text?: boolean
   type?: string
 }
 
@@ -21,12 +22,14 @@ const Button = ({
   outline = false,
   primary = false,
   secondary = false,
+  text = false,
   type,
 }: ButtonProps) => {
   const buttonClass = clsx(styles.button, {
     [styles.outline]: outline,
     [styles.primary]: primary,
     [styles.secondary]: secondary,
+    [styles.text]: text,
   })
 
   return (
