@@ -1,5 +1,7 @@
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
+import Modal from '@/6_shared/ui/ModalWindow'
 import Button from '@/6_shared/ui/ui-button'
 import { Input, Select, Textarea } from '@chakra-ui/react'
 import { ErrorMessage } from '@hookform/error-message'
@@ -10,7 +12,7 @@ import Image from 'next/image'
 import styles from '@/styles/MyProfile.module.scss'
 
 import { MyProfile_Api, useProfileDataMutation } from '../../api/MyProfile_Api'
-import { TabLinks } from '../../hoc/TabLinks'
+import { MyProfileTanLinks } from '../../hoc/MyProfileTabLinks'
 import { countryOptions } from '../datalist/countryOptions'
 
 const validateAge = (value: any) => {
@@ -22,7 +24,10 @@ const validateAge = (value: any) => {
 
 export const GeneralInformation = () => {
   const [profileData, {}] = useProfileDataMutation()
+  const [isOpen, setIsOpen] = useState(false)
 
+  const openModal = () => setIsOpen(true)
+  const closeModal = () => setIsOpen(false)
   const {
     formState: { errors, isValid },
     handleSubmit,
@@ -37,14 +42,20 @@ export const GeneralInformation = () => {
   }
 
   return (
-    <TabLinks>
+    <MyProfileTanLinks>
       {/* <DatePicker initialValue={new Date()} /> */}
+      <div></div>
       <div className={styles.genInfo_wrapper}>
         <div className={styles.genInfo_profile}>
           <div className={styles.profile_img}>
             <Image alt={'acc_logo'} src={accountEllipse} />
           </div>
-          <Button outline>Add a Profile Photo</Button>
+          <Button onClick={openModal} outline>
+            Add a Profile Photo
+          </Button>
+          <Modal isOpen={isOpen} onClose={closeModal} title={'Add a Profile Photo'}>
+            логика загрузки фото
+          </Modal>
         </div>
         <div className={styles.formWrapper}>
           <form className={styles.Form} onSubmit={handleSubmit(onSubmit)}>
@@ -177,6 +188,6 @@ export const GeneralInformation = () => {
           </form>
         </div>
       </div>
-    </TabLinks>
+    </MyProfileTanLinks>
   )
 }

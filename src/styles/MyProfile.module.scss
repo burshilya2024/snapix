@@ -8,7 +8,7 @@
   width: 100%;
   text-align: center;
   white-space: nowrap;
-
+  color: gray !important;
   &:after {
     content: '';
     display: block;
@@ -19,14 +19,19 @@
 
   &:hover {
     cursor: pointer;
-    color: #397df6;
+    color: #5d96f9 !important;
   }
 
   &:hover::after {
     background-color: #397df6;
   }
 }
-
+.tabLinkActive {
+  color: #397df6 !important;
+  &:after {
+    background-color: #397df6;
+  }
+}
 //=====================MyProfile===========================================================
 
 .profile_top {
@@ -75,7 +80,6 @@
 .profile_img {
   margin-bottom: 20px;
 }
-
 
 //=============GEN_INFO_FORM=========================================================================
 
