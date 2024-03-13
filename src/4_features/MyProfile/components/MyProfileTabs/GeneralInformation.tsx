@@ -3,16 +3,15 @@ import { useForm } from 'react-hook-form'
 
 import Modal from '@/6_shared/ui/ModalWindow'
 import Button from '@/6_shared/ui/ui-button'
-import { Input, Select, Textarea } from '@chakra-ui/react'
+import { Input, Textarea } from '@chakra-ui/react'
 import { ErrorMessage } from '@hookform/error-message'
-import { DatePicker } from '@orange_digital/chakra-datepicker'
-import accountEllipse from '@public/assets/icons/Ellipse.png'
-import Image from 'next/image'
+import FileImage from '@public/assets/icons/file.svg'
 
 import styles from '@/styles/MyProfile.module.scss'
 
-import { MyProfile_Api, useProfileDataMutation } from '../../api/MyProfile_Api'
+import { useProfileDataMutation } from '../../api/MyProfile_Api'
 import { MyProfileTanLinks } from '../../hoc/MyProfileTabLinks'
+import AvatarUploader from '../UploadUserAvatar'
 import { countryOptions } from '../datalist/countryOptions'
 
 const validateAge = (value: any) => {
@@ -48,13 +47,17 @@ export const GeneralInformation = () => {
       <div className={styles.genInfo_wrapper}>
         <div className={styles.genInfo_profile}>
           <div className={styles.profile_img}>
-            <Image alt={'acc_logo'} src={accountEllipse} />
+            <div className={styles.FileImage}>
+              <span className={'svg'}>
+                <FileImage />
+              </span>
+            </div>
           </div>
           <Button onClick={openModal} outline>
             Add a Profile Photo
           </Button>
           <Modal isOpen={isOpen} onClose={closeModal} title={'Add a Profile Photo'}>
-            логика загрузки фото
+            <AvatarUploader />
           </Modal>
         </div>
         <div className={styles.formWrapper}>

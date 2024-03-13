@@ -1,4 +1,5 @@
 import { useFetchDataPhotoQuery } from '@/4_features/public/api/UnsplashTestApi'
+import Profile_info_stats from '@/5_entites/profile-info-stats/Profile_info_stats'
 import Button from '@/6_shared/ui/ui-button'
 import profile_avatar from '@public/assets/icons/profile_avatar.png'
 import Image from 'next/image'
@@ -19,33 +20,7 @@ export const MyProfilePage = () => {
         <div className={styles.profile_avatar}>
           <Image alt={'avatar'} height={204} src={profile_avatar} width={204} />
         </div>
-        <div className={styles.profile_info}>
-          <div className={styles.profile_info__heading}>
-            <h1>URL Profile</h1>
-            <Link href={'/MyProfile/general-information'}>
-              <Button secondary>Profile Settings</Button>
-            </Link>
-          </div>
-          <div className={styles.profile_info__stats}>
-            <div>
-              <span>2328</span>
-              <p>Following</p>
-            </div>
-            <div>
-              <span>2624</span>
-              <p>Followers</p>
-            </div>
-            <div>
-              <span>5234</span>
-              <p>Publications</p>
-            </div>
-          </div>
-          <div className={'profile_info__text'}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, perspiciatis earum!
-            Exercitationem commodi reprehenderit, consequuntur ex provident magnam? Nobis deleniti
-            magni asperiores nostrum rem error ipsam atque nesciunt quis eius.
-          </div>
-        </div>
+        <Profile_info_stats />
       </div>
       <div className={styles.profile_photos}>
         {photos &&
