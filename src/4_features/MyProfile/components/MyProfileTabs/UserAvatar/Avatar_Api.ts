@@ -10,9 +10,27 @@ export interface Avatar {
 export interface GetAvatarsResponse {
   avatars: Avatar[]
 }
+const getToken = () => {
+  return localStorage.getItem('accessTokenSnapix')
+}
+const BASE_URL = 'https://9art.ru/api/v1/users/profile/avatar'
 
 export const userApiAvatar = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://9art.ru/api/v1/users/profile/avatar' }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: BASE_URL,
+    credentials: 'include',
+    prepareHeaders: headers => {
+      // Получаем токен из localStorage
+      const token = getToken() || ''
+
+      // Если токен доступен, добавляем его в заголовок Authorization
+      if (token) {
+        headers.set('Authorization', `Bearer ${token}`)
+      }
+
+      return headers
+    },
+  }),
   endpoints: builder => ({
     deleteAvatar: builder.mutation<any, void>({
       query: () => ({
