@@ -3,17 +3,17 @@ import { useForm } from 'react-hook-form'
 
 import Modal from '@/6_shared/ui/ModalWindow'
 import Button from '@/6_shared/ui/ui-button'
-import { Input, Select, Textarea } from '@chakra-ui/react'
+import { Input, Textarea } from '@chakra-ui/react'
 import { ErrorMessage } from '@hookform/error-message'
-import { DatePicker } from '@orange_digital/chakra-datepicker'
-import accountEllipse from '@public/assets/icons/Ellipse.png'
+import FileImage from '@public/assets/icons/file.svg'
 import Image from 'next/image'
 
 import styles from '@/styles/MyProfile.module.scss'
 
-import { MyProfile_Api, useProfileDataMutation } from '../../api/MyProfile_Api'
-import { MyProfileTanLinks } from '../../hoc/MyProfileTabLinks'
+import { useProfileDataMutation } from '../../api/MyProfile_Api'
+import { MyProfileTabLinks } from '../../hoc/MyProfileTabLinks'
 import { countryOptions } from '../datalist/countryOptions'
+import AvatarUploader from './UserAvatar/UploadUserAvatar'
 
 const validateAge = (value: any) => {
   const selected = new Date(value).getFullYear()
@@ -42,19 +42,24 @@ export const GeneralInformation = () => {
   }
 
   return (
-    <MyProfileTanLinks>
+    <MyProfileTabLinks>
       {/* <DatePicker initialValue={new Date()} /> */}
       <div></div>
       <div className={styles.genInfo_wrapper}>
         <div className={styles.genInfo_profile}>
           <div className={styles.profile_img}>
-            <Image alt={'acc_logo'} src={accountEllipse} />
+            <div className={styles.FileImage}>
+              <span className={'svg'}>
+                <FileImage />
+              </span>
+            </div>
           </div>
           <Button onClick={openModal} outline>
             Add a Profile Photo
           </Button>
           <Modal isOpen={isOpen} onClose={closeModal} title={'Add a Profile Photo'}>
-            логика загрузки фото
+            {/* //!РАБОТА С АВАТАРКОЙ */}
+            <AvatarUploader />
           </Modal>
         </div>
         <div className={styles.formWrapper}>
@@ -188,6 +193,6 @@ export const GeneralInformation = () => {
           </form>
         </div>
       </div>
-    </MyProfileTanLinks>
+    </MyProfileTabLinks>
   )
 }

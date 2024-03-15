@@ -1,7 +1,7 @@
-import { MyProfileTanLinks } from '../../hoc/MyProfileTabLinks'
+import { MyProfileTabLinks } from '../../hoc/MyProfileTabLinks'
 
 export const Devices = () => {
-  return <MyProfileTanLinks>Devices</MyProfileTanLinks>
+  return <MyProfileTabLinks>Devices</MyProfileTabLinks>
 }
 
 export default Devices

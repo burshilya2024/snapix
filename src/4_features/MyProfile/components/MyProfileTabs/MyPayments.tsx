@@ -1,7 +1,7 @@
-import { MyProfileTanLinks } from '../../hoc/MyProfileTabLinks'
+import { MyProfileTabLinks } from '../../hoc/MyProfileTabLinks'
 
 export const MyPayments = () => {
-  return <MyProfileTanLinks>MyPayments</MyProfileTanLinks>
+  return <MyProfileTabLinks>MyPayments</MyProfileTabLinks>
 }
 
 export default MyPayments

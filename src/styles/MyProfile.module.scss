@@ -6,14 +6,18 @@
 
 .tabLink {
   width: 100%;
+  color: gray !important;
   text-align: center;
   white-space: nowrap;
-  color: gray !important;
-  &:after {
+
+  &::after {
     content: '';
+
     display: block;
+
     width: 100%;
     height: 1px;
+
     background-color: #8c9094;
   }
 
@@ -26,13 +30,28 @@
     background-color: #397df6;
   }
 }
+
 .tabLinkActive {
   color: #397df6 !important;
-  &:after {
+
+  &::after {
     background-color: #397df6;
   }
 }
-//=====================MyProfile===========================================================
+
+// ===================== MyProfile ============================
+
+.FileImage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 200px;
+  height: 200px;
+
+  background: rgb(27 27 27);
+  border-radius: 200px;
+}
 
 .profile_top {
   display: flex;
@@ -43,9 +62,10 @@
 .profile_info {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  width: 100%;
   gap: 10px;
+  justify-content: space-between;
+
+  width: 100%;
 }
 
 .profile_info__heading {
@@ -55,33 +75,34 @@
   & h1 {
     width: 115px;
     height: 36px;
-    white-space: nowrap;
-    font-family: Inter;
+
     font-size: 20px;
     font-weight: 700;
     line-height: 36px;
-    letter-spacing: 0px;
     text-align: left;
+    letter-spacing: 0;
+    white-space: nowrap;
   }
 }
 
 .profile_info__stats {
-  width: 50%;
   display: flex;
   justify-content: space-between;
+  width: 50%;
 }
 
 .profile_photos {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  justify-content: center;
 }
 
 .profile_img {
   margin-bottom: 20px;
 }
 
-//=============GEN_INFO_FORM=========================================================================
+// ============== GEN_INFO_FORM ===============================
 
 .genInfo_wrapper {
   display: flex;
@@ -102,6 +123,6 @@
 
 .submitBtn_wrapper {
   display: flex;
-  justify-content: right;
+  justify-content: flex-end; /* fixed "right" to "flex-end" */
   margin: 10px;
 }

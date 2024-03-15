@@ -5,6 +5,7 @@ import { googleAuth } from '@/4_features/Authorization/GoogleAuth/api/googleAuth
 import { PasswordRecovery_Api } from '@/4_features/Authorization/PasswordRecovery/api/PasswordRecovery_Api'
 import { Register_Login_Api } from '@/4_features/Authorization/Register_Login_User/api/register_Login_Api'
 import { MyProfile_Api } from '@/4_features/MyProfile/api/MyProfile_Api'
+import { userApiAvatar } from '@/4_features/MyProfile/components/MyProfileTabs/UserAvatar/Avatar_Api'
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 
 import { UnsplashTextApi } from '../../4_features/public/api/UnsplashTestApi'
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   [Register_Login_Api.reducerPath]: Register_Login_Api.reducer,
   [UnsplashTextApi.reducerPath]: UnsplashTextApi.reducer,
   [googleAuth.reducerPath]: googleAuth.reducer,
+  [userApiAvatar.reducerPath]: userApiAvatar.reducer,
 })
 
 export const setupStore = () => {
@@ -28,7 +30,8 @@ export const setupStore = () => {
         .concat(Register_Login_Api.middleware)
         .concat(PasswordRecovery_Api.middleware)
         .concat(googleAuth.middleware)
-        .concat(MyProfile_Api.middleware),
+        .concat(MyProfile_Api.middleware)
+        .concat(userApiAvatar.middleware),
     reducer: rootReducer,
   })
 }
