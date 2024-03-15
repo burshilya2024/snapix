@@ -14,7 +14,7 @@ interface PropsType {
   children: ReactNode
 }
 
-export const MyProfileTanLinks = ({ children }: PropsType) => {
+export const MyProfileTabLinks = ({ children }: PropsType) => {
   const links: LinkItem[] = [
     { href: '/MyProfile/general-information', label: 'General information' },
     { href: '/MyProfile/devices', label: 'Devices' },

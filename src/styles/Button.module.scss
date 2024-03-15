@@ -1,15 +1,16 @@
 .button {
   cursor: pointer;
 
+  gap: 10px;
+
   min-width: 168px;
   height: 36px;
   padding: 6px 24px;
-  gap: 10px;
 
   font-size: 16px;
   font-weight: 600;
-  white-space: nowrap;
   color: #fff;
+  white-space: nowrap;
 
   background-color: #397df6;
   border: none;
@@ -26,39 +27,40 @@
 
 .primary {
   color: #fff;
-  background-color: #4C8DFF;
+  background-color: #4c8dff;
 
   &:active {
-    background-color: #397DF6;
+    background-color: #397df6;
   }
 
   &:hover {
-    background-color: #73A5FF;
+    background-color: #73a5ff;
   }
 
   &:focus {
-    background-color: #2F68CC;
+    background-color: #2f68cc;
   }
 
   &:disabled {
-    background-color: #234E99;
+    background-color: #234e99;
   }
+
   &:hover:disabled {
     cursor: default;
-    transform: translateY(0px);
+    transform: translateY(0);
   }
 }
 
 .secondary {
   color: #f6f6f6;
-  background-color: #333333;
+  background-color: #333;
 
   &:hover {
-    background-color: #4C4C4C;
+    background-color: #4c4c4c;
   }
 
   &:focus {
-    background-color: #0D0D0D;
+    background-color: #0d0d0d;
   }
 }
 
@@ -68,7 +70,7 @@
   border: 1px solid #397df6;
 
   &:hover {
-    color: #73A5FF;
+    color: #73a5ff;
     background-color: transparent;
   }
 }
@@ -78,7 +80,7 @@
   background-color: transparent;
 
   &:hover {
-    color: #73A5FF;
+    color: #73a5ff;
     background-color: transparent;
   }
 }

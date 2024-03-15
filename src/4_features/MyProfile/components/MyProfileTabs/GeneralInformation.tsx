@@ -6,13 +6,14 @@ import Button from '@/6_shared/ui/ui-button'
 import { Input, Textarea } from '@chakra-ui/react'
 import { ErrorMessage } from '@hookform/error-message'
 import FileImage from '@public/assets/icons/file.svg'
+import Image from 'next/image'
 
 import styles from '@/styles/MyProfile.module.scss'
 
 import { useProfileDataMutation } from '../../api/MyProfile_Api'
-import { MyProfileTanLinks } from '../../hoc/MyProfileTabLinks'
-import AvatarUploader from '../UploadUserAvatar'
+import { MyProfileTabLinks } from '../../hoc/MyProfileTabLinks'
 import { countryOptions } from '../datalist/countryOptions'
+import AvatarUploader from './UserAvatar/UploadUserAvatar'
 
 const validateAge = (value: any) => {
   const selected = new Date(value).getFullYear()
@@ -41,7 +42,7 @@ export const GeneralInformation = () => {
   }
 
   return (
-    <MyProfileTanLinks>
+    <MyProfileTabLinks>
       {/* <DatePicker initialValue={new Date()} /> */}
       <div></div>
       <div className={styles.genInfo_wrapper}>
@@ -57,6 +58,7 @@ export const GeneralInformation = () => {
             Add a Profile Photo
           </Button>
           <Modal isOpen={isOpen} onClose={closeModal} title={'Add a Profile Photo'}>
+            {/* //!РАБОТА С АВАТАРКОЙ */}
             <AvatarUploader />
           </Modal>
         </div>
@@ -191,6 +193,6 @@ export const GeneralInformation = () => {
           </form>
         </div>
       </div>
-    </MyProfileTanLinks>
+    </MyProfileTabLinks>
   )
 }

@@ -1,14 +1,17 @@
 import React from 'react'
 
+import { User } from '@/2_pages/MyProfile'
 import Button from '@/6_shared/ui/ui-button'
 import Link from 'next/link'
 
 import styles from '@/styles/MyProfile.module.scss'
-const Profile_info_stats = () => {
+
+const Profile_info_stats: React.FC<{ user: User }> = ({ user }) => {
   return (
     <div className={styles.profile_info}>
       <div className={styles.profile_info__heading}>
-        <h1>URL Profile</h1>
+        {/* <h1>{user.name}</h1> */}
+        <h1>{user.email}</h1>
         <Link href={'/MyProfile/general-information'}>
           <Button secondary>Profile Settings</Button>
         </Link>
