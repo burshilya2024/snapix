@@ -166,7 +166,7 @@ export const ResetPasswordComponent: React.FC = () => {
           />
         </div>
         <div>
-          <Button primary type={'submit'}>
+          <Button fullWidth primary type={'submit'}>
             {t.passwordRecovery.createNewPassword}
           </Button>
         </div>

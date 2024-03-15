@@ -86,13 +86,13 @@ export const ForgotPasswordComponent = () => {
           />
         </div>
         <div>
-          <Button disabled={!captcha} primary type={'submit'}>
+          <Button disabled={!captcha} fullWidth primary type={'submit'}>
             {t.passwordRecovery.sendLink}
           </Button>
         </div>
         <div>
           <Link href={'/LogIn'}>
-            <Button outline type={'submit'}>
+            <Button fullWidth outline type={'submit'}>
               {t.passwordRecovery.backToSignIn}
             </Button>
           </Link>

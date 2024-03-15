@@ -6,3 +6,6 @@ export { ResendEmailComponent } from './Authorization/PasswordRecovery/Component
 export { ResetPasswordComponent } from './Authorization/PasswordRecovery/Components/ResetPassword'
 export { LoginComponents } from '@/4_features/Authorization/Register_Login_User/ui/LoginUser'
 export { SignUpComponent } from '@/4_features/Authorization/Register_Login_User/ui/RegisterUser'
+export { AccountManagement } from '@/4_features/MyProfile/components/MyProfileTabs/AccountManagement'
+export { Devices } from '@/4_features/MyProfile/components/MyProfileTabs/Devices'
+export { MyPayments } from '@/4_features/MyProfile/components/MyProfileTabs/MyPayments'
