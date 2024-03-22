@@ -1,4 +1,13 @@
 export const ru = {
+  Avatar: {
+    Choose: 'Выберите фотографию профиля',
+    DeleteAvatar: 'удалить аватар',
+    SuccessDelete: 'аватар удален успешно!',
+    SuccessUpload: 'аватар загружен успешно!',
+    UploadAvatar: 'обновить аватар',
+    save: 'сохранить',
+    youSure: 'вы уверены',
+  },
   confrirm_Password: {
     confirmed: 'Ваш Email подтверждён',
     congratulations: 'Поздравляем!',

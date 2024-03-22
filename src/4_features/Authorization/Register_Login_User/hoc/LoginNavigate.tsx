@@ -22,7 +22,7 @@ export const LoginNavigate: React.FC<PropsType> = ({ children }) => {
         Refresh()
       }
     }
-  }, [router])
+  }, [Refresh, isAuth, refreshToken, router])
 
   return <>{isAuth === 'true' ? children : null}</>
 }

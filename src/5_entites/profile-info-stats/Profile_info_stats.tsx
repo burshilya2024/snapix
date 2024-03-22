@@ -1,17 +1,25 @@
 import React from 'react'
 
-import { User } from '@/2_pages/MyProfile'
 import Button from '@/6_shared/ui/ui-button'
 import Link from 'next/link'
 
 import styles from '@/styles/MyProfile.module.scss'
 
-const Profile_info_stats: React.FC<{ user: User }> = ({ user }) => {
+interface PropsUser {
+  aboutMe?: null | string
+  birthDate?: Date | null
+  city?: null | string
+  firstName?: null | string
+  lastName?: null | string
+  lastUpdate: string // Формат даты и времени в строке
+  userName: string
+}
+
+const Profile_info_stats: React.FC<{ user: PropsUser }> = ({ user }) => {
   return (
     <div className={styles.profile_info}>
       <div className={styles.profile_info__heading}>
-        {/* <h1>{user.name}</h1> */}
-        <h1>{user.email}</h1>
+        <h1>{user?.userName}</h1>
         <Link href={'/MyProfile/general-information'}>
           <Button secondary>Profile Settings</Button>
         </Link>
