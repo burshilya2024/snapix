@@ -1,21 +1,14 @@
 import React from 'react'
 
+import { useGetUserQuery } from '@/4_features/MyProfile/components/UserAvatar/api/Avatar_Api'
 import Button from '@/6_shared/ui/ui-button'
 import Link from 'next/link'
 
 import styles from '@/styles/MyProfile.module.scss'
 
-interface PropsUser {
-  aboutMe?: null | string
-  birthDate?: Date | null
-  city?: null | string
-  firstName?: null | string
-  lastName?: null | string
-  lastUpdate: string // Формат даты и времени в строке
-  userName: string
-}
+const Profile_info_stats = () => {
+  const { data: user } = useGetUserQuery()
 
-const Profile_info_stats: React.FC<{ user: PropsUser }> = ({ user }) => {
   return (
     <div className={styles.profile_info}>
       <div className={styles.profile_info__heading}>
