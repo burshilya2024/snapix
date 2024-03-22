@@ -1,3 +1,9 @@
+.InputGroup {
+  input {
+    background-color: white;
+  }
+}
+
 .profileTabs {
   display: flex;
   justify-content: space-between;
@@ -40,23 +46,20 @@
 }
 
 // ===================== MyProfile ============================
-
-.FileImage {
-  display: flex;
+.profile_Avatar_Info_wrapper {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  gap: 30px;
   align-items: center;
-  justify-content: center;
 
-  width: 200px;
-  height: 200px;
-
-  background: rgb(27 27 27);
-  border-radius: 200px;
+  margin-bottom: 50px;
 }
 
-.profile_top {
-  display: flex;
-  gap: 30px;
-  margin-bottom: 50px;
+.My_Profile_Avatar {
+  overflow: hidden;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
 }
 
 .profile_info {
@@ -96,10 +99,6 @@
   flex-wrap: wrap;
   gap: 10px;
   justify-content: center;
-}
-
-.profile_img {
-  margin-bottom: 20px;
 }
 
 // ============== GEN_INFO_FORM ===============================

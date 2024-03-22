@@ -1,4 +1,13 @@
 export const nl = {
+  Avatar: {
+    Choose: 'Kies profielfoto',
+    DeleteAvatar: 'Verwijder avatar',
+    SuccessDelete: 'Avatar succesvol verwijderd!',
+    SuccessUpload: 'Avatar succesvol geüpload!',
+    UploadAvatar: 'Upload avatar',
+    save: 'Opslaan',
+    youSure: 'Weet u het zeker?',
+  },
   navBar: {
     create: 'Maken',
     favorites: 'Favorieten',

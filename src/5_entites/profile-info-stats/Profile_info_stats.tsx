@@ -1,17 +1,18 @@
 import React from 'react'
 
-import { User } from '@/2_pages/MyProfile'
+import { useGetUserQuery } from '@/4_features/MyProfile/components/UserAvatar/api/Avatar_Api'
 import Button from '@/6_shared/ui/ui-button'
 import Link from 'next/link'
 
 import styles from '@/styles/MyProfile.module.scss'
 
-const Profile_info_stats: React.FC<{ user: User }> = ({ user }) => {
+const Profile_info_stats = () => {
+  const { data: user } = useGetUserQuery()
+
   return (
     <div className={styles.profile_info}>
       <div className={styles.profile_info__heading}>
-        {/* <h1>{user.name}</h1> */}
-        <h1>{user.email}</h1>
+        <h1>{user?.userName}</h1>
         <Link href={'/MyProfile/general-information'}>
           <Button secondary>Profile Settings</Button>
         </Link>
