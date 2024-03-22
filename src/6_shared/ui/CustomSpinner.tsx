@@ -15,9 +15,9 @@ const spinnerStyle = {
   borderRadius: '50%',
   borderTop: '2px solid #000',
   display: 'flex',
-  height: '30px',
+  height: '40px',
   justifyContent: 'center',
-  width: '30px',
+  width: '40px',
 }
 
 // Ваш компонент

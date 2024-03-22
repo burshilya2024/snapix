@@ -1,6 +1,15 @@
 import { LocaleType } from '@/6_shared/config/i18n/Locales/ru'
 
 export const en: LocaleType = {
+  Avatar: {
+    Choose: 'Choose profile photo',
+    DeleteAvatar: 'Delete avatar',
+    SuccessDelete: 'Avatar deleted successfully!',
+    SuccessUpload: 'Avatar uploaded successfully!',
+    UploadAvatar: 'Upload avatar',
+    save: 'Save',
+    youSure: 'Are you sure?',
+  },
   confrirm_Password: {
     confirmed: 'Your email has been confirmed',
     congratulations: 'Congratulations!',
