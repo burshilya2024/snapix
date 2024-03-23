@@ -1,4 +1,6 @@
-import { useForm } from 'react-hook-form'
+// ProfileFormInformation.tsx
+import React, { useState } from 'react'
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 
 import { useProfileDataMutation } from '@/4_features/MyProfile/api/MyProfile_Api'
 import Button from '@/6_shared/ui/ui-button'
@@ -10,6 +12,7 @@ import * as yup from 'yup'
 import styles from '@/styles/MyProfile.module.scss'
 
 import { countryOptions } from '../../datalist/countryOptions'
+import { InputField } from './helpers/InputField'
 
 // Схема валидации с помощью yup
 const validationSchema = yup.object().shape({
@@ -47,89 +50,93 @@ interface FormData {
   username: string
 }
 
-const InputField = ({
-  label,
-  name,
-  type = 'text',
-  ...rest
-}: {
-  [key: string]: any
-  label: string
-  name: keyof FormData
-  type?: string
-}) => {
-  const {
-    formState: { errors },
-    register,
-  } = useForm<FormData>({
-    resolver: yupResolver(validationSchema),
-  })
-
-  return (
-    <div className={styles.InputGroup}>
-      <label htmlFor={name}>{label}</label>
-      <Input size={'sm'} {...register(name)} id={name} type={type} {...rest} />
-      <ErrorMessage errors={errors} name={name} render={({ message }) => <p>{message}</p>} />
-    </div>
-  )
-}
-
 export const ProfileFormInformation = () => {
   const [profileData, {}] = useProfileDataMutation()
-  const {
-    formState: { errors, isValid },
-    handleSubmit,
-    register,
-  } = useForm<FormData>({
+  const [error, setError] = useState<null | string>(null)
+  const methods = useForm<FormData>({
     mode: 'onBlur',
     resolver: yupResolver(validationSchema),
   })
 
-  const onSubmit = async (data: any) => {
-    await profileData(data)
+  const {
+    formState: { isValid },
+    handleSubmit,
+  } = methods
+
+  const onSubmit: SubmitHandler<FormData> = async data => {
+    try {
+      await profileData(data)
+      setError(null)
+    } catch (err) {
+      setError('Failed to update profile data')
+    }
   }
 
   return (
     <div className={styles.formWrapper}>
-      <form className={styles.Form} onSubmit={handleSubmit(onSubmit)}>
-        <InputField label={'Username*'} name={'username'} />
-        <InputField label={'Lastname*'} name={'lastname'} />
-        <InputField label={'Firstname*'} name={'firstname'} />
-        <InputField label={'Date of Birth*'} name={'dateOfBirth'} type={'date'} />
-        <div className={styles.group}>
-          <label htmlFor={'country'}>Select your country</label>
-          <Input {...register('country', {})} id={'country'} list={'countries'} />
-          <datalist id={'countries'}>
-            {countryOptions.map(country => (
-              <option key={country.value} value={country.value}>
-                {country.value}
-              </option>
-            ))}
-          </datalist>
-        </div>
-        <div className={styles.group}>
-          <label htmlFor={'about'}>About me</label>
-          <div>
-            <Textarea
-              {...register('about', {
-                maxLength: {
-                  message: 'No more than 200 characters',
-                  value: 200,
-                },
-              })}
-              id={'about'}
-              resize={'none'}
+      <FormProvider {...methods}>
+        <form className={styles.Form} onSubmit={handleSubmit(onSubmit)}>
+          <InputField
+            label={'Username*'}
+            name={'username'}
+            rules={validationSchema.fields['username']}
+          />
+          <InputField
+            label={'Lastname*'}
+            name={'lastname'}
+            rules={validationSchema.fields['lastname']}
+          />
+          <InputField
+            label={'Firstname*'}
+            name={'firstname'}
+            rules={validationSchema.fields['firstname']}
+          />
+          <InputField
+            label={'Date of Birth*'}
+            name={'dateOfBirth'}
+            rules={validationSchema.fields['dateOfBirth']}
+            type={'date'}
+          />
+          <div className={styles.group}>
+            <label htmlFor={'country'}>Select your country</label>
+            <Input
+              id={'country'}
+              list={'countries'}
+              style={{ background: 'white' }}
+              {...methods.register('country')}
+            />
+            <datalist id={'countries'}>
+              {countryOptions.map(country => (
+                <option key={country.value} value={country.value}>
+                  {country.value}
+                </option>
+              ))}
+            </datalist>
+          </div>
+          <div className={styles.group}>
+            <label htmlFor={'about'}>About me</label>
+            <div>
+              <Textarea
+                id={'about'}
+                resize={'none'}
+                {...methods.register('about', validationSchema.fields['about'])}
+              />
+            </div>
+            <ErrorMessage
+              errors={methods.formState.errors}
+              name={'about'}
+              render={({ message }) => <p>{message}</p>}
             />
           </div>
-          <ErrorMessage errors={errors} name={'about'} render={({ message }) => <p>{message}</p>} />
-        </div>
-        <hr />
-        <div className={styles.submitBtn_wrapper}>
-          <Button disabled={!isValid} primary type={'submit'}>
-            Save Changes
-          </Button>
-        </div>
-      </form>
+          <hr />
+          <div className={styles.submitBtn_wrapper}>
+            <Button disabled={!isValid} primary type={'submit'}>
+              Save Changes
+            </Button>
+            {error && <p>{error}</p>}
+          </div>
+        </form>
+      </FormProvider>
     </div>
   )
 }
