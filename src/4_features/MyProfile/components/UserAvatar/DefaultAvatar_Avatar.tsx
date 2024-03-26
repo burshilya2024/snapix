@@ -1,9 +1,10 @@
+import { getUserIdFromToken } from '@/6_shared/api/GetUserId'
 import { MyCustomSpinner } from '@/6_shared/ui/CustomSpinner'
 import FileImage from '@public/assets/icons/file.svg'
 
 import styles from '@/styles/MyProfile.module.scss'
 
-import { getUserIdFromToken, useGetAvatarQuery } from './api/Avatar_Api'
+import { useGetAvatarQuery } from './api/Avatar_Api'
 
 export const DefaultAvatar_Avatar: React.FC = () => {
   const userId = getUserIdFromToken()
