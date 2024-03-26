@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 
+import { getUserIdFromToken } from '@/6_shared/api/GetUserId'
 import { useTranslation } from '@/6_shared/config/i18n/hooks/useTranslation'
 import Modal from '@/6_shared/ui/ModalWindow'
 import Button from '@/6_shared/ui/ui-button'
@@ -10,7 +11,7 @@ import styles from '@/styles/Avatar.module.scss'
 import CropperPostAvatar from './CropperPostAvatar'
 import { DefaultAvatar_Avatar } from './DefaultAvatar_Avatar'
 import DeleteAvatar from './DeleteAvatar'
-import { getUserIdFromToken, useGetAvatarQuery } from './api/Avatar_Api'
+import { useGetAvatarQuery } from './api/Avatar_Api'
 
 const WrapperAvatar = () => {
   const { t } = useTranslation()
