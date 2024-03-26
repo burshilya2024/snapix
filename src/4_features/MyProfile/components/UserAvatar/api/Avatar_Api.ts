@@ -1,5 +1,5 @@
+import { getToken } from '@/6_shared/api/GetAccessToken'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { JwtPayload, jwtDecode } from 'jwt-decode'
 
 export interface Avatar {
   height: number
@@ -20,35 +20,6 @@ export interface ProfileUser {
   lastName?: null | string
   lastUpdate: string // Формат даты и времени в строке
   userName: string
-}
-
-export const getToken = () => {
-  return localStorage.getItem('accessTokenSnapix')
-}
-
-// Функция для получения userId из токена
-export const getUserIdFromToken = () => {
-  const accessTokenString = localStorage.getItem('accessTokenSnapix') || ''
-
-  if (!accessTokenString) {
-    // Обработка случая, когда токен не найден в локальном хранилище
-    console.error('No access token found!')
-
-    return null
-  }
-
-  try {
-    const accessToken = accessTokenString as string
-    const decodedToken = jwtDecode<JwtPayload>(accessToken)
-    //@ts-ignore
-    const decodedUser = decodedToken.user
-
-    return decodedUser.id
-  } catch (error) {
-    console.error('Invalid token:', error)
-
-    return null
-  }
 }
 
 export const BASE_URL = 'https://9art.ru/api/v1/users'
